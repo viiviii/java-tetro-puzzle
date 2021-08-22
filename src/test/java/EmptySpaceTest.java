@@ -14,7 +14,7 @@ public class EmptySpaceTest {
         EmptySpace emptySpace = new EmptySpace(offset1, offset2);
 
         //then
-        assertTrue(emptySpace.size() == 1);
+        assertEquals(1, emptySpace.size());
     }
 
 }
