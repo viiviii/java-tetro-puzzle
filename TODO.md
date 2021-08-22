@@ -39,7 +39,7 @@
     - throw NoSuchElementException
   
 ### Offset
-- 좌표의 x, y 위치를 나타낸다
+- [x] ~~좌표의 x, y 위치를 나타낸다~~
 
 ### 원하는 시나리오
 - `List<Set<Block>>` combinationsOfBlockToFit();
