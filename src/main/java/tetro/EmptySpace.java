@@ -21,4 +21,11 @@ public final class EmptySpace {
     public Offset first() {
         return offsets.first();
     }
+
+    @Override
+    public String toString() {
+        return "EmptySpace{" +
+                "offsets=" + offsets +
+                '}';
+    }
 }

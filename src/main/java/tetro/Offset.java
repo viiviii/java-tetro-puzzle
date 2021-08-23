@@ -58,4 +58,12 @@ public final class Offset implements Comparable<Offset> {
                 ? Integer.compare(this.x, other.x)
                 : Integer.compare(this.y, other.y);
     }
+
+    @Override
+    public String toString() {
+        return "Offset{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -18,4 +18,11 @@ public final class Board {
     public boolean isFull() {
         return emptySpace.size() == 0;
     }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "emptySpace=" + emptySpace +
+                '}';
+    }
 }
