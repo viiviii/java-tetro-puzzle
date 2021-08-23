@@ -14,6 +14,7 @@ public class Offset implements Comparable<Offset> {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) return false;
         if (!getClass().equals(obj.getClass())) return false;
         Offset other = (Offset) obj;
         return this.x == other.x && this.y == other.y;
