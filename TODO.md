@@ -7,11 +7,11 @@
     - 추후 바뀔지 내가 알 수 없는 상태
 - 보드엔 빈 칸이 있고 블럭으로 채울 수 있다
 - 값
-  - 비어있는 위치 목록: EmptySpace emptySpace
+  - [x] ~~비어있는 위치 목록: EmptySpace emptySpace~~
     - 정렬되어 있어서 읽기만 했으면 좋겠음
-  - 채울 수 없는 보드: static final Board UNFIT_BOARD
+  - [x] ~~채울 수 없는 보드: static final Board UNFIT~~
 - 메서드
-    - 보드가 모두 채워져있는지: boolean isFull()
+    - [x] ~~보드가 모두 채워져있는지: boolean isFull()~~
     - 보드를 채우는 블럭의 조합 목록: List combinationsOfBlockToFit?()
     - 보드를 블럭으로 채우기: fit(block) -> 새로운 Board를 생성해서 리턴해야 됨
 
