@@ -1,10 +1,21 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
+import tetro.exception.OffsetOutOfBoundsException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OffsetTest {
+
+    @Test
+    public void of() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+
+        //then
+        assertEquals(1, offset1.x);
+        assertEquals(1, offset1.y);
+    }
 
     @Test
     public void equals() throws Exception {
@@ -60,5 +71,17 @@ public class OffsetTest {
         //then
         assertEquals(false, offset.equals(null));
         assertThrows(NullPointerException.class, () -> offset.compareTo(null));
+    }
+    
+    @Test
+    public void 유효하지_않은_좌표일_경우_exception을_던진다() throws Exception {
+        //given
+        final int MAX_LENGTH = Offset.LENGTH;
+
+        //then
+        assertThrows(OffsetOutOfBoundsException.class,
+                () -> Offset.of(MAX_LENGTH, 0));
+        assertThrows(OffsetOutOfBoundsException.class,
+                () -> Offset.of(-1, -10));
     }
 }
