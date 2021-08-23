@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,4 +40,18 @@ public class EmptySpaceTest {
         assertFalse(emptySpace.containsAll(compare3));
     }
 
+    @Test
+    public void 가장_처음_비어있는_위치_구하기() throws Exception {
+        //given
+        Offset offset1 = new Offset(3, 3);
+        Offset offset2 = new Offset(2, 2);
+        Offset offset3 = new Offset(3, 2);
+        EmptySpace emptySpace = new EmptySpace(offset1, offset2, offset3);
+
+        //when
+        Offset firstOffset = emptySpace.first();
+
+        //then
+        assertEquals(offset2, firstOffset);
+    }
 }
