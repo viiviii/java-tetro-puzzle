@@ -1,7 +1,9 @@
 package tetro;
 
 public final class Board {
-    public static final Board UNFIT = new Board(new EmptySpace(new Offset(-99999, -99999)));
+    public static final int LENGTH = 9;
+    public static final Board UNFIT = new Board(new EmptySpace(Offset.INVALID));
+
     private final EmptySpace emptySpace;
 
     private Board(EmptySpace emptySpace) {
