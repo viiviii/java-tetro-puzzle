@@ -37,7 +37,7 @@ public final class Offset implements Comparable<Offset> {
         if (invalidBounds(x, y)) {
             throw new OffsetOutOfBoundsException(x, y);
         }
-        return (y * LENGTH) + x;
+        return x + (y * LENGTH);
     }
 
     private static boolean invalidBounds(int x, int y) {
