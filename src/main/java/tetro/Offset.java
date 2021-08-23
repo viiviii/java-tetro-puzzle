@@ -1,5 +1,7 @@
 package tetro;
 
+import tetro.exception.OffsetOutOfBoundsException;
+
 /**
  * 좌표의 x, y 위치를 나타낸다
  */
@@ -10,7 +12,7 @@ public final class Offset implements Comparable<Offset> {
     public final int y;
 
     public static final Offset INVALID = new Offset(-99999, -99999);
-    private static final int LENGTH = Board.LENGTH;
+    public static final int LENGTH = Board.LENGTH;
 
     private static final Offset[] cache = new Offset[LENGTH * LENGTH];
 
@@ -32,7 +34,14 @@ public final class Offset implements Comparable<Offset> {
     }
 
     private static Integer index(int x, int y) {
-        return (x * LENGTH) + y;
+        if (invalidBounds(x, y)) {
+            throw new OffsetOutOfBoundsException(x, y);
+        }
+        return (y * LENGTH) + x;
+    }
+
+    private static boolean invalidBounds(int x, int y) {
+        return x < 0 || y < 0 || x >= LENGTH || y >= LENGTH;
     }
 
     @Override
