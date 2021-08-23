@@ -1,9 +1,9 @@
 
 /**
-* 좌표의 x, y 위치를 나타낸다
-* */
+ * 좌표의 x, y 위치를 나타낸다
+ */
 // TODO: 이펙티브 자바 equals를 재정의하려거든 hashCode도 재정의하라
-public class Offset {
+public class Offset implements Comparable<Offset> {
     final int x;
     final int y;
 
@@ -14,8 +14,15 @@ public class Offset {
 
     @Override
     public boolean equals(Object obj) {
-        if(!getClass().equals(obj.getClass())) return false;
+        if (!getClass().equals(obj.getClass())) return false;
         Offset other = (Offset) obj;
         return this.x == other.x && this.y == other.y;
+    }
+
+    @Override
+    public int compareTo(Offset other) {
+        return this.y == other.y
+                ? Integer.compare(this.x, other.x)
+                : Integer.compare(this.y, other.y);
     }
 }
