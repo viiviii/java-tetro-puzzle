@@ -1,3 +1,4 @@
+package tetro;
 
 /**
  * 좌표의 x, y 위치를 나타낸다

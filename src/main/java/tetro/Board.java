@@ -1,3 +1,4 @@
+package tetro;
 
 public final class Board {
     public static final Board UNFIT = new Board(new EmptySpace(new Offset(-99999, -99999)));
