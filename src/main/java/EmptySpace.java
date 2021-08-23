@@ -1,6 +1,6 @@
 import java.util.*;
 
-// 2. ClassCastException를 던져선 안됨 -> e1.compareTo(e2) or comparator.compare(e1, e2)
+// TODO: ClassCastException를 던져선 안됨 -> e1.compareTo(e2) or comparator.compare(e1, e2)
 public class EmptySpace {
     private final SortedSet<Offset> offsets;
 
@@ -9,6 +9,10 @@ public class EmptySpace {
     }
 
     public int size() {
-        return offsets.size();
+        return this.offsets.size();
+    }
+
+    public boolean containsAll(Collection<Offset> others) {
+        return offsets.containsAll(others);
     }
 }
