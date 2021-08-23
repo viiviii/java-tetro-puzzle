@@ -15,4 +15,8 @@ public class EmptySpace {
     public boolean containsAll(Collection<Offset> others) {
         return offsets.containsAll(others);
     }
+
+    public Offset first() {
+        return offsets.first();
+    }
 }
