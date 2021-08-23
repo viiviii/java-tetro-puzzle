@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class EmptySpaceTest {
@@ -15,6 +18,27 @@ public class EmptySpaceTest {
 
         //then
         assertEquals(1, emptySpace.size());
+    }
+    
+    @Test
+    public void containsAll() throws Exception {
+        //given
+        Offset emptyOffset1 = new Offset(1, 1);
+        Offset emptyOffset2 = new Offset(2, 2);
+        Offset compareOffset1 = new Offset(1, 1);
+        Offset compareOffset2 = new Offset(2, 2);
+        Offset compareOffset3 = new Offset(3, 3);
+
+        EmptySpace emptySpace = new EmptySpace(emptyOffset1, emptyOffset2);
+
+        Set compare1 = Set.of(compareOffset1);
+        Set compare2 = Set.of(compareOffset1, compareOffset2);
+        Set compare3 = Set.of(compareOffset1, compareOffset3);
+
+        //then
+        assertTrue(emptySpace.containsAll(compare1));
+        assertTrue(emptySpace.containsAll(compare2));
+        assertFalse(emptySpace.containsAll(compare3));
     }
 
 }
