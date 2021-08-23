@@ -10,11 +10,11 @@ public class OffsetTest {
     @Test
     public void of() throws Exception {
         //given
-        Offset offset1 = Offset.of(1, 1);
+        Offset offset1 = Offset.of(0, 8);
 
         //then
-        assertEquals(1, offset1.x);
-        assertEquals(1, offset1.y);
+        assertEquals(0, offset1.x);
+        assertEquals(8, offset1.y);
     }
 
     @Test
@@ -33,9 +33,9 @@ public class OffsetTest {
         //given
         final int LESS = -1;
         final int GREATER = 1;
-        Offset offset1 = Offset.of(3, 3);
-        Offset offset2 = Offset.of(2, 2);
-        Offset offset3 = Offset.of(3, 2);
+        Offset offset1 = Offset.of(8, 8);
+        Offset offset2 = Offset.of(0, 0);
+        Offset offset3 = Offset.of(0, 8);
 
         //when
         int compare1With2 = offset1.compareTo(offset2);
@@ -51,8 +51,8 @@ public class OffsetTest {
     @Test
     public void equals_결과가_true이면_compareTo_결과는_0이어야한다() throws Exception {
         //given
-        Offset offset1 = Offset.of(1, 1);
-        Offset offset2 = Offset.of(1, 1);
+        Offset offset1 = Offset.of(0, 8);
+        Offset offset2 = Offset.of(0, 8);
 
         //when
         boolean equals = offset1.equals(offset2);
@@ -66,7 +66,7 @@ public class OffsetTest {
     @Test
     public void null이_인자일때_equals_결과가_false여도_coampreTo는_Exception을_던져야한다() throws Exception {
         //given
-        Offset offset = Offset.of(1, 1);
+        Offset offset = Offset.of(0, 8);
 
         //then
         assertEquals(false, offset.equals(null));
