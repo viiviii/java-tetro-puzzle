@@ -40,6 +40,9 @@
   
 ### Offset
 - [x] ~~좌표의 x, y 위치를 나타낸다~~
+- 보드의 크기만큼 제한하기
+- 매번 객체 만들 필요 없어 보임
+- toString이 직관적으로 보이게
 
 ### 원하는 시나리오
 - `List<Set<Block>>` combinationsOfBlockToFit();
