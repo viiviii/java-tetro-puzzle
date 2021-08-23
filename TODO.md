@@ -30,9 +30,9 @@
 
 ### EmptySpace
 - 값
--   비어있는 위치 목록: `Set<Offset>` offsets
-- Offset 집합은 순서가 있고 중복을 허용하지 않는다 -> Comparable, Set
-  - 순서: 가장 좌측상단부터
+- [x] ~~비어있는 위치 목록: `Set<Offset>` offsets~~
+- [x] ~~Offset 집합은 순서가 있고 중복을 허용하지 않는다~~
+  - [x] ~~순서: 가장 좌측상단부터~~
 - 메서드
   - 해당 위치들이 비어있는지: boolean containsAll?(Offset...)
   - 가장 처음 비어있는 위치 구하기: Offset first()
