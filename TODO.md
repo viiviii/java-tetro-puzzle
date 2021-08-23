@@ -34,8 +34,8 @@
 - [x] ~~Offset 집합은 순서가 있고 중복을 허용하지 않는다~~
   - [x] ~~순서: 가장 좌측상단부터~~
 - 메서드
-  - 해당 위치들이 비어있는지: boolean containsAll?(Offset...)
-  - 가장 처음 비어있는 위치 구하기: Offset first()
+  - [x] ~~해당 위치들이 비어있는지: boolean containsAll?(Offset...)~~
+  - [x] ~~가장 처음 비어있는 위치 구하기: Offset first()~~
     - throw NoSuchElementException
   
 ### Offset
