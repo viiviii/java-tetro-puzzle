@@ -26,7 +26,9 @@
     - `Set<Offset>` offsets: 블록 모양(블록 타입의 방향별 모양)
     - 시작 위치를 받아 Block 객체 리스트를 lazy하게 만들어주는 메서드가 있었으면 좋겠음
 - BlockType enum
-    - I, O, T, S, Z, J, L (7종류)
+    - [x] ~~I, O, T, S, Z, J, L (7종류)~~
+    - o1x, o1y 부분 별로임ㅠㅠ
+- [x] ~~Offset이 직관적으로 보이게~~
 
 ### EmptySpace
 - 값
@@ -42,7 +44,6 @@
 - [x] ~~좌표의 x, y 위치를 나타낸다~~
 - [x] ~~보드의 크기만큼 제한하기~~
 - [x] ~~매번 객체 만들 필요 없어 보임~~
-- toString이 직관적으로 보이게
 
 ### 원하는 시나리오
 - `List<Set<Block>>` combinationsOfBlockToFit();
