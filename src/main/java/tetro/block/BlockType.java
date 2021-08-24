@@ -2,6 +2,9 @@ package tetro.block;
 
 import tetro.Offset;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public enum BlockType {
@@ -21,7 +24,31 @@ public enum BlockType {
         final Offset o3 = Offset.of(o3x, o3y);
         final Offset o4 = Offset.of(o4x, o4y);
         this.offsets = Set.of(o1, o2, o3, o4);
-        System.out.println("BlockType." + this + toMatrixString());
+        System.out.println("BlockType." + this + toMatrixString()); // TODO: 제거
+    }
+
+    // TODO: 리팩토링
+    // TODO: 1번 이상 회전일 때 구현
+    public Set<Offset> rotateOnce() {
+        List<Integer> offsetX = new ArrayList<>();
+        List<Integer> offsetY = new ArrayList<>();
+        Set<Offset> rotateOffsets = new HashSet<>();
+        int minOffsetX = 0;
+        for (Offset offset : this.offsets) {
+            int rotatedOffsetX = -offset.y;
+            int rotatedOffsetY = offset.x;
+            offsetX.add(rotatedOffsetX);
+            offsetY.add(rotatedOffsetY);
+            if (rotatedOffsetX < minOffsetX) {
+                minOffsetX = rotatedOffsetX;
+            }
+        }
+        for (int i = 0; i < offsetX.size(); i++) {
+            int x = offsetX.get(i) + Math.abs(minOffsetX);
+            int y = offsetY.get(i);
+            rotateOffsets.add(Offset.of(x, y));
+        }
+        return Set.copyOf(rotateOffsets);
     }
 
     private String toMatrixString() {
