@@ -25,19 +25,24 @@ public enum BlockType {
     }
 
     private String toMatrixString() {
+        boolean[][] matrix = createMatrixBy(this.offsets);
+        return createStringBy(matrix);
+    }
+
+    private boolean[][] createMatrixBy(Set<Offset> offsets) {
         final int MAX_BLOCK_LENGTH = 4;
         final boolean FILL = true;
         boolean[][] matrix = new boolean[MAX_BLOCK_LENGTH][MAX_BLOCK_LENGTH];
-        this.offsets.forEach(o -> matrix[o.y][o.x] = FILL);
-        return createStringBy(matrix);
+        offsets.forEach(offset -> matrix[offset.y][offset.x] = FILL);
+        return matrix;
     }
 
     private String createStringBy(boolean[][] matrix) {
         StringBuilder sb = new StringBuilder();
         sb.append(System.lineSeparator());
         for (boolean[] row : matrix) {
-            for (boolean element : row) {
-                sb.append(String.format("%-2s", element ? "■" : ""));
+            for (boolean filled : row) {
+                sb.append(String.format("%-2s", filled ? "■" : ""));
             }
             sb.append(System.lineSeparator());
         }
