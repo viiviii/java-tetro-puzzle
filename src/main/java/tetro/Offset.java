@@ -1,5 +1,6 @@
 package tetro;
 
+import tetro.block.BlockShape;
 import tetro.exception.OffsetOutOfBoundsException;
 
 /**
@@ -45,11 +46,11 @@ public final class Offset implements Comparable<Offset> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (!getClass().equals(obj.getClass())) return false;
-        Offset other = (Offset) obj;
-        return this.x == other.x && this.y == other.y;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Offset)) return false;
+        Offset that = (Offset) o;
+        return this.x == that.x && this.y == that.y;
     }
 
     @Override
