@@ -25,6 +25,8 @@
     - BlockType type
     - `Set<Offset>` offsets: 블록 모양(블록 타입의 방향별 모양)
     - 시작 위치를 받아 Block 객체 리스트를 lazy하게 만들어주는 메서드가 있었으면 좋겠음
+    - 블록을 회전한 모양은 항상 같으니 한번만 생성해놓고
+        - 여기에 시작위치를 추가해서 그때그떄 Block 객체를 만들고 싶음
 - BlockType enum
     - [x] ~~I, O, T, S, Z, J, L (7종류)~~
     - o1x, o1y 부분 별로임ㅠㅠ
@@ -44,6 +46,7 @@
 - [x] ~~좌표의 x, y 위치를 나타낸다~~
 - [x] ~~보드의 크기만큼 제한하기~~
 - [x] ~~매번 객체 만들 필요 없어 보임~~
+- 여기에서 valid 체크하는것과 범위 가진게 이상함 
 
 ### 원하는 시나리오
 - `List<Set<Block>>` combinationsOfBlockToFit();
