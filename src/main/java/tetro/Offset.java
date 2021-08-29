@@ -53,15 +53,6 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
         return quarterTurn();
     }
 
-    // 0: (x, y) -> 1: (-y, x) -> 2: (-x, -y) -> 3: (y, -x) -> 4 == 0: (x, y)
-    private Offset quarterTurns(int quarterTurns) {
-        final int MAX_ROTATIONS = 360 / 90;
-        final int turns = quarterTurns % MAX_ROTATIONS;
-        if (turns < 1) return this;
-        final Offset rotateOffset = quarterTurn();
-        return rotateOffset.quarterTurns(turns - 1);
-    }
-
     private Offset quarterTurn() {
         return Offset.of(-this.y, this.x);
     }
