@@ -13,6 +13,11 @@ public final class EmptySpace {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(offsets);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof EmptySpace)) return false;

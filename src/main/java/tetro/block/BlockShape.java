@@ -19,11 +19,16 @@ public class BlockShape {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(offsets);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BlockShape)) return false;
         BlockShape that = (BlockShape) o;
-        return Objects.equals(offsets, that.offsets);
+        return this.offsets.equals(that.offsets);
     }
 
     public Set<Offset> offsets() {
