@@ -2,7 +2,6 @@ package tetro;
 
 import java.util.*;
 
-// TODO: ClassCastException를 던져선 안됨 -> e1.compareTo(e2) or comparator.compare(e1, e2)
 public final class EmptySpace {
     private final SortedSet<Offset> offsets;
 
