@@ -13,6 +13,19 @@ public final class EmptySpace {
         this.offsets = new TreeSet<>(list);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmptySpace)) return false;
+        EmptySpace that = (EmptySpace) o;
+        return this.offsets.equals(that.offsets);
+    }
+
+    @Override
+    public String toString() {
+        return "EmptySpace{" + "offsets=" + offsets + '}';
+    }
+
     public int size() {
         return this.offsets.size();
     }
@@ -23,12 +36,5 @@ public final class EmptySpace {
 
     public Offset first() {
         return offsets.first();
-    }
-
-    @Override
-    public String toString() {
-        return "EmptySpace{" +
-                "offsets=" + offsets +
-                '}';
     }
 }
