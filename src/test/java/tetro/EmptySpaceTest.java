@@ -56,4 +56,15 @@ public class EmptySpaceTest {
         //then
         assertEquals(offset2, firstOffset);
     }
+
+    @Test
+    public void offset이_null값으로_들어와도_빈_배열로_초기화된다() throws Exception {
+        //given
+        EmptySpace nullSpace = new EmptySpace(null);
+        EmptySpace emptySpace = new EmptySpace();
+
+        //then
+        assertEquals(emptySpace, nullSpace);
+        assertEquals(0, nullSpace.size());
+    }
 }
