@@ -67,4 +67,24 @@ public class EmptySpaceTest {
         assertEquals(emptySpace, nullSpace);
         assertEquals(0, nullSpace.size());
     }
+
+    @Test
+    public void equals() throws Exception {
+        //given
+        Offset offset1 = Offset.of(3, 3);
+        Offset offset2 = Offset.of(2, 2);
+        Offset offset3 = Offset.of(3, 2);
+        Offset offset4 = Offset.of(3, 2);
+        Offset offset5 = Offset.of(2, 2);
+        Offset offset6 = Offset.of(3, 3);
+
+        //when
+        EmptySpace emptySpace1 = new EmptySpace(offset1, offset2, offset3);
+        EmptySpace emptySpace2 = new EmptySpace(offset4, offset5, offset6);
+
+        //then
+        assertEquals(emptySpace1, emptySpace2);
+        assertDoesNotThrow(() -> emptySpace1.equals(emptySpace2),
+                "e1.compareTo(e2)는 ClassCastException을 던져선 안됨");
+    }
 }
