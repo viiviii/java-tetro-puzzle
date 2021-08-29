@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class BlockShape {
-    public final int SIZE = 4;
+    public static final int SIZE = 4;
     private final Set<Offset> offsets;
 
     public BlockShape(Offset o1, Offset o2, Offset o3, Offset o4) {
