@@ -6,7 +6,7 @@ import java.util.Objects;
  * 좌표의 x, y 위치를 나타낸다
  */
 public final class Offset implements Comparable<Offset> {
-    public static final Offset INVALID = new Offset(-99999, -99999);
+    public static final Offset INVALID = Offset.of(Integer.MIN_VALUE, Integer.MAX_VALUE);
 
     public final int x;
     public final int y;
