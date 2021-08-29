@@ -6,11 +6,16 @@ import java.util.Objects;
 import java.util.Set;
 
 public class BlockShape {
-    private final int SIZE = 4;
+    public final int SIZE = 4;
     private final Set<Offset> offsets;
 
     public BlockShape(Offset o1, Offset o2, Offset o3, Offset o4) {
-        offsets = Set.of(o1, o2, o3, o4);
+        this.offsets = Set.of(o1, o2, o3, o4);
+    }
+
+    public BlockShape(Set<Offset> offsets) {
+        validateArgumentSize(offsets);
+        this.offsets = Set.copyOf(offsets);
     }
 
     @Override
@@ -21,22 +26,31 @@ public class BlockShape {
         return Objects.equals(offsets, that.offsets);
     }
 
+    public Set<Offset> offsets() {
+        return this.offsets;
+    }
+
     @Override
     public String toString() {
-        boolean[][] matrix = createMatrixByOffsets();
+        final boolean[][] matrix = createMatrixByOffsets();
         return toStringBy(matrix);
+    }
+
+    private void validateArgumentSize(Set<Offset> offsets) {
+        if (offsets != null && offsets.size() == SIZE) return;
+        throw new IllegalArgumentException("argument size is not equal to block shape size");
     }
 
     // TODO: 메서드명 뭔가 이상함
     private boolean[][] createMatrixByOffsets() {
         final boolean FILL = true;
-        boolean[][] matrix = new boolean[SIZE][SIZE];
+        final boolean[][] matrix = new boolean[SIZE][SIZE];
         this.offsets.forEach(offset -> matrix[offset.y][offset.x] = FILL);
         return matrix;
     }
 
     private String toStringBy(boolean[][] matrix) {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         sb.append(System.lineSeparator());
         for (boolean[] row : matrix) {
             for (boolean filled : row) {
