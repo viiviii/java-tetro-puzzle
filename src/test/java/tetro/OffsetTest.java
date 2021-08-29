@@ -2,6 +2,10 @@ package tetro;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OffsetTest {
@@ -21,10 +25,89 @@ public class OffsetTest {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
+        Offset equalToOffset1 = Offset.of(1, 1);
 
         //then
         assertNotEquals(offset1, offset2);
-        assertEquals(Offset.of(1, 1), offset1);
+        assertEquals(equalToOffset1, offset1);
+    }
+
+
+    @Test
+    public void equalsOfImmutableSetWithMoreThan3Arguments() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(0, 2);
+        Offset offset3 = Offset.of(3, 5);
+        Offset equalToOffset1 = Offset.of(1, 1);
+
+        //when
+        Set<Offset> set1 = Set.of(offset1, offset2, offset3);
+        Set<Offset> set2 = Set.of(equalToOffset1, offset2, offset3);
+
+        //then
+        assertEquals(set1, set2);
+    }
+
+    @Test
+    public void equalsOfTreeSet() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(0, 2);
+        Offset equalToOffset1 = Offset.of(1, 1);
+
+        //when
+        Set<Offset> set1 = new TreeSet<>();
+        set1.add(offset1);
+        set1.add(offset2);
+
+        Set<Offset> set2 = new TreeSet<>();
+        set2.add(equalToOffset1);
+        set2.add(offset2);
+
+        //then
+        assertEquals(set1, set2);
+    }
+
+
+    @Test
+    public void equalsOfHashSet() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(0, 2);
+        Offset equalToOffset1 = Offset.of(1, 1);
+
+        //when
+        Set<Offset> set1 = new HashSet<>();
+        set1.add(offset1);
+        set1.add(offset2);
+
+        Set<Offset> set2 = new HashSet<>();
+        set2.add(equalToOffset1);
+        set2.add(offset2);
+
+        //then
+        assertEquals(set1, set2);
+    }
+
+    @Test
+    public void set에서_올바른_중복_제거() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset equalToOffset1 = Offset.of(1, 1);
+
+        //when
+        Set<Offset> hashSet = new HashSet<>();
+        hashSet.add(offset1);
+        hashSet.add(equalToOffset1);
+
+        Set<Offset> treeSet = new TreeSet<>();
+        treeSet.add(offset1);
+        treeSet.add(equalToOffset1);
+
+        //then
+        assertEquals(1, hashSet.size());
+        assertEquals(1, treeSet.size());
     }
 
     @Test
