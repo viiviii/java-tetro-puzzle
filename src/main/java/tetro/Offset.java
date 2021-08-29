@@ -7,6 +7,7 @@ import java.util.Objects;
  */
 public final class Offset implements Comparable<Offset> {
     public static final Offset INVALID = Offset.of(Integer.MIN_VALUE, Integer.MAX_VALUE);
+    public static final Offset ORIGIN = Offset.of(1, 1);
 
     public final int x;
     public final int y;
@@ -43,9 +44,6 @@ public final class Offset implements Comparable<Offset> {
 
     @Override
     public String toString() {
-        return "Offset{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
+        return "Offset{" + "x=" + x + ", y=" + y + '}';
     }
 }
