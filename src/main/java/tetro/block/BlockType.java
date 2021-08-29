@@ -2,6 +2,8 @@ package tetro.block;
 
 import tetro.Offset;
 
+import java.util.Set;
+
 public enum BlockType {
     O(1,0, 0, 1, 0, 0, 1, 1, 1),
     I(2,0, 0, 0, 1, 0, 2, 0, 3),
@@ -12,7 +14,7 @@ public enum BlockType {
     L(4,0, 0, 0, 1, 0, 2, 1, 2);
 
     public final int numberOfRotatedShapes;
-    public final BlockShape shape;
+    public final Set<Offset> offsets;
 
 
     // TODO: o1x, o1y, ... 이 부분
@@ -23,7 +25,6 @@ public enum BlockType {
         final Offset o2 = Offset.of(o2x, o2y);
         final Offset o3 = Offset.of(o3x, o3y);
         final Offset o4 = Offset.of(o4x, o4y);
-        this.shape = new BlockShape(o1, o2, o3, o4);
-        System.out.println(this.getClass() + "." + this.name() + shape); // TODO: 제거
+        this.offsets = Set.of(o1, o2, o3, o4);
     }
 }
