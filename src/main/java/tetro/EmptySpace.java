@@ -7,7 +7,10 @@ public final class EmptySpace {
     private final SortedSet<Offset> offsets;
 
     public EmptySpace(Offset... offsets) {
-        this.offsets = new TreeSet<>(Arrays.asList(offsets));
+        final List list = (offsets == null || offsets.length == 0
+                ? List.of()
+                : Arrays.asList(offsets));
+        this.offsets = new TreeSet<>(list);
     }
 
     public int size() {
