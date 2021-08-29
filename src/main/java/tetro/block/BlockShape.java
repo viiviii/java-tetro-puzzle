@@ -5,17 +5,19 @@ import tetro.Offset;
 import java.util.Objects;
 import java.util.Set;
 
-public class BlockShape {
-    public static final int SIZE = 4;
-    private final Set<Offset> offsets;
+public final class BlockShape {
+    private static final int SIZE = 4;
 
-    public BlockShape(Offset o1, Offset o2, Offset o3, Offset o4) {
-        this.offsets = Set.of(o1, o2, o3, o4);
-    }
+    private final Set<Offset> offsets;
 
     public BlockShape(Set<Offset> offsets) {
         validateArgumentSize(offsets);
         this.offsets = Set.copyOf(offsets);
+    }
+
+    private void validateArgumentSize(Set<Offset> offsets) {
+        if (offsets != null && offsets.size() == SIZE) return;
+        throw new IllegalArgumentException("argument size is not equal to block shape size");
     }
 
     @Override
@@ -39,11 +41,6 @@ public class BlockShape {
     public String toString() {
         final boolean[][] matrix = createMatrixByOffsets();
         return toStringBy(matrix);
-    }
-
-    private void validateArgumentSize(Set<Offset> offsets) {
-        if (offsets != null && offsets.size() == SIZE) return;
-        throw new IllegalArgumentException("argument size is not equal to block shape size");
     }
 
     // TODO: 메서드명 뭔가 이상함
