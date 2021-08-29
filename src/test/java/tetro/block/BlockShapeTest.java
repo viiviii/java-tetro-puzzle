@@ -12,11 +12,13 @@ public class BlockShapeTest {
     @Test
     public void equals() throws Exception {
         //given
-        BlockShape oShape = BlockType.O.shape;
+        Set sameOffsets = Set.of(Offset.of(0, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        Set otherOffsets = Set.of(Offset.of(0, 2), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
 
         //when
-        BlockShape sameShape = new BlockShape(Offset.of(0, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
-        BlockShape otherShape = new BlockShape(Offset.of(0, 2), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        BlockShape oShape = new BlockShape(BlockType.O.offsets);
+        BlockShape sameShape = new BlockShape(sameOffsets);
+        BlockShape otherShape = new BlockShape(otherOffsets);
 
         //then
         assertEquals(oShape, sameShape);
