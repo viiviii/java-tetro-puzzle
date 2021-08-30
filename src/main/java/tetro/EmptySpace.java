@@ -12,9 +12,16 @@ public final class EmptySpace {
         this.offsets = new TreeSet<>(list);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(offsets);
+    public int size() {
+        return this.offsets.size();
+    }
+
+    public boolean containsAll(Collection<Offset> others) {
+        return offsets.containsAll(others);
+    }
+
+    public Offset first() {
+        return offsets.first();
     }
 
     @Override
@@ -26,19 +33,12 @@ public final class EmptySpace {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(offsets);
+    }
+
+    @Override
     public String toString() {
         return "EmptySpace{" + "offsets=" + offsets + '}';
-    }
-
-    public int size() {
-        return this.offsets.size();
-    }
-
-    public boolean containsAll(Collection<Offset> others) {
-        return offsets.containsAll(others);
-    }
-
-    public Offset first() {
-        return offsets.first();
     }
 }

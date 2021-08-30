@@ -23,8 +23,12 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
+    public Offset rotate() {
+        return quarterTurn();
+    }
+
+    private Offset quarterTurn() {
+        return Offset.of(-this.y, this.x);
     }
 
     @Override
@@ -33,6 +37,11 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
         if (!(o instanceof Offset)) return false;
         Offset that = (Offset) o;
         return this.x == that.x && this.y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override
@@ -45,14 +54,5 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
     @Override
     public String toString() {
         return "Offset{" + "x=" + x + ", y=" + y + '}';
-    }
-
-    @Override
-    public Offset rotate() {
-        return quarterTurn();
-    }
-
-    private Offset quarterTurn() {
-        return Offset.of(-this.y, this.x);
     }
 }
