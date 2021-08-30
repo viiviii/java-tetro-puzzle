@@ -47,7 +47,6 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
         return "Offset{" + "x=" + x + ", y=" + y + '}';
     }
 
-    // TODO: 이하 메서드 테스트 코드 작성 및 테스트 필요
     @Override
     public Offset rotate() {
         return quarterTurn();
