@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EmptySpaceTest {
 
     @Test
-    public void offset은_중복을_허용하지_않는다() throws Exception {
+    public void emptySpace는_중복없는_위치값을_가진다() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(1, 1);
