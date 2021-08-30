@@ -31,7 +31,7 @@ public final class BlockShape extends Shape {
         if (invalidOffset.isEmpty()) return;
         throw new IllegalArgumentException("offset out of range: " +
                 "<actual> " + invalidOffset.get() +
-                ", <range> Between " + Offset.ORIGIN + " and " + Offset.of(SIZE, SIZE));
+                ", <range> Between " + Offset.ZERO + " and " + Offset.of(SIZE, SIZE));
     }
 
     private Optional<Offset> invalidRangeOf(Set<Offset> offsets) {

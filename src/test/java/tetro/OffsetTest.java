@@ -156,15 +156,15 @@ public class OffsetTest {
     }
 
     @Test
-    public void rotate_originOffset_returnsSameOffset() throws Exception {
+    public void rotate_zeroOffset_returnsSameOffset() throws Exception {
         //given
-        Offset origin = Offset.ORIGIN;
+        Offset zero = Offset.ZERO;
 
         //when
-        Offset actual = origin.rotate();
+        Offset actual = zero.rotate();
 
         //then
-        assertEquals(origin, actual);
+        assertEquals(zero, actual);
     }
     
     @Test
