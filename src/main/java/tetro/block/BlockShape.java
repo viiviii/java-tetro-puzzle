@@ -1,61 +1,62 @@
 package tetro.block;
 
 import tetro.Offset;
+import tetro.shape.Shape;
 
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 
-public final class BlockShape {
+public final class BlockShape extends Shape {
     private static final int SIZE = 4;
 
-    private final Set<Offset> offsets;
-
     public BlockShape(Set<Offset> offsets) {
-        // TODO: validateArgumentSize 메서드 위치 변경 -> 방어적 복사
-        validateArgumentSize(offsets);
-        this.offsets = Set.copyOf(offsets);
+        super(offsets);
     }
 
-    private void validateArgumentSize(Set<Offset> offsets) {
+    @Override
+    protected void validate(Set<Offset> offsets) {
+        validateSize(offsets);
+        validateRange(offsets);
+    }
+
+    private void validateSize(Set<Offset> offsets) {
         if (offsets != null && offsets.size() == SIZE) return;
-        throw new IllegalArgumentException("argument size is not equal to block shape size");
+        throw new IllegalArgumentException("offsets size is not equal to shape size: " +
+                "<actual> " + (offsets == null ? "null" : offsets.size()) +
+                ", <shape size> " + SIZE);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(offsets);
+    private void validateRange(Set<Offset> offsets) {
+        final Optional<Offset> invalidOffset = invalidRangeOf(offsets);
+        if (invalidOffset.isEmpty()) return;
+        throw new IllegalArgumentException("offset out of range: " +
+                "<actual> " + invalidOffset.get() +
+                ", <range> Between " + Offset.ORIGIN + " and " + Offset.of(SIZE, SIZE));
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BlockShape)) return false;
-        BlockShape that = (BlockShape) o;
-        return this.offsets.equals(that.offsets);
+    private Optional<Offset> invalidRangeOf(Set<Offset> offsets) {
+        final Predicate<Offset> invalid = offset ->
+                offset.x < 0 || offset.x > SIZE || offset.y < 0 || offset.y > SIZE;
+        return offsets.stream().filter(e -> invalid.test(e)).findAny();
     }
 
-    public Set<Offset> offsets() {
-        return this.offsets;
+    public String toGridString() {
+        final boolean[][] grid = gridFilledWithShapeOffsets();
+        return toStringBy(grid);
     }
 
-    @Override
-    public String toString() {
-        final boolean[][] matrix = createMatrixByOffsets();
-        return toStringBy(matrix);
-    }
-
-    // TODO: 메서드명 뭔가 이상함
-    private boolean[][] createMatrixByOffsets() {
+    private boolean[][] gridFilledWithShapeOffsets() {
         final boolean FILL = true;
-        final boolean[][] matrix = new boolean[SIZE][SIZE];
-        this.offsets.forEach(offset -> matrix[offset.y][offset.x] = FILL);
-        return matrix;
+        final boolean[][] grid = new boolean[SIZE][SIZE];
+        this.offsets().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        return grid;
     }
 
-    private String toStringBy(boolean[][] matrix) {
+    private String toStringBy(boolean[][] grid) {
         final StringBuilder sb = new StringBuilder();
         sb.append(System.lineSeparator());
-        for (boolean[] row : matrix) {
+        for (boolean[] row : grid) {
             for (boolean filled : row) {
                 sb.append(String.format("%-2s", filled ? "■" : ""));
             }
