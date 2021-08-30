@@ -1,7 +1,6 @@
-package tetro.block;
+package tetro.shape;
 
 import tetro.Offset;
-import tetro.shape.Shape;
 
 import java.util.Optional;
 import java.util.Set;

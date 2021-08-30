@@ -1,7 +1,8 @@
-package tetro.block;
+package tetro.shape;
 
 import org.junit.jupiter.api.Test;
 import tetro.Offset;
+import tetro.block.BlockType;
 
 import java.util.Set;
 

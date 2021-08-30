@@ -1,5 +1,7 @@
 package tetro.block;
 
+import tetro.shape.BlockShape;
+
 public abstract class Block {
     private final BlockType type;
     private final BlockShape shape;
