@@ -26,5 +26,12 @@ public class BoardTest {
 
         //then
         assertEquals(board, Board.UNFIT);
+        assertFalse(board.isFull());
+    }
+
+    @Test
+    public void UNFIT의_isFull_값은_false다() throws Exception {
+        //then
+        assertFalse(Board.UNFIT.isFull());
     }
 }
