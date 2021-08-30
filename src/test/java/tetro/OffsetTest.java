@@ -154,4 +154,43 @@ public class OffsetTest {
         assertEquals(false, offset.equals(null));
         assertThrows(NullPointerException.class, () -> offset.compareTo(null));
     }
+
+    @Test
+    public void rotate_originOffset_returnsSameOffset() throws Exception {
+        //given
+        Offset origin = Offset.ORIGIN;
+
+        //when
+        Offset actual = origin.rotate();
+
+        //then
+        assertEquals(origin, actual);
+    }
+    
+    @Test
+    public void rotate_1QuadrantOffset_returns2QuadrantOffset() throws Exception {
+        //given
+        Offset offset1Quadrant1 = Offset.of(2, 4);
+        
+        //when
+        Offset actual = offset1Quadrant1.rotate();
+
+        //then
+        assertEquals(Offset.of(-4, 2),actual);
+    }
+    
+    @Test
+    public void rotate_4Times_returnsSameOffset() throws Exception {
+        //given
+        Offset originalOffset = Offset.of(1, -3);
+        
+        //when
+        Offset rotate1TimeOffset = originalOffset.rotate();
+        Offset rotate2TimesOffset = rotate1TimeOffset.rotate();
+        Offset rotate3TimesOffset = rotate2TimesOffset.rotate();
+        Offset rotate4TimesOffset = rotate3TimesOffset.rotate();
+
+        //then
+        assertEquals(originalOffset, rotate4TimesOffset);
+    }
 }
