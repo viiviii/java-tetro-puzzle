@@ -11,6 +11,7 @@ public final class BlockShape {
     private final Set<Offset> offsets;
 
     public BlockShape(Set<Offset> offsets) {
+        // TODO: validateArgumentSize 메서드 위치 변경 -> 방어적 복사
         validateArgumentSize(offsets);
         this.offsets = Set.copyOf(offsets);
     }
