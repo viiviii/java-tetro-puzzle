@@ -2,12 +2,14 @@ package tetro.shape;
 
 import tetro.Offset;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 
 public final class BlockShape extends Shape {
     private static final int SIZE = 4;
+
+    private static final Predicate<Offset> validOffset =
+            offset -> offset.x >= 0 && offset.x < SIZE && offset.y >= 0 && offset.y < SIZE;
 
     public BlockShape(Set<Offset> offsets) {
         super(offsets);
@@ -15,28 +17,20 @@ public final class BlockShape extends Shape {
 
     @Override
     protected void validate(Set<Offset> offsets) throws IllegalArgumentException {
-        if (shapeSizeNotEquals(offsets.size())) {
-            throw new IllegalArgumentException("offsets size is not equal to shape size: " +
+        if (offsets.size() != SIZE) {
+            throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
                     "<offsets size> " + offsets.size() + ", " +
                     "<shape size> " + SIZE);
         }
 
-        final Optional<Offset> invalidOffset = invalidRangeOf(offsets);
-        if(invalidOffset.isPresent()) {
-            throw new IllegalArgumentException("offset out of range: " +
-                    "<actual> " + invalidOffset.get() + ", " +
-                    "<range> Between " + Offset.ZERO + " and " + Offset.of(SIZE, SIZE));
+        if (hasInvalidOffset(offsets)) {
+            throw new IllegalArgumentException("Has invalid Offset in 'offsets': " +
+                    "<offsets> " + offsets);
         }
     }
 
-    private boolean shapeSizeNotEquals(int size) {
-        return SIZE != size;
-    }
-
-    private Optional<Offset> invalidRangeOf(Set<Offset> offsets) {
-        final Predicate<Offset> invalid = offset ->
-                offset.x < 0 || offset.x > SIZE || offset.y < 0 || offset.y > SIZE;
-        return offsets.stream().filter(e -> invalid.test(e)).findAny();
+    private boolean hasInvalidOffset(Set<Offset> offsets) {
+        return offsets.stream().anyMatch(validOffset.negate());
     }
 
     public String toGridString() {
