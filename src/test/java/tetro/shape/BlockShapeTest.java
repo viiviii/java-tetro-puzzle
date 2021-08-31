@@ -28,20 +28,24 @@ public class BlockShapeTest {
     }
 
     @Test
-    public void validateSize() throws Exception {
+    public void validate_notShapeSize_throwsException() throws Exception {
         //given
-        Set not4ArgumentSet = Set.of(Offset.of(0, 0));
+        Set setNotEqualToShapeSize = Set.of(Offset.of(0, 0));
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new BlockShape(not4ArgumentSet));
+        assertThrows(IllegalArgumentException.class, () -> new BlockShape(setNotEqualToShapeSize));
     }
 
     @Test
-    public void validateRange() throws Exception {
+    public void validate_invalidOffset_throwsException() throws Exception {
         //given
-        Set invalidRageOffset = Set.of(Offset.of(-1, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        Set offsets = Set.of(Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+
+        //when
+        Offset negativeOffset = Offset.of(-1, 0);
+        Set setWithInvalidOffset = Set.of(negativeOffset, offsets);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new BlockShape(invalidRageOffset));
+        assertThrows(IllegalArgumentException.class, () -> new BlockShape(setWithInvalidOffset));
     }
 }
