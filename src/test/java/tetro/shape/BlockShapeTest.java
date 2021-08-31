@@ -30,7 +30,7 @@ public class BlockShapeTest {
     @Test
     public void validate_notShapeSize_throwsException() throws Exception {
         //given
-        Set setNotEqualToShapeSize = Set.of(Offset.of(0, 0));
+        Set setNotEqualToShapeSize = Set.of(Offset.ZERO);
 
         //then
         assertThrows(IllegalArgumentException.class, () -> new BlockShape(setNotEqualToShapeSize));
@@ -39,11 +39,12 @@ public class BlockShapeTest {
     @Test
     public void validate_invalidOffset_throwsException() throws Exception {
         //given
-        Set offsets = Set.of(Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        Offset negativeOffset = Offset.of(-1, -2);
+        Offset outOfRangeOffset1 = Offset.of(4, 0);
+        Offset outOfRangeOffset2 = Offset.of(0, 4);
 
         //when
-        Offset negativeOffset = Offset.of(-1, 0);
-        Set setWithInvalidOffset = Set.of(negativeOffset, offsets);
+        Set setWithInvalidOffset = Set.of(negativeOffset, outOfRangeOffset1, outOfRangeOffset2, Offset.ZERO);
 
         //then
         assertThrows(IllegalArgumentException.class, () -> new BlockShape(setWithInvalidOffset));
