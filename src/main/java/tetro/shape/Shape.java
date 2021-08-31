@@ -9,14 +9,18 @@ public abstract class Shape {
     private final Set<Offset> offsets;
 
     protected Shape(Set<Offset> offsets) {
-        this.offsets = Set.copyOf(offsets);
+        this.offsets = immutableSet(offsets);
         validate(offsets);
     }
 
     protected abstract void validate(Set<Offset> offsets);
 
     public final Set<Offset> offsets() {
-        return Set.copyOf(this.offsets);
+        return immutableSet(this.offsets);
+    }
+
+    private Set<Offset> immutableSet(Set<Offset> set) {
+        return Set.copyOf(set);
     }
 
     @Override
