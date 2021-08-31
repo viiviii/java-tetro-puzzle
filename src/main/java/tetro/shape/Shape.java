@@ -13,7 +13,7 @@ public abstract class Shape {
         validate(offsets);
     }
 
-    protected abstract void validate(Set<Offset> offsets);
+    protected abstract void validate(Set<Offset> offsets) throws IllegalArgumentException;
 
     public final Set<Offset> offsets() {
         return immutableSet(this.offsets);
