@@ -1,6 +1,26 @@
 # TODO
 > 보드의 비어있는 모든 부분을 블록으로 채우는 경우의 수 구하기 
 
+### Project
+- 주 생성자의 역할은 심플하게 변경
+- test
+    - 메서드명 패턴 통일하기
+    - 테스트 당 하나의 assert만 가지도록 분리하기
+    - 참고하던 문서 나머지 부분 + 다른 글들도 읽고 추가 필요
+- Offset compareTo
+    - 테스트 케이스 분리 및 더 다양하게 작성
+    - 지금 실패하는 테스트 고치기
+- BlockShape
+    - offset 범위 compareTo 사용하기
+- Shape
+    - Offsets 하나로 변경할 수 있는가?
+      - EmptySpace도 Offset으로 변경할 수 있는가? 
+    - 주 생성자의 하는 일을 최소한으로 변경할 수 있는가?
+
+### ???
+- 직렬화는 왜 하는 걸까, awt.Point는 왜 직렬화 했을까
+- UnmodifiableSet vs ImmutableSet 차이
+
 ### Board
 - 정사각형이다
 - [x] ~~현재 사이즈는 모두 9*9이다~~
@@ -13,7 +33,7 @@
 - 메서드
     - [x] ~~보드가 모두 채워져있는지: boolean isFull()~~
     - 보드를 채우는 블럭의 조합 목록: List combinationsOfBlockToFit?()
-    - 보드를 블럭으로 채우기: fit(block) -> 새로운 Board를 생성해서 리턴해야 됨
+    - 보드를 블럭으로 채우기: fit(block) -> 새로운 Board를 생성해서 리턴해야 됨?
 
 ### Block
 - 블럭은 타입이 있다(O, J, L, ...)
@@ -29,7 +49,7 @@
 - BlockType enum
     - [x] ~~I, O, T, S, Z, J, L (7종류)~~
     - o1x, o1y 부분 별로임ㅠㅠ
-- [x] ~~Offset이 직관적으로 보이게~~
+- [x] ~~Offset이 직관적으로 보이게 toString~~
 
 ### EmptySpace
 - 값
@@ -43,9 +63,6 @@
   
 ### Offset
 - [x] ~~좌표의 x, y 위치를 나타낸다~~
-- [x] ~~보드의 크기만큼 제한하기~~
-- [x] ~~매번 객체 만들 필요 없어 보임~~
-- 여기에서 valid 체크하는것과 범위 가진게 이상함 
 
 ### 원하는 시나리오
 - `List<Set<Block>>` combinationsOfBlockToFit();
@@ -68,6 +85,3 @@ for(block: Blocks) {
 }
 return result;
 ```
-
-### ???
-- 직렬화는 왜 하는 걸까, awt.Point는 왜 직렬화 했을까
