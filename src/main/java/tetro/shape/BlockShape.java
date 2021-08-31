@@ -17,7 +17,7 @@ public final class BlockShape extends Shape {
     protected void validate(Set<Offset> offsets) throws IllegalArgumentException {
         if (shapeSizeNotEquals(offsets.size())) {
             throw new IllegalArgumentException("offsets size is not equal to shape size: " +
-                    "<offsets size> " + (offsets == null ? "null" : offsets.size()) + ", " +
+                    "<offsets size> " + offsets.size() + ", " +
                     "<shape size> " + SIZE);
         }
 
