@@ -2,9 +2,7 @@ package tetro;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,48 +13,73 @@ public class OffsetTest {
         //given
         Offset offset1 = Offset.of(0, 8);
 
+        //when
+        int actualX = offset1.x;
+        int actualY = offset1.y;
+
         //then
-        assertEquals(0, offset1.x);
-        assertEquals(8, offset1.y);
+        assertEquals(0, actualX);
+        assertEquals(8, actualY);
     }
 
     @Test
-    public void equals() throws Exception {
+    public void equals_sameOffsets_returnsTrue() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(1, 1);
+
+        //when
+        boolean actual = offset1.equals(offset2);
+
+        //then
+        assertTrue(actual);
+    }
+
+    @Test
+    public void equals_differentOffsets_returnsFalse() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
-        Offset equalToOffset1 = Offset.of(1, 1);
+
+        //when
+        boolean actual = offset1.equals(offset2);
 
         //then
-        assertNotEquals(offset1, offset2);
-        assertEquals(equalToOffset1, offset1);
+        assertFalse(actual);
     }
 
 
+    /*
+    * `ImmutableSet`의 equals() 테스트 시 꼭 요소가 3개 이상이어야 함
+    * 갯수에 따라 `AbstractImmutableSet`의 contains()가 다르게 구현되어 있음
+    *   - 2개 이하일 경우: equals() 사용
+    *   -    이상일 경우: 내부적으로 hashCode 사용 -> Offset hashCode override 필요
+    * */
     @Test
-    public void equalsOfImmutableSetWithMoreThan3Arguments() throws Exception {
+    public void equalsOfImmutableSet_equalsTrueButDifferentReference_returnsTrue() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
         Offset offset3 = Offset.of(3, 5);
         Offset equalToOffset1 = Offset.of(1, 1);
 
-        //when
         Set<Offset> set1 = Set.of(offset1, offset2, offset3);
         Set<Offset> set2 = Set.of(equalToOffset1, offset2, offset3);
 
+        //when
+        boolean actual = set1.equals(set2);
+
         //then
-        assertEquals(set1, set2);
+        assertTrue(actual);
     }
 
     @Test
-    public void equalsOfTreeSet() throws Exception {
+    public void equalsOfTreeSet_equalsTrueButDifferentReference_returnsTrue() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
         Offset equalToOffset1 = Offset.of(1, 1);
 
-        //when
         Set<Offset> set1 = new TreeSet<>();
         set1.add(offset1);
         set1.add(offset2);
@@ -65,19 +88,21 @@ public class OffsetTest {
         set2.add(equalToOffset1);
         set2.add(offset2);
 
+        //when
+        boolean actual = set1.equals(set2);
+
         //then
-        assertEquals(set1, set2);
+        assertTrue(actual);
     }
 
 
     @Test
-    public void equalsOfHashSet() throws Exception {
+    public void equalsOfHashSet_equalsTrueButDifferentReference_returnsTrue() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
         Offset equalToOffset1 = Offset.of(1, 1);
 
-        //when
         Set<Offset> set1 = new HashSet<>();
         set1.add(offset1);
         set1.add(offset2);
@@ -86,28 +111,45 @@ public class OffsetTest {
         set2.add(equalToOffset1);
         set2.add(offset2);
 
+        //when
+        boolean actual = set1.equals(set2);
+
         //then
-        assertEquals(set1, set2);
+        assertTrue(actual);
     }
 
     @Test
-    public void set에서_올바른_중복_제거() throws Exception {
+    public void sizeOfHashSet_addDuplicateOffsets_returns1() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset equalToOffset1 = Offset.of(1, 1);
 
-        //when
         Set<Offset> hashSet = new HashSet<>();
         hashSet.add(offset1);
         hashSet.add(equalToOffset1);
+
+        //when
+        int actual = hashSet.size();
+
+        //then
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void sizeOfTreeSet_addDuplicateOffsets_returns1() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset equalToOffset1 = Offset.of(1, 1);
 
         Set<Offset> treeSet = new TreeSet<>();
         treeSet.add(offset1);
         treeSet.add(equalToOffset1);
 
+        //when
+        int actual = treeSet.size();
+
         //then
-        assertEquals(1, hashSet.size());
-        assertEquals(1, treeSet.size());
+        assertEquals(1, actual);
     }
 
     @Test
