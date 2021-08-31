@@ -193,37 +193,4 @@ public class OffsetTest {
         //then
         assertEquals(originalOffset, rotate4TimesOffset);
     }
-
-    @Test
-    public void isPositive_positiveOffset_returnsTrue() throws Exception {
-        //given
-        Offset offset = Offset.of(1, 1);
-
-        //when
-        boolean actual = offset.isPositive();
-
-        //then
-        assertTrue(actual);
-    }
-
-    @Test
-    public void isPositive_negativeOffset_returnsFalse() throws Exception {
-        //given
-        Offset offset = Offset.of(-1, -1);
-
-        //when
-        boolean actual = offset.isPositive();
-
-        //then
-        assertFalse(actual);
-    }
-
-    @Test
-    public void isPositive_zeroOffset_returnsFalse() throws Exception {
-        //when
-        boolean actual = Offset.ZERO.isPositive();
-
-        //then
-        assertFalse(actual);
-    }
 }

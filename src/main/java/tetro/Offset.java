@@ -22,10 +22,6 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
         return new Offset(x, y);
     }
 
-    public boolean isPositive() {
-        return this != ZERO && (x >= 0 && y >= 0);
-    }
-
     @Override
     public Offset rotate() {
         return quarterTurn();
