@@ -14,24 +14,23 @@ public final class BlockShape extends Shape {
     }
 
     @Override
-    protected void validate(Set<Offset> offsets) {
-        validateSize(offsets);
-        validateRange(offsets);
-    }
+    protected void validate(Set<Offset> offsets) throws IllegalArgumentException {
+        if (shapeSizeNotEquals(offsets.size())) {
+            throw new IllegalArgumentException("offsets size is not equal to shape size: " +
+                    "<offsets size> " + (offsets == null ? "null" : offsets.size()) + ", " +
+                    "<shape size> " + SIZE);
+        }
 
-    private void validateSize(Set<Offset> offsets) {
-        if (offsets != null && offsets.size() == SIZE) return;
-        throw new IllegalArgumentException("offsets size is not equal to shape size: " +
-                "<actual> " + (offsets == null ? "null" : offsets.size()) +
-                ", <shape size> " + SIZE);
-    }
-
-    private void validateRange(Set<Offset> offsets) {
         final Optional<Offset> invalidOffset = invalidRangeOf(offsets);
-        if (invalidOffset.isEmpty()) return;
-        throw new IllegalArgumentException("offset out of range: " +
-                "<actual> " + invalidOffset.get() +
-                ", <range> Between " + Offset.ZERO + " and " + Offset.of(SIZE, SIZE));
+        if(invalidOffset.isPresent()) {
+            throw new IllegalArgumentException("offset out of range: " +
+                    "<actual> " + invalidOffset.get() + ", " +
+                    "<range> Between " + Offset.ZERO + " and " + Offset.of(SIZE, SIZE));
+        }
+    }
+
+    private boolean shapeSizeNotEquals(int size) {
+        return SIZE != size;
     }
 
     private Optional<Offset> invalidRangeOf(Set<Offset> offsets) {
