@@ -1,14 +1,12 @@
-package tetro.shape;
-
-import tetro.Offset;
+package tetro;
 
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class Shape {
+public abstract class Offsets {
     private final Set<Offset> offsets;
 
-    protected Shape(Set<Offset> offsets) {
+    protected Offsets(Set<Offset> offsets) {
         this.offsets = immutableSet(offsets);
         validate(offsets);
     }
@@ -26,8 +24,8 @@ public abstract class Shape {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Shape)) return false;
-        Shape that = (Shape) o;
+        if (!(o instanceof Offsets)) return false;
+        Offsets that = (Offsets) o;
         return this.offsets.equals(that.offsets);
     }
 
