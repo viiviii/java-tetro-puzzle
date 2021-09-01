@@ -3,6 +3,7 @@ package tetro.shape;
 import org.junit.jupiter.api.Test;
 import tetro.offset.Offset;
 import tetro.block.BlockType;
+import tetro.offset.Offsets;
 
 import java.util.Set;
 
@@ -13,13 +14,13 @@ public class BlockShapeTest {
     @Test
     public void equals() throws Exception {
         //given
-        Set sameOffsets = Set.of(Offset.ZERO, Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
-        Set otherOffsets = Set.of(Offset.of(0, 2), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        Offsets sameOffsets = Offsets.of(Offset.ZERO, Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        Offsets otherOffsets = Offsets.of(Offset.of(0, 2), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
 
         //when
-        BlockShape oShape = new BlockShape(BlockType.O.offsets);
-        BlockShape sameShape = new BlockShape(sameOffsets);
-        BlockShape otherShape = new BlockShape(otherOffsets);
+        BlockShape oShape = BlockShape.from(BlockType.O.offsets);
+        BlockShape sameShape = BlockShape.from(sameOffsets);
+        BlockShape otherShape = BlockShape.from(otherOffsets);
 
         //then
         assertEquals(oShape, sameShape);
@@ -30,10 +31,10 @@ public class BlockShapeTest {
     @Test
     public void validate_notShapeSize_throwsException() throws Exception {
         //when
-        Set setNotEqualToShapeSize = Set.of(Offset.ZERO);
+        Offsets setNotEqualToShapeSize = Offsets.of(Offset.ZERO);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new BlockShape(setNotEqualToShapeSize));
+        assertThrows(IllegalArgumentException.class, () -> BlockShape.from(setNotEqualToShapeSize));
     }
 
     @Test
@@ -44,10 +45,10 @@ public class BlockShapeTest {
         Offset outOfRangeOffset2 = Offset.of(0, 4);
 
         //when
-        Set setWithInvalidOffset = Set.of(negativeOffset, outOfRangeOffset1, outOfRangeOffset2, Offset.ZERO);
+        Offsets setWithInvalidOffset = Offsets.of(negativeOffset, outOfRangeOffset1, outOfRangeOffset2, Offset.ZERO);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> new BlockShape(setWithInvalidOffset));
+        assertThrows(IllegalArgumentException.class, () -> BlockShape.from(setWithInvalidOffset));
     }
     
     @Test

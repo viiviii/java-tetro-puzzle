@@ -3,17 +3,20 @@ package tetro.shape;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
-import java.util.Set;
-
 public final class BlockShape extends Offsets {
     private static final int SIZE = 4;
 
-    public BlockShape(Set<Offset> offsets) {
+    private BlockShape(Offsets offsets) {
         super(offsets);
     }
 
-    @Override
-    protected void validate(Set<Offset> offsets) throws IllegalArgumentException {
+    // TODO
+    public static final BlockShape from(Offsets offsets){
+        validate(offsets);
+        return new BlockShape(offsets);
+    }
+
+    private static void validate(Offsets offsets) throws IllegalArgumentException {
         if (offsets.size() != SIZE) {
             throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
                     "<offsets size> " + offsets.size() + ", " +
@@ -26,8 +29,8 @@ public final class BlockShape extends Offsets {
         }
     }
 
-    private boolean hasInvalidOffset(Set<Offset> offsets) {
-        return offsets.stream().anyMatch(e -> !canContain(e));
+    private static boolean hasInvalidOffset(Offsets offsets) {
+        return offsets.toImmutableSet().stream().anyMatch(e -> !canContain(e));
     }
 
     public static boolean canContain(Offset offset) {
@@ -42,7 +45,7 @@ public final class BlockShape extends Offsets {
     private boolean[][] gridFilledWithShapeOffsets() {
         final boolean FILL = true;
         final boolean[][] grid = new boolean[SIZE][SIZE];
-        this.offsets().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        this.toImmutableSet().forEach(offset -> grid[offset.y][offset.x] = FILL);
         return grid;
     }
 
