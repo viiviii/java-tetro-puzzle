@@ -7,6 +7,8 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OffsetTest {
+    final int LESS = -1;
+    final int GREATER = 1;
 
     @Test
     public void of() throws Exception {
@@ -153,26 +155,6 @@ public class OffsetTest {
     }
 
     @Test
-    public void y값이_더_작거나_만약_같은_경우_x값이_작은게_순서가_앞이다() throws Exception {
-        //given
-        final int LESS = -1;
-        final int GREATER = 1;
-        Offset offset1 = Offset.of(8, 8);
-        Offset offset2 = Offset.ZERO;
-        Offset offset3 = Offset.of(0, 8);
-
-        //when
-        int compare1With2 = offset1.compareTo(offset2);
-        int compare2With3 = offset2.compareTo(offset3);
-        int compare3With1 = offset3.compareTo(offset1);
-
-        //then
-        assertEquals(GREATER, compare1With2);
-        assertEquals(LESS, compare2With3);
-        assertEquals(LESS, compare3With1);
-    }
-
-    @Test
     public void equals_결과가_true이면_compareTo_결과는_0이어야한다() throws Exception {
         //given
         Offset offset1 = Offset.of(0, 8);
@@ -196,6 +178,85 @@ public class OffsetTest {
         assertEquals(false, offset.equals(null));
         assertThrows(NullPointerException.class, () -> offset.compareTo(null));
     }
+
+    @Test
+    public void compareTo_otherWithGreaterX_returnsLess() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(2, 1);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(LESS, actual);
+    }
+
+    @Test
+    public void compareTo_otherWithGreaterY_returnsLess() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(1, 2);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(LESS, actual);
+    }
+
+    @Test
+    public void compareTo_otherWithGreaterXY_returnsLess() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(2, 2);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(LESS, actual);
+    }
+
+    @Test
+    public void compareTo_otherWithLessXY_returnsGreater() throws Exception {
+        //given
+        Offset offset1 = Offset.of(2, 2);
+        Offset offset2 = Offset.of(1, 1);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(GREATER, actual);
+    }
+
+    @Test
+    public void compareTo_otherWithLessXGreaterY_returnsLess() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(0, 2);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(LESS, actual);
+    }
+
+    @Test
+    public void compareTo_otherWithGreaterXLessY_returnsGreater() throws Exception {
+        //given
+        Offset offset1 = Offset.of(1, 1);
+        Offset offset2 = Offset.of(2, 0);
+
+        //when
+        int actual = offset1.compareTo(offset2);
+
+        //then
+        assertEquals(GREATER, actual);
+    }
+
 
     @Test
     public void rotate_zeroOffset_returnsSameOffset() throws Exception {
