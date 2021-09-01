@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 public final class BlockShape extends Shape {
     private static final int SIZE = 4;
 
-    private static final Predicate<Offset> validOffset =
-            offset -> offset.x >= 0 && offset.x < SIZE && offset.y >= 0 && offset.y < SIZE;
+    private static final Predicate<Offset> validOffset = offset ->
+            offset.x >= 0 && offset.y >= 0 && offset.x < SIZE && offset.y < SIZE;
 
     public BlockShape(Set<Offset> offsets) {
         super(offsets);
@@ -31,6 +31,10 @@ public final class BlockShape extends Shape {
 
     private boolean hasInvalidOffset(Set<Offset> offsets) {
         return offsets.stream().anyMatch(validOffset.negate());
+    }
+
+    public static boolean canContain(Offset offset) {
+        return validOffset.test(offset);
     }
 
     public String toGridString() {
