@@ -3,22 +3,19 @@ package tetro.offset;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class Offsets {
+public class Offsets {
     private final Set<Offset> offsets;
 
-    protected Offsets(Set<Offset> offsets) {
-        this.offsets = immutableSet(offsets);
-        validate(offsets);
+    private Offsets(Set<Offset> offsets) {
+        this.offsets = offsets;
     }
 
-    protected abstract void validate(Set<Offset> offsets) throws IllegalArgumentException;
-
-    public final Set<Offset> offsets() {
-        return immutableSet(this.offsets);
+    public static final Offsets from(Set<Offset> offsets) {
+        return new Offsets(Set.copyOf(offsets));
     }
 
-    private Set<Offset> immutableSet(Set<Offset> set) {
-        return Set.copyOf(set);
+    public final Set<Offset> toImmutableSet() {
+        return Set.copyOf(this.offsets);
     }
 
     @Override
@@ -36,6 +33,6 @@ public abstract class Offsets {
 
     @Override
     public String toString() {
-        return "Shape{" + "offsets=" + offsets + '}';
+        return "Offsets{" + offsets + '}';
     }
 }
