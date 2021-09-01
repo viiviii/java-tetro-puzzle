@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * 좌표의 x, y 위치를 나타낸다
  */
-public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
+public final class Offset implements Comparable<Offset>, Rotatable<Offset>, Translatable<Offset> {
     public static final Offset INVALID = Offset.of(Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final Offset ZERO = Offset.of(0, 0);
 
@@ -23,12 +23,24 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
     }
 
     @Override
+    public int compareTo(Offset other) {
+        return this.y == other.y
+                ? Integer.compare(this.x, other.x)
+                : Integer.compare(this.y, other.y);
+    }
+
+    @Override
     public Offset rotate() {
         return quarterTurn();
     }
 
     private Offset quarterTurn() {
         return Offset.of(-this.y, this.x);
+    }
+
+    @Override
+    public Offset translate(int translateX, int translateY) {
+        return Offset.of(this.x + translateX, this.y + translateY);
     }
 
     @Override
@@ -42,13 +54,6 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset> {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
-    }
-
-    @Override
-    public int compareTo(Offset other) {
-        return this.y == other.y
-                ? Integer.compare(this.x, other.x)
-                : Integer.compare(this.y, other.y);
     }
 
     @Override
