@@ -25,7 +25,7 @@ public class OffsetTest {
     }
 
     @Test
-    public void equals_sameOffsets_returnsTrue() throws Exception {
+    public void equals_twoSameOffset_returnsTrue() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(1, 1);
@@ -38,7 +38,7 @@ public class OffsetTest {
     }
 
     @Test
-    public void equals_differentOffsets_returnsFalse() throws Exception {
+    public void equals_twoDifferentOffset_returnsFalse() throws Exception {
         //given
         Offset offset1 = Offset.of(1, 1);
         Offset offset2 = Offset.of(0, 2);
