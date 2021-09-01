@@ -3,13 +3,9 @@ package tetro.shape;
 import tetro.Offset;
 
 import java.util.Set;
-import java.util.function.Predicate;
 
 public final class BlockShape extends Shape {
     private static final int SIZE = 4;
-
-    private static final Predicate<Offset> validOffset = offset ->
-            offset.x >= 0 && offset.y >= 0 && offset.x < SIZE && offset.y < SIZE;
 
     public BlockShape(Set<Offset> offsets) {
         super(offsets);
@@ -30,11 +26,11 @@ public final class BlockShape extends Shape {
     }
 
     private boolean hasInvalidOffset(Set<Offset> offsets) {
-        return offsets.stream().anyMatch(validOffset.negate());
+        return offsets.stream().anyMatch(e -> !canContain(e));
     }
 
     public static boolean canContain(Offset offset) {
-        return validOffset.test(offset);
+        return offset.x >= 0 && offset.y >= 0 && offset.x < SIZE && offset.y < SIZE;
     }
 
     public String toGridString() {
