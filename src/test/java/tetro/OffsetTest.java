@@ -296,4 +296,34 @@ public class OffsetTest {
         //then
         assertEquals(originalOffset, rotate4TimesOffset);
     }
+
+    @Test
+    public void translate_positiveAxis_returnsSumOfXY() throws Exception {
+        //given
+        int translateX = 3;
+        int translateY = 3;
+        Offset offset = Offset.of(1, 1);
+
+        //when
+        Offset actual = offset.translate(translateX, translateY);
+
+        //then
+        assertEquals(4, actual.x);
+        assertEquals(4, actual.y);
+    }
+
+    @Test
+    public void translate_negativeAxis_returnsMinusOfXY() throws Exception {
+        //given
+        int translateX = -3;
+        int translateY = -3;
+        Offset offset = Offset.of(1, 1);
+
+        //when
+        Offset actual = offset.translate(translateX, translateY);
+
+        //then
+        assertEquals(-2, actual.x);
+        assertEquals(-2, actual.y);
+    }
 }
