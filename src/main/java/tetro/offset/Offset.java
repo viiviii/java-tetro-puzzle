@@ -1,4 +1,7 @@
-package tetro;
+package tetro.offset;
+
+import tetro.Rotatable;
+import tetro.Translatable;
 
 import java.util.Objects;
 

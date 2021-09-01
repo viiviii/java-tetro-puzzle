@@ -1,6 +1,7 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
+import tetro.offset.Offset;
 
 import static org.junit.jupiter.api.Assertions.*;
 

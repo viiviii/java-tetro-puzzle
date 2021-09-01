@@ -1,10 +1,11 @@
 package tetro.shape;
 
-import tetro.Offset;
+import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 import java.util.Set;
 
-public final class BlockShape extends Shape {
+public final class BlockShape extends Offsets {
     private static final int SIZE = 4;
 
     public BlockShape(Set<Offset> offsets) {

@@ -1,5 +1,7 @@
 package tetro;
 
+import tetro.offset.Offset;
+
 import java.util.*;
 
 public final class EmptySpace {

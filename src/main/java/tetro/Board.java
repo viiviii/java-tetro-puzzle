@@ -1,5 +1,7 @@
 package tetro;
 
+import tetro.offset.Offset;
+
 public final class Board {
     public static final int LENGTH = 9;
     public static final Board UNFIT = new Board(new EmptySpace(Offset.INVALID));

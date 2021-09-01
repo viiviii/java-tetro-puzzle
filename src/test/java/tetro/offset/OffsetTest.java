@@ -1,4 +1,4 @@
-package tetro;
+package tetro.offset;
 
 import org.junit.jupiter.api.Test;
 
