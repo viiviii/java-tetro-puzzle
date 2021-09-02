@@ -34,4 +34,22 @@ public class BlockShapeTest {
         //then
         assertThrows(IllegalArgumentException.class, () -> BlockShape.from(setNotEqualToShapeSize));
     }
+
+    @Test
+    public void toGridString_doesNotThrowsException() throws Exception {
+        //given
+        Offset o1 = Offset.of(-1, -1);
+        Offset o2 = Offset.ZERO;
+        Offset o3 = Offset.of(1, 1);
+        Offset o4 = Offset.of(1, 2);
+        Offsets offsets = Offsets.of(o1, o2, o3, o4);
+
+        //when
+        BlockShape oShape = BlockShape.from(BlockType.O.offsets);
+        BlockShape shapeWithNegativeOffset = BlockShape.from(offsets);
+
+        //then
+        assertDoesNotThrow(() -> oShape.toGridString());
+        assertDoesNotThrow(() -> shapeWithNegativeOffset.toGridString());
+    }
 }
