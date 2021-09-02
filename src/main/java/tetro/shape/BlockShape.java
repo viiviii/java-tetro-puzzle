@@ -15,7 +15,7 @@ public final class BlockShape {
 
     public static BlockShape from(Offsets offsets) {
         validate(offsets);
-        return new BlockShape(positiveOffsets(offsets));
+        return new BlockShape(offsets.translatePositive());
     }
 
     private static void validate(Offsets offsets) throws IllegalArgumentException {
@@ -23,10 +23,6 @@ public final class BlockShape {
         throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
                 "<offsets size> " + offsets.size() + ", " +
                 "<shape size> " + SIZE);
-    }
-
-    private static Offsets positiveOffsets(Offsets offsets) {
-        return offsets.translateBy(Offset.ZERO);
     }
 
     @Override

@@ -125,4 +125,17 @@ public class OffsetsTest {
         assertEquals(origin.x, actual.first().x);
         assertEquals(origin.y, actual.first().y);
     }
+
+    @Test
+    public void translatePositive_negativeOffsets_returnsPositiveOffsets() throws Exception {
+        //given
+        Offsets positive = BlockType.O.offsets;
+        Offsets negative = positive.translate(-3, -5);
+
+        //when
+        Offsets actual = negative.translatePositive();
+
+        //then
+        assertEquals(positive, actual);
+    }
 }

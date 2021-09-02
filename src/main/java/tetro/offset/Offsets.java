@@ -54,6 +54,10 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return translate(translateX, translateY);
     }
 
+    public Offsets translatePositive() {
+        return this.translateBy(Offset.ZERO);
+    }
+
     @Override
     public Offsets rotate() {
         final List<Offset> rotatedOffsets = this.stream()
