@@ -5,6 +5,7 @@ import tetro.Translatable;
 
 import java.util.*;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,7 +46,7 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
 
     @Override
     public Offsets translate(int translateX, int translateY) {
-        List<Offset> translateOffsets = this.stream()
+        final List<Offset> translateOffsets = this.stream()
                 .map(e -> e.translate(translateX, translateY))
                 .collect(Collectors.toList());
         return new Offsets(translateOffsets);
@@ -64,7 +65,14 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
     }
 
     public Offsets translatePositive() {
-        return this.translateBy(Offset.ZERO);
+        final int minX = min(e -> e.x);
+        final int minY = min(e -> e.y);
+        return translate(-minX, -minY);
+    }
+
+    // TODO: 이거 이름 뭐라그래
+    private int min(Function<Offset, Integer> mapper) {
+        return this.stream().map(e -> mapper.apply(e)).min(Integer::compare).get();
     }
 
     @Override
