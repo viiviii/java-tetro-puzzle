@@ -2,7 +2,6 @@ package tetro.offset;
 
 import org.junit.jupiter.api.Test;
 import tetro.block.BlockType;
-import tetro.shape.BlockShape;
 
 import java.util.Collections;
 
@@ -138,42 +137,5 @@ public class OffsetsTest {
 
         //then
         assertEquals(positive, actual);
-    }
-
-
-    @Test
-    public void linked_linkedOffsets_returnsTrue() throws Exception {
-        //given
-        Offsets offsets = BlockType.S.offsets;
-
-        // TODO: test하고 지우기
-        BlockShape shape = BlockShape.from(offsets);
-        System.out.println(shape.toGridString());
-
-        //when
-        boolean actual = offsets.linked();
-
-        //then
-        assertTrue(actual);
-    }
-
-    @Test
-    public void linked_unlinkedOffsets_returnsFalse() throws Exception {
-        //given
-        Offset o1 = Offset.of(1, 0);
-        Offset o2 = Offset.of(2, 0);
-        Offset o3 = Offset.of(0, 1);
-        Offset o4 = Offset.of(1, 2);
-        Offsets offsets = Offsets.of(o1, o2, o3, o4);
-
-        // TODO: test하고 지우기
-        BlockShape shape = BlockShape.from(offsets);
-        System.out.println(shape.toGridString());
-
-        //when
-        boolean actual = offsets.linked();
-
-        //then
-        assertFalse(actual);
     }
 }

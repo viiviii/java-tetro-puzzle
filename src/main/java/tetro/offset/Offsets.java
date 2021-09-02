@@ -36,14 +36,6 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return this.offsets.stream();
     }
 
-    public boolean linked() {
-        final BiPredicate<Offset, Offset> linked = (a, b) -> a.x == b.x || a.y == b.y;
-        final Offset offset = this.stream()
-                .reduce((a, b) -> linked.test(a, b) ? b : a)
-                .get();
-        return offset.equals(this.offsets.last());
-    }
-
     @Override
     public Offsets translate(int translateX, int translateY) {
         final List<Offset> translateOffsets = this.stream()
