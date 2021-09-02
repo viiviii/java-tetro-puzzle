@@ -97,4 +97,19 @@ public class OffsetsTest {
         //then
         assertEquals(offsets, rotate4);
     }
+
+    @Test
+    public void translate_oBlockOneSpace_returnsPlusNumberOne() throws Exception {
+        //given
+        final int translateX = 1;
+        final int translateY = 1;
+        Offsets origin = BlockType.Z.offsets;
+
+        //when
+        Offsets actual = origin.translate(translateX, translateY);
+
+        //then
+        assertEquals(origin.first().x + translateX, actual.first().x);
+        assertEquals(origin.first().y + translateY, actual.first().y);
+    }
 }

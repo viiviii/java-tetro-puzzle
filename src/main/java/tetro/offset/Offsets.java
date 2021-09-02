@@ -1,12 +1,13 @@
 package tetro.offset;
 
 import tetro.Rotatable;
+import tetro.Translatable;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class Offsets implements Rotatable<Offsets> {
+public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> {
     private final SortedSet<Offset> offsets;
 
     private Offsets(List<Offset> offsets) {
@@ -34,8 +35,20 @@ public final class Offsets implements Rotatable<Offsets> {
     }
 
     @Override
+    public Offsets translate(int translateX, int translateY) {
+        List<Offset> translateOffsets = this.stream()
+                .map(e -> e.translate(translateX, translateX))
+                .collect(Collectors.toList());
+        return new Offsets(translateOffsets);
+    }
+
+    public Offsets translate(Offset translate) {
+        return translate(translate.x, translate.y);
+    }
+
+    @Override
     public Offsets rotate() {
-        final List<Offset> rotatedOffsets = this.offsets.stream()
+        final List<Offset> rotatedOffsets = this.stream()
                 .map(e -> quarterTurn(e))
                 .collect(Collectors.toList());
         return new Offsets(rotatedOffsets);
