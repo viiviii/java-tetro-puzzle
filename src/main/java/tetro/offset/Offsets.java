@@ -13,20 +13,8 @@ public final class Offsets {
         return new Offsets(List.copyOf(set));
     }
 
-    public static final Offsets of(Offset offset) {
-        return new Offsets(List.of(offset));
-    }
-
-    public static final Offsets of(Offset o1, Offset o2) {
-        return new Offsets(List.of(o1, o2));
-    }
-
-    public static final Offsets of(Offset o1, Offset o2, Offset o3) {
-        return new Offsets(List.of(o1, o2, o3));
-    }
-
-    public static final Offsets of(Offset o1, Offset o2, Offset o3, Offset o4) {
-        return new Offsets(List.of(o1, o2, o3, o4));
+    public static final Offsets of(Offset... offset) {
+        return new Offsets(Arrays.asList(offset));
     }
 
     public int size() {
