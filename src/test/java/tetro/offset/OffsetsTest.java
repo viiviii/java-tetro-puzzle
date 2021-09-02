@@ -1,6 +1,7 @@
 package tetro.offset;
 
 import org.junit.jupiter.api.Test;
+import tetro.block.BlockType;
 
 import java.util.Collections;
 
@@ -82,4 +83,18 @@ public class OffsetsTest {
         assertEquals(LESS, compare);
     }
 
+    @Test
+    public void rotate_4Times_returnsSameOffsets() throws Exception {
+        //given
+        Offsets offsets = BlockType.I.offsets;
+
+        //when
+        Offsets rotate1 = offsets.rotate();
+        Offsets rotate2 = rotate1.rotate();
+        Offsets rotate3 = rotate2.rotate();
+        Offsets rotate4 = rotate3.rotate();
+
+        //then
+        assertEquals(offsets, rotate4);
+    }
 }
