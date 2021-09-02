@@ -134,7 +134,7 @@ public class OffsetsTest {
         Offsets negative = positive.translate(-3, -5);
 
         //when
-        Offsets actual = negative.translatePositive();
+        Offsets actual = negative.translateToZeroOffset();
 
         //then
         assertEquals(positive, actual);

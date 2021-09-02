@@ -64,7 +64,10 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return translate(translateX, translateY);
     }
 
-    public Offsets translatePositive() {
+    /**
+     * 제1사분면의 원점(0,0)에 가깝게 이동
+     */
+    public Offsets translateToZeroOffset() {
         final int minX = min(e -> e.x);
         final int minY = min(e -> e.y);
         return translate(-minX, -minY);

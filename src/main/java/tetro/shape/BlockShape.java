@@ -1,6 +1,5 @@
 package tetro.shape;
 
-import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
@@ -15,7 +14,7 @@ public final class BlockShape {
 
     public static BlockShape from(Offsets offsets) {
         validate(offsets);
-        return new BlockShape(offsets.translatePositive());
+        return new BlockShape(offsets.translateToZeroOffset());
     }
 
     private static void validate(Offsets offsets) throws IllegalArgumentException {
