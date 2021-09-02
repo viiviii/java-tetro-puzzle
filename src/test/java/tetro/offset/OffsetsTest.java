@@ -99,7 +99,7 @@ public class OffsetsTest {
     }
 
     @Test
-    public void translate_oBlockOneSpace_returnsPlusNumberOne() throws Exception {
+    public void translate_oneSpace_returnsPlusNumberOne() throws Exception {
         //given
         final int translateX = 1;
         final int translateY = 1;
@@ -111,5 +111,19 @@ public class OffsetsTest {
         //then
         assertEquals(origin.first().x + translateX, actual.first().x);
         assertEquals(origin.first().y + translateY, actual.first().y);
+    }
+
+    @Test
+    public void translateBy_positiveX10Y10_returnsFirstOffsetSame() throws Exception {
+        //given
+        Offset origin = Offset.of(10, 11);
+        Offsets offsets = BlockType.J.offsets;
+
+        //when
+        Offsets actual = offsets.translateBy(origin);
+
+        //then
+        assertEquals(origin.x, actual.first().x);
+        assertEquals(origin.y, actual.first().y);
     }
 }

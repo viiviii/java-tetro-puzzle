@@ -46,6 +46,14 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return translate(translate.x, translate.y);
     }
 
+    // TODO: 메서드명
+    public Offsets translateBy(Offset origin) {
+        final Offset first = this.first();
+        final int translateX = origin.x - first.x;
+        final int translateY = origin.y - first.y;
+        return translate(translateX, translateY);
+    }
+
     @Override
     public Offsets rotate() {
         final List<Offset> rotatedOffsets = this.stream()
