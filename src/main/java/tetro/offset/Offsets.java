@@ -1,6 +1,7 @@
 package tetro.offset;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public final class Offsets {
     private final SortedSet<Offset> offsets;
@@ -23,6 +24,10 @@ public final class Offsets {
 
     public Offset first() {
         return this.offsets.first();
+    }
+
+    public Stream<Offset> stream() {
+        return this.offsets.stream();
     }
 
     @Override
