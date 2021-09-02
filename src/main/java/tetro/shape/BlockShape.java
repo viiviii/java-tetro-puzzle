@@ -1,11 +1,9 @@
 package tetro.shape;
 
-import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-// TODO: offset이 음수인지 확인하지 않기 validate는 사이즈만 -> 확인은 다른데서
 public final class BlockShape {
     private static final int SIZE = 4;
     private final Offsets offsets;
@@ -14,35 +12,16 @@ public final class BlockShape {
         this.offsets = offsets;
     }
 
-    // TODO
-    public static final BlockShape from(Offsets offsets) {
+    public static BlockShape from(Offsets offsets) {
         validate(offsets);
         return new BlockShape(offsets);
     }
 
     private static void validate(Offsets offsets) throws IllegalArgumentException {
-        if (offsets.size() != SIZE) {
-            throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
-                    "<offsets size> " + offsets.size() + ", " +
-                    "<shape size> " + SIZE);
-        }
-
-        if (hasInvalidOffset(offsets)) {
-            throw new IllegalArgumentException("Has invalid Offset in 'offsets': " +
-                    "<offsets> " + offsets);
-        }
-    }
-
-    private static boolean hasInvalidOffset(Offsets offsets) {
-        return offsets.stream().anyMatch(e -> !canContain(e));
-    }
-
-    public static boolean canContain(Offset offset) {
-        return offset.x >= 0 && offset.y >= 0 && offset.x < SIZE && offset.y < SIZE;
-    }
-
-    public Offsets offsets() {
-        return offsets;
+        if (offsets.size() == SIZE) return;
+        throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
+                "<offsets size> " + offsets.size() + ", " +
+                "<shape size> " + SIZE);
     }
 
     @Override
