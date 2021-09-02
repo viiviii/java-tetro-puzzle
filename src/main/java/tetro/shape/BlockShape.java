@@ -5,6 +5,7 @@ import tetro.offset.Offsets;
 
 import java.util.Objects;
 
+// TODO: offset이 음수인지 확인하지 않기 validate는 사이즈만 -> 확인은 다른데서
 public final class BlockShape {
     private static final int SIZE = 4;
     private final Offsets offsets;
@@ -33,7 +34,7 @@ public final class BlockShape {
     }
 
     private static boolean hasInvalidOffset(Offsets offsets) {
-        return offsets.toImmutableSet().stream().anyMatch(e -> !canContain(e));
+        return offsets.stream().anyMatch(e -> !canContain(e));
     }
 
     public static boolean canContain(Offset offset) {
@@ -70,7 +71,7 @@ public final class BlockShape {
     private boolean[][] gridFilledWithShapeOffsets() {
         final boolean FILL = true;
         final boolean[][] grid = new boolean[SIZE][SIZE];
-        offsets.toImmutableSet().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        offsets.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
         return grid;
     }
 
