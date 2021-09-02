@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class OffsetsTest {
     final int LESS = -1;
 
-
     @Test
     public void size_emptySet_returnsNumberZero() throws Exception {
         //given
@@ -27,7 +26,7 @@ public class OffsetsTest {
     public void size_twoDifferentOffset_returnsNumberTwo() throws Exception {
         //given
         Offset o1 = Offset.ZERO;
-        Offset o2 = Offset.of(1, 1);
+        Offset o2 = Offset.of(1, 2);
         Offsets offsets = Offsets.of(o1, o2);
 
         //when
@@ -40,8 +39,8 @@ public class OffsetsTest {
     @Test
     public void size_duplicateOffsets_returnsNumberOne() throws Exception {
         //given
-        Offset o1 = Offset.ZERO;
-        Offset o2 = Offset.of(0, 0);
+        Offset o1 = Offset.of(4, 1);
+        Offset o2 = Offset.of(4, 1);
         Offsets offsets = Offsets.of(o1, o2);
 
         //when
@@ -54,8 +53,8 @@ public class OffsetsTest {
     @Test
     public void first_twoPositiveOffset_returnsOffsetWithLessForCompareTo() throws Exception {
         //given
-        Offset o1 = Offset.of(3, 3);
-        Offset o2 = Offset.of(2, 2);
+        Offset o1 = Offset.of(5, 3);
+        Offset o2 = Offset.of(1, 2);
         Offsets offsets = Offsets.of(o1, o2);
 
         //when
@@ -102,7 +101,7 @@ public class OffsetsTest {
     public void translate_oneSpace_returnsPlusNumberOne() throws Exception {
         //given
         final int translateX = 1;
-        final int translateY = 1;
+        final int translateY = 4;
         Offsets origin = BlockType.Z.offsets;
 
         //when
