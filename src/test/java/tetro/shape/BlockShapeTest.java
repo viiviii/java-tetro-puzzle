@@ -36,20 +36,39 @@ public class BlockShapeTest {
     }
 
     @Test
-    public void toGridString_doesNotThrowsException() throws Exception {
+    public void toGridString_startedZeroOffset_doesNotThrowsException() throws Exception {
         //given
-        Offset o1 = Offset.of(-1, -1);
-        Offset o2 = Offset.ZERO;
-        Offset o3 = Offset.of(1, 1);
-        Offset o4 = Offset.of(1, 2);
-        Offsets offsets = Offsets.of(o1, o2, o3, o4);
+        Offsets offsets = BlockType.O.offsets;
 
         //when
-        BlockShape oShape = BlockShape.from(BlockType.O.offsets);
-        BlockShape shapeWithNegativeOffset = BlockShape.from(offsets);
+        BlockShape shape = BlockShape.from(offsets);
 
         //then
-        assertDoesNotThrow(() -> oShape.toGridString());
-        assertDoesNotThrow(() -> shapeWithNegativeOffset.toGridString());
+        assertDoesNotThrow(() -> shape.toGridString());
+    }
+
+    @Test
+    public void toGridString_notStartedZeroOffset_doesNotThrowsException() throws Exception {
+        //given
+        Offsets offsets = BlockType.S.offsets;
+
+        //when
+        BlockShape shape = BlockShape.from(offsets);
+
+        //then
+        assertDoesNotThrow(() -> shape.toGridString());
+    }
+
+    @Test
+    public void toGridString_negativeOffset_doesNotThrowsException() throws Exception {
+        //given
+        Offsets offsets = BlockType.S.offsets;
+        Offsets negativeOffsets = offsets.translate(-3, 0);
+
+        //when
+        BlockShape shape = BlockShape.from(negativeOffsets);
+
+        //then
+        assertDoesNotThrow(() -> shape.toGridString());
     }
 }
