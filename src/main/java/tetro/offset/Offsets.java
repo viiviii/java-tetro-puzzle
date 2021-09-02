@@ -37,7 +37,7 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
     @Override
     public Offsets translate(int translateX, int translateY) {
         List<Offset> translateOffsets = this.stream()
-                .map(e -> e.translate(translateX, translateX))
+                .map(e -> e.translate(translateX, translateY))
                 .collect(Collectors.toList());
         return new Offsets(translateOffsets);
     }
