@@ -1,6 +1,5 @@
 package tetro.offset;
 
-import tetro.Rotatable;
 import tetro.Translatable;
 
 import java.util.Objects;
@@ -8,7 +7,7 @@ import java.util.Objects;
 /**
  * 좌표의 x, y 위치를 나타낸다
  */
-public final class Offset implements Comparable<Offset>, Rotatable<Offset>, Translatable<Offset> {
+public final class Offset implements Comparable<Offset>, Translatable<Offset> {
     public static final Offset INVALID = Offset.of(Integer.MIN_VALUE, Integer.MAX_VALUE);
     public static final Offset ZERO = Offset.of(0, 0);
 
@@ -30,15 +29,6 @@ public final class Offset implements Comparable<Offset>, Rotatable<Offset>, Tran
         return this.y == other.y
                 ? Integer.compare(this.x, other.x)
                 : Integer.compare(this.y, other.y);
-    }
-
-    @Override
-    public Offset rotate() {
-        return quarterTurn();
-    }
-
-    private Offset quarterTurn() {
-        return Offset.of(-this.y, this.x);
     }
 
     @Override

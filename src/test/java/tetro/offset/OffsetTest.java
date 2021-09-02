@@ -52,11 +52,11 @@ public class OffsetTest {
 
 
     /*
-    * `ImmutableSet`의 equals() 테스트 시 꼭 요소가 3개 이상이어야 함
-    * 갯수에 따라 `AbstractImmutableSet`의 contains()가 다르게 구현되어 있음
-    *   - 2개 이하일 경우: equals() 사용
-    *   -    이상일 경우: 내부적으로 hashCode 사용 -> Offset hashCode override 필요
-    * */
+     * `ImmutableSet`의 equals() 테스트 시 꼭 요소가 3개 이상이어야 함
+     * 갯수에 따라 `AbstractImmutableSet`의 contains()가 다르게 구현되어 있음
+     *   - 2개 이하일 경우: equals() 사용
+     *   -    이상일 경우: 내부적으로 hashCode 사용 -> Offset hashCode override 필요
+     * */
     @Test
     public void equalsOfImmutableSet_equalsTrueButDifferentReference_returnsTrue() throws Exception {
         //given
@@ -255,46 +255,6 @@ public class OffsetTest {
 
         //then
         assertEquals(GREATER, actual);
-    }
-
-
-    @Test
-    public void rotate_zeroOffset_returnsSameOffset() throws Exception {
-        //given
-        Offset zero = Offset.ZERO;
-
-        //when
-        Offset actual = zero.rotate();
-
-        //then
-        assertEquals(zero, actual);
-    }
-    
-    @Test
-    public void rotate_1QuadrantOffset_returns2QuadrantOffset() throws Exception {
-        //given
-        Offset offset1Quadrant1 = Offset.of(2, 4);
-        
-        //when
-        Offset actual = offset1Quadrant1.rotate();
-
-        //then
-        assertEquals(Offset.of(-4, 2),actual);
-    }
-    
-    @Test
-    public void rotate_4Times_returnsSameOffset() throws Exception {
-        //given
-        Offset originalOffset = Offset.of(1, -3);
-        
-        //when
-        Offset rotate1TimeOffset = originalOffset.rotate();
-        Offset rotate2TimesOffset = rotate1TimeOffset.rotate();
-        Offset rotate3TimesOffset = rotate2TimesOffset.rotate();
-        Offset rotate4TimesOffset = rotate3TimesOffset.rotate();
-
-        //then
-        assertEquals(originalOffset, rotate4TimesOffset);
     }
 
     @Test
