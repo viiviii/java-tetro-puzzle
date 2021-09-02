@@ -30,10 +30,6 @@ public final class Offsets {
         return new Offsets(Set.of(o1, o2, o3, o4));
     }
 
-    public final Set<Offset> toImmutableSet() {
-        return Set.copyOf(this.offsets);
-    }
-
     public int size() {
         return this.offsets.size();
     }
