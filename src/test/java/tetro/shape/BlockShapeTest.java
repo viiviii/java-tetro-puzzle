@@ -1,47 +1,45 @@
 package tetro.shape;
 
 import org.junit.jupiter.api.Test;
-import tetro.offset.Offset;
 import tetro.block.BlockType;
-import tetro.offset.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockShapeTest {
 
     @Test
-    public void equals() throws Exception {
+    public void equals_sameShapes_returnsTrue() throws Exception {
         //given
-        Offsets sameOffsets = Offsets.of(Offset.ZERO, Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
-        Offsets otherOffsets = Offsets.of(Offset.of(0, 2), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1));
+        BlockShape shape1 = BlockShape.from(BlockType.O);
+        BlockShape shape2 = BlockShape.from(BlockType.O);
 
         //when
-        BlockShape oShape = BlockShape.from(BlockType.O.offsets);
-        BlockShape sameShape = BlockShape.from(sameOffsets);
-        BlockShape otherShape = BlockShape.from(otherOffsets);
+        boolean actual = shape1.equals(shape2);
 
         //then
-        assertEquals(oShape, sameShape);
-        assertNotEquals(oShape, otherShape);
-        assertNotEquals(oShape, null);
+        assertTrue(actual);
     }
 
     @Test
-    public void validate_notShapeSize_throwsException() throws Exception {
+    public void equals_differentShapes_returnsFalse() throws Exception {
+        //given
+        BlockShape shape1 = BlockShape.from(BlockType.S);
+        BlockShape shape2 = BlockShape.from(BlockType.Z);
+
         //when
-        Offsets setNotEqualToShapeSize = Offsets.of(Offset.ZERO);
+        boolean actual = shape1.equals(shape2);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> BlockShape.from(setNotEqualToShapeSize));
+        assertFalse(actual);
     }
 
     @Test
     public void toGridString_startedZeroOffset_doesNotThrowsException() throws Exception {
         //given
-        Offsets offsets = BlockType.O.offsets;
+        BlockType type = BlockType.O;
 
         //when
-        BlockShape shape = BlockShape.from(offsets);
+        BlockShape shape = BlockShape.from(type);
 
         //then
         assertDoesNotThrow(() -> shape.toGridString());
@@ -50,23 +48,10 @@ public class BlockShapeTest {
     @Test
     public void toGridString_notStartedZeroOffset_doesNotThrowsException() throws Exception {
         //given
-        Offsets offsets = BlockType.S.offsets;
+        BlockType type = BlockType.S;
 
         //when
-        BlockShape shape = BlockShape.from(offsets);
-
-        //then
-        assertDoesNotThrow(() -> shape.toGridString());
-    }
-
-    @Test
-    public void toGridString_negativeOffset_doesNotThrowsException() throws Exception {
-        //given
-        Offsets offsets = BlockType.S.offsets;
-        Offsets negativeOffsets = offsets.translate(-3, 0);
-
-        //when
-        BlockShape shape = BlockShape.from(negativeOffsets);
+        BlockShape shape = BlockShape.from(type);
 
         //then
         assertDoesNotThrow(() -> shape.toGridString());
