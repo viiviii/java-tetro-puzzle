@@ -1,27 +1,19 @@
 package tetro.shape;
 
+import tetro.block.BlockType;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
 public final class BlockShape {
-    private static final int SIZE = 4;
     private final Offsets offsets;
 
     private BlockShape(Offsets offsets) {
         this.offsets = offsets;
     }
 
-    public static BlockShape from(Offsets offsets) {
-        validate(offsets);
-        return new BlockShape(offsets.translateToZeroOffset());
-    }
-
-    private static void validate(Offsets offsets) throws IllegalArgumentException {
-        if (offsets.size() == SIZE) return;
-        throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
-                "<offsets size> " + offsets.size() + ", " +
-                "<shape size> " + SIZE);
+    public static BlockShape from(BlockType blockType) {
+        return new BlockShape(blockType.offsets);
     }
 
     @Override
@@ -48,6 +40,7 @@ public final class BlockShape {
     }
 
     private boolean[][] gridFilledWithShapeOffsets() {
+        final int SIZE = offsets.size();
         final boolean FILL = true;
         final boolean[][] grid = new boolean[SIZE][SIZE];
         offsets.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
