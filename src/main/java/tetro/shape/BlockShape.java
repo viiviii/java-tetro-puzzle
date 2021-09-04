@@ -17,6 +17,10 @@ public final class BlockShape {
         return new BlockShape(offsets.translateToZeroOffset());
     }
 
+    public static BlockShape of(Offsets offsets, int rotation) {
+        return BlockShape.from(offsets);
+    }
+
     private static void validate(Offsets offsets) throws IllegalArgumentException {
         if (offsets.size() == SIZE) return;
         throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
