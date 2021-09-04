@@ -3,15 +3,15 @@ package tetro.shape;
 import tetro.block.BlockType;
 import tetro.offset.Offsets;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 // TODO: BlockShape.from(shapeOffsets).rotate(rotation).create();
 public final class BlockShapes {
-    private static final List<BlockShape> shapes;
+    private static final Set<BlockShape> shapes;
 
     static {
-        List<BlockShape> allShapes = new ArrayList<>();
+        Set<BlockShape> allShapes = new HashSet<>();
         BlockType[] allBlockTypes = BlockType.values();
         for (BlockType type : allBlockTypes) {
             Offsets shapeOffsets = type.offsets;
@@ -23,7 +23,7 @@ public final class BlockShapes {
         shapes = allShapes;
     }
 
-    public static List<BlockShape> all() {
+    public static Set<BlockShape> all() {
         return shapes;
     }
 }
