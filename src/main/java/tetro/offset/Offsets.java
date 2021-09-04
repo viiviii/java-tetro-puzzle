@@ -76,6 +76,11 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return new Offsets(rotatedOffsets);
     }
 
+    public Offsets rotate() {
+        final int ONCE = 1;
+        return rotate(ONCE);
+    }
+
     private Offset quarterTurn(Offset offset) {
         return Offset.of(-offset.y, offset.x);
     }
