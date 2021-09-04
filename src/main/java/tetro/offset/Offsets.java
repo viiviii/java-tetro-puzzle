@@ -69,7 +69,7 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
     }
 
     @Override
-    public Offsets rotate() {
+    public Offsets rotate(int rotation) {
         final List<Offset> rotatedOffsets = this.stream()
                 .map(e -> quarterTurn(e))
                 .collect(Collectors.toList());

@@ -26,8 +26,9 @@ public final class BlockShape implements Rotatable<BlockShape> {
     }
 
     @Override
-    public BlockShape rotate() {
-        return new BlockShape(this.offsets);
+    public BlockShape rotate(int rotation) {
+        final Offsets rotateOffsets = this.offsets.rotate(rotation);
+        return BlockShape.from(rotateOffsets);
     }
 
     @Override
