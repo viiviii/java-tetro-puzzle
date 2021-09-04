@@ -7,6 +7,7 @@
     - 메서드명 패턴 통일하기
     - 테스트 당 하나의 assert만 가지도록 분리하기
     - 참고하던 문서 나머지 부분 + 다른 글들도 읽고 추가 필요
+    - TestingBlockType 제거 가능?
 - Shape
     - Offsets 하나로 변경할 수 있는가?
       - EmptySpace도 Offset으로 변경할 수 있는가? 
@@ -31,8 +32,9 @@
 - List<BlockShape> shapes
   - 캐싱
 ### BlockShape
-- BlockType
+- ~~BlockType~~ -> BlockType 카운트 필요할 때 그떄 적당한 곳에 추가하기
 - offsets
+
 
 ---
 
