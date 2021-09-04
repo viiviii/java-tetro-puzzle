@@ -16,7 +16,7 @@ public final class BlockShapes {
         for (BlockType type : allBlockTypes) {
             Offsets shapeOffsets = type.offsets;
             for (int rotation = 0; rotation < type.numberOfShapes; rotation++) {
-                BlockShape shape = BlockShape.of(shapeOffsets, rotation);
+                BlockShape shape = BlockShape.from(shapeOffsets).rotate();
                 allShapes.add(shape);
             }
         }

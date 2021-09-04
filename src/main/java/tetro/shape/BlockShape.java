@@ -1,10 +1,11 @@
 package tetro.shape;
 
+import tetro.Rotatable;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-public final class BlockShape {
+public final class BlockShape implements Rotatable<BlockShape> {
     private static final int SIZE = 4;
     private final Offsets offsets;
 
@@ -17,15 +18,16 @@ public final class BlockShape {
         return new BlockShape(offsets.translateToZeroOffset());
     }
 
-    public static BlockShape of(Offsets offsets, int rotation) {
-        return BlockShape.from(offsets);
-    }
-
     private static void validate(Offsets offsets) throws IllegalArgumentException {
         if (offsets.size() == SIZE) return;
         throw new IllegalArgumentException("'offsets.size()' is not equal to BlockShape size: " +
                 "<offsets size> " + offsets.size() + ", " +
                 "<shape size> " + SIZE);
+    }
+
+    @Override
+    public BlockShape rotate() {
+        return new BlockShape(this.offsets);
     }
 
     @Override
