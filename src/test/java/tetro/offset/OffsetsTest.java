@@ -1,7 +1,7 @@
 package tetro.offset;
 
 import org.junit.jupiter.api.Test;
-import tetro.block.TestingBlockType;
+import tetro.block.BlockType;
 
 import java.util.Collections;
 
@@ -85,7 +85,7 @@ public class OffsetsTest {
     @Test
     public void rotate_4Times_returnsSameOffsets() throws Exception {
         //given
-        Offsets offsets = TestingBlockType.I.offsets;
+        Offsets offsets = BlockType.I.offsets;
 
         //when
         Offsets rotate1 = offsets.rotate();
@@ -102,7 +102,7 @@ public class OffsetsTest {
         //given
         final int translateX = 1;
         final int translateY = 4;
-        Offsets origin = TestingBlockType.Z.offsets;
+        Offsets origin = BlockType.Z.offsets;
 
         //when
         Offsets actual = origin.translate(translateX, translateY);
@@ -116,7 +116,7 @@ public class OffsetsTest {
     public void translateBy_positiveX10Y10_returnsFirstOffsetSame() throws Exception {
         //given
         Offset origin = Offset.of(10, 11);
-        Offsets offsets = TestingBlockType.J.offsets;
+        Offsets offsets = BlockType.J.offsets;
 
         //when
         Offsets actual = offsets.translateBy(origin);
@@ -129,7 +129,7 @@ public class OffsetsTest {
     @Test
     public void translatePositive_negativeOffsets_returnsPositiveOffsets() throws Exception {
         //given
-        Offsets positive = TestingBlockType.O.offsets;
+        Offsets positive = BlockType.O.offsets;
         Offsets negative = positive.translate(-3, -5);
 
         //when

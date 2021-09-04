@@ -1,9 +1,7 @@
 package tetro.block;
 
-import tetro.shape.BlockShape;
-
-import java.util.ArrayList;
-import java.util.List;
+import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 public enum BlockType {
     O(1, 0, 0, 1, 0, 0, 1, 1, 1),
@@ -14,22 +12,15 @@ public enum BlockType {
     J(4, 1, 0, 1, 1, 0, 2, 1, 2),
     L(4, 0, 0, 0, 1, 0, 2, 1, 2);
 
-    public final BlockShapes shapes;
+    public final int numberOfShapes;
+    public final Offsets offsets;
 
     BlockType(int numberOfShapes, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-        this.shapes = BlockShapes.of(numberOfShapes, x1, y1, x2, y2, x3, y3, x4, y4);
-    }
-
-    private static class BlockShapes {
-        final List<BlockShape> shapes;
-
-        private BlockShapes(List<BlockShape> shapes) {
-            this.shapes = shapes;
-        }
-
-        // TODO
-        private static BlockShapes of(int numberOfShapes, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-            return new BlockShapes(new ArrayList<BlockShape>());
-        }
+        this.numberOfShapes = numberOfShapes;
+        final Offset o1 = Offset.of(x1, y1);
+        final Offset o2 = Offset.of(x2, y2);
+        final Offset o3 = Offset.of(x3, y3);
+        final Offset o4 = Offset.of(x4, y4);
+        this.offsets = Offsets.of(o1, o2, o3, o4);
     }
 }
