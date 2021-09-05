@@ -2,7 +2,11 @@ package tetro.shape;
 
 import org.junit.jupiter.api.Test;
 import tetro.block.BlockType;
+import tetro.offset.Offset;
 import tetro.offset.Offsets;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,6 +23,34 @@ public class BlockShapeTest {
 
         //then
         assertTrue(actual);
+    }
+
+    @Test
+    public void validate_notEqualsBlockShapeSize_throwsException() throws Exception {
+        //given
+        Set<Offset> set = BlockType.L.offsets.stream().collect(Collectors.toSet());
+        set.add(Offset.of(3, 0));
+
+        //when
+        Offsets notEqualSizeOffsets = Offsets.from(set);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> BlockShape.from(notEqualSizeOffsets));
+    }
+
+    @Test
+    public void validate_hasInvalidOffset_throwsException() throws Exception {
+        //given
+        Offsets offsets = BlockType.O.offsets;
+        Set<Offset> set = offsets.stream().collect(Collectors.toSet());
+
+        //when
+        set.remove(offsets.first());
+        set.add(Offset.INVALID);
+        Offsets offsetsWithInvalid = Offsets.from(set);
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> BlockShape.from(offsetsWithInvalid));
     }
 
     @Test
