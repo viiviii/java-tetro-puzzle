@@ -44,10 +44,6 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return new Offsets(translateOffsets);
     }
 
-    public Offsets translate(Offset translate) {
-        return translate(translate.x, translate.y);
-    }
-
     public Offsets translateBy(Offset origin) {
         final Offset first = this.first();
         final int translateX = origin.x - first.x;
@@ -76,11 +72,6 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
                 .map(e -> fn.apply(e.x, e.y))
                 .collect(Collectors.toList());
         return new Offsets(rotatedOffsets);
-    }
-
-    public Offsets rotate() {
-        final int ONCE = 1;
-        return rotate(ONCE);
     }
 
     // TODO: 얘네 이름 뭐라고 지어ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ나어퓨ㅓㄴ유팡뉴파ㅓㄴ유퍼ㅏㄴ유
