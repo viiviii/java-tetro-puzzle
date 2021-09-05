@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-// TODO: BlockShape.from(shapeOffsets).rotate(rotation).create();
 public final class BlockShapes {
     public static final int SIZE;
     private static final Set<BlockShape> shapes;
