@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import tetro.block.BlockType;
 
 import java.util.Collections;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,19 +85,56 @@ public class OffsetsTest {
         assertEquals(LESS, compare);
     }
 
+
+    @Test
+    public void rotate_1TimesXAndY_returnsMinusYAndX() throws Exception {
+        //given
+        Offsets offsets = BlockType.J.offsets;
+        Offsets expect = map(offsets, (e) -> Offset.of(-e.y, e.x));
+
+        //when
+        Offsets actual = offsets.rotate(1);
+
+        //then
+        assertEquals(expect, actual);
+    }
+
+    @Test
+    public void rotate_2TimesXAndY_returnsMinusXAndMinusY() throws Exception {
+        //given
+        Offsets offsets = BlockType.S.offsets;
+        Offsets expect = map(offsets, (e) -> Offset.of(-e.x, -e.y));
+
+        //when
+        Offsets actual = offsets.rotate(2);
+
+        //then
+        assertEquals(expect, actual);
+    }
+
+    @Test
+    public void rotate_3TimesXAndY_returnsYAndMinusX() throws Exception {
+        //given
+        Offsets offsets = BlockType.T.offsets;
+        Offsets expect = map(offsets, (e) -> Offset.of(e.y, -e.x));
+
+        //when
+        Offsets actual = offsets.rotate(3);
+
+        //then
+        assertEquals(expect, actual);
+    }
+
     @Test
     public void rotate_4Times_returnsSameOffsets() throws Exception {
         //given
         Offsets offsets = BlockType.I.offsets;
 
         //when
-        Offsets rotate1 = offsets.rotate();
-        Offsets rotate2 = rotate1.rotate();
-        Offsets rotate3 = rotate2.rotate();
-        Offsets rotate4 = rotate3.rotate();
+        Offsets actual = offsets.rotate(4);
 
         //then
-        assertEquals(offsets, rotate4);
+        assertEquals(offsets, actual);
     }
 
     @Test
@@ -137,5 +177,10 @@ public class OffsetsTest {
 
         //then
         assertEquals(positive, actual);
+    }
+
+    private Offsets map(Offsets offsets, Function<Offset, Offset> mapper) {
+        final Set<Offset> set = offsets.stream().map(mapper).collect(Collectors.toSet());
+        return Offsets.from(set);
     }
 }
