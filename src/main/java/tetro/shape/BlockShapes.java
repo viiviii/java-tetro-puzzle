@@ -28,8 +28,4 @@ public final class BlockShapes {
         return IntStream.range(0, blockType.numberOfShapes)
                 .mapToObj(rotation -> BlockShape.from(offsets).rotate(rotation));
     }
-
-    public static Set<BlockShape> all() {
-        return shapes;
-    }
 }
