@@ -4,6 +4,7 @@ import tetro.Rotatable;
 import tetro.Translatable;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -70,8 +71,9 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
 
     @Override
     public Offsets rotate(int rotation) {
+        final BiFunction<Integer, Integer, Offset> fn = createRotateOffset(rotation);
         final List<Offset> rotatedOffsets = this.stream()
-                .map(e -> quarterTurn(e))
+                .map(e -> fn.apply(e.x, e.y))
                 .collect(Collectors.toList());
         return new Offsets(rotatedOffsets);
     }
@@ -81,8 +83,15 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return rotate(ONCE);
     }
 
-    private Offset quarterTurn(Offset offset) {
-        return Offset.of(-offset.y, offset.x);
+    // TODO: 얘네 이름 뭐라고 지어ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ나어퓨ㅓㄴ유팡뉴파ㅓㄴ유퍼ㅏㄴ유
+    // 0: (x, y), 1: (-y, x), 2: (-x, -y), 3: (y, -x), 4(0): (x, y)
+    private BiFunction<Integer, Integer, Offset> createRotateOffset(int rotation) {
+        return curry(rotation, (x, y) -> Offset.of(x, y));
+    }
+
+    private BiFunction curry(int rotation, BiFunction<Integer, Integer, Offset> createOffset) {
+        if (rotation == 0) return createOffset;
+        return curry(rotation - 1, (x, y) -> createOffset.apply(-y, x));
     }
 
     @Override
