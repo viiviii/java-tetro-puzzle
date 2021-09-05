@@ -14,6 +14,8 @@ public final class BlockShapes {
     public static final int SIZE;
     private static final Set<BlockShape> shapes;
 
+    private BlockShapes(){}
+
     static {
         shapes = allBlockShapes();
         SIZE = shapes.size();
