@@ -7,8 +7,7 @@ import tetro.offset.Offsets;
 import java.util.Objects;
 
 // TODO: BlockShape offset이랑 blockType.offset이 같이 있으면 이름이 모호함
-// TODO: from이랑 rotate는 항상 같이 호출됨
-public final class BlockShape implements Rotatable<BlockShape> {
+public final class BlockShape {
     private final BlockType type;
     private final Offsets offsets;
 
@@ -17,16 +16,15 @@ public final class BlockShape implements Rotatable<BlockShape> {
         this.offsets = offsets;
     }
 
-    // TODO
-    public static BlockShape from(BlockType blockType) {
-        return new BlockShape(blockType, blockType.offsets);
-    }
-
-    // TODO: rotate + translateToZeroOffset 합친 메서드?
-    @Override
-    public BlockShape rotate(int rotation) {
-        final Offsets rotateOffsets = offsets.rotate(rotation).translateToZeroOffset();
-        return new BlockShape(type, rotateOffsets);
+    // TODO: 뭔가 지저분해
+    // TODO: from이 맞나 of이 맞나?
+    public static Rotatable<BlockShape> from(BlockType blockType) {
+        return (rotation) -> {
+            final Offsets rotateOffsets = blockType.offsets
+                    .rotate(rotation)
+                    .translateToZeroOffset();
+            return new BlockShape(blockType, rotateOffsets);
+        };
     }
 
     @Override
