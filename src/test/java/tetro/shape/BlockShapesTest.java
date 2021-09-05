@@ -15,7 +15,7 @@ class BlockShapesTest {
         final int NUMBER_OF_ALL_BLOCK_SHAPES = numberOfAllBlockShapes();
 
         //when
-        int actual = BlockShapes.size;
+        int actual = BlockShapes.SIZE;
 
         //then
         assertEquals(NUMBER_OF_ALL_BLOCK_SHAPES, actual);
