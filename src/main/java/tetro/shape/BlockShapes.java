@@ -11,10 +11,12 @@ import java.util.stream.Stream;
 
 // TODO: BlockShape.from(shapeOffsets).rotate(rotation).create();
 public final class BlockShapes {
+    public static final int size;
     private static final Set<BlockShape> shapes;
 
     static {
         shapes = allBlockShapes();
+        size = shapes.size();
     }
 
     private static Set<BlockShape> allBlockShapes() {
