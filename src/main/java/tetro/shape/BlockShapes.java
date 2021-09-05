@@ -20,7 +20,7 @@ public final class BlockShapes {
     private static Set<BlockShape> allBlockShapes() {
         return Arrays.stream(BlockType.values())
                 .flatMap(blockType -> allShapesOf(blockType))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toUnmodifiableSet());
     }
 
     private static Stream<BlockShape> allShapesOf(BlockType blockType) {
