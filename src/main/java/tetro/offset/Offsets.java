@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> {
+    private static final int MAX_ROTATION = 360 / 90;
     private final SortedSet<Offset> offsets;
 
     private Offsets(List<Offset> offsets) {
@@ -77,7 +78,8 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
     // TODO: 얘네 이름 뭐라고 지어ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ나어퓨ㅓㄴ유팡뉴파ㅓㄴ유퍼ㅏㄴ유
     // 0: (x, y), 1: (-y, x), 2: (-x, -y), 3: (y, -x), 4(0): (x, y)
     private BiFunction<Integer, Integer, Offset> createRotateOffset(int rotation) {
-        return curry(rotation, (x, y) -> Offset.of(x, y));
+        final int calibrationRotation = rotation % MAX_ROTATION;
+        return curry(calibrationRotation, (x, y) -> Offset.of(x, y));
     }
 
     private BiFunction curry(int rotation, BiFunction<Integer, Integer, Offset> createOffset) {
