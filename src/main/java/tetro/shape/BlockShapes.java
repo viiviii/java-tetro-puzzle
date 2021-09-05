@@ -1,7 +1,6 @@
 package tetro.shape;
 
 import tetro.block.BlockType;
-import tetro.offset.Offsets;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -14,7 +13,8 @@ public final class BlockShapes {
     public static final int SIZE;
     private static final Set<BlockShape> shapes;
 
-    private BlockShapes(){}
+    private BlockShapes() {
+    }
 
     static {
         shapes = allBlockShapes();
@@ -28,8 +28,7 @@ public final class BlockShapes {
     }
 
     private static Stream<BlockShape> allShapesOf(BlockType blockType) {
-        final Offsets offsets = blockType.offsets;
         return IntStream.range(0, blockType.numberOfShapes)
-                .mapToObj(rotation -> BlockShape.from(offsets).rotate(rotation));
+                .mapToObj(rotation -> BlockShape.from(blockType).rotate(rotation));
     }
 }
