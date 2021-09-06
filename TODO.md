@@ -42,26 +42,37 @@
 
 ---
 
-### 원하는 시나리오
-- `List<Set<Block>>` combinationsOfBlockToFit();
-
+### 원하는 모양새
+- Q. List<Set<Block>> Combinations 같은 클래스 필요?YN
+- Offsets가 아닌 Holes 같은 클래스 필요?YN
+- fill은 언제고 fit은 언제쓰는 단어임?동일하게 맞추던가
+- 마지막엔 블럭 다 안돌텐데 lazy?YN
 ```
-List<Set<Block>> result = [];
-for(block: Blocks) {
-    Board newBoard  = board.fit(block);
-    if(newBoard == UNFIT_BOARD) continue; 
-    if(newBoard.isFull) { 
-        // 마지막 조각의 결과는 무조건 1개이므로 바로 리턴
-        return result.add(new { block });
+public List<Set<Block>> combinationsFillOf(Offsets holes) {
+    List<Set<Block>> result = [];
+    if(holes.size() == 0) return result;
+    List<Block> blocks = Blocks.fromPosition(firstHole);
+    for(block: blocks) {
+        Offsets remainingHoles = holes.fit(block);
+        
+        if(remainingHoles.size() == 0) {
+            // 마지막 결과는 무조건 1개이므로 루프를 더 돌지 않고 바로 리턴
+            return result.add(Set.of(block));
+        }
+        
+        boolean unfittedHoles = (remainingHoles == holes); //predicate?
+        if(unfittedHoles) continue;
+        
+        List<Set<Block>> combinations = combinationsFillOf(remainingHoles);
+        if(combinations.isEmpty) continue; 
+        
+        for(combination : combinations) {
+            combination.add(block);
+        }
+        result.addAll(combinations);
     }
-    List<Set<Block>> combinations = newBoard.combinationsOfBlockToFit();
-    if(combinations.isEmpty) continue;
-    for(combination : combinations) {
-        combination.add(block);
-    }
-    result.addAll(combinations);
+    return result;
 }
-return result;
 ```
 
 ---
