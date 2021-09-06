@@ -2,37 +2,34 @@ package tetro;
 
 import org.junit.jupiter.api.Test;
 import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
     @Test
-    public void isFull() throws Exception {
+    public void isFull_offsetsSizeZero_returnsTrue() throws Exception {
         //given
-        EmptySpace emptySpace1 = new EmptySpace();
-        EmptySpace emptySpace2 = new EmptySpace(Offset.of(1, 1));
-        Board board1 = Board.from(emptySpace1);
-        Board board2 = Board.from(emptySpace2);
+        Offsets offsets = Offsets.of();
+        Board board = Board.from(offsets);
 
+        //when
+        boolean actual = board.isFull();
         //then
-        assertTrue(board1.isFull());
-        assertFalse(board2.isFull());
+        assertTrue(actual);
     }
 
     @Test
-    public void 인자로_null이_올_경우_UNFIT을_리턴한다() throws Exception {
+    public void isFull_offsetsSizeNotZero_returnsFalse() throws Exception {
         //given
-        Board board = Board.from(null);
+        Offsets offsets = Offsets.of(Offset.of(1, 1));
+        Board board = Board.from(offsets);
+
+        //when
+        boolean actual = board.isFull();
 
         //then
-        assertEquals(board, Board.UNFIT);
-        assertFalse(board.isFull());
-    }
-
-    @Test
-    public void UNFIT의_isFull_값은_false다() throws Exception {
-        //then
-        assertFalse(Board.UNFIT.isFull());
+        assertFalse(actual);
     }
 }

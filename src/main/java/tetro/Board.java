@@ -1,19 +1,18 @@
 package tetro;
 
-import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 public final class Board {
-    public static final int LENGTH = 9;
-    public static final Board UNFIT = new Board(new EmptySpace(Offset.INVALID));
+    public static final int SIZE = 9;
 
-    private final EmptySpace emptySpace;
+    private final Offsets emptySpace;
 
-    private Board(EmptySpace emptySpace) {
+    private Board(Offsets emptySpace) {
         this.emptySpace = emptySpace;
     }
 
-    public static Board from(EmptySpace emptySpace) {
-        if (emptySpace == null) return UNFIT;
+    public static Board from(Offsets emptySpace) {
+        // TODO
         return new Board(emptySpace);
     }
 
@@ -23,8 +22,6 @@ public final class Board {
 
     @Override
     public String toString() {
-        return "Board{" +
-                "emptySpace=" + emptySpace +
-                '}';
+        return "Board{" +"emptySpace=" + emptySpace + '}';
     }
 }
