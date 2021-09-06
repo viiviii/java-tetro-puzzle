@@ -5,23 +5,23 @@ import tetro.offset.Offsets;
 public final class Board {
     public static final int SIZE = 9;
 
-    private final Offsets emptySpace;
+    private final Offsets holes;
 
-    private Board(Offsets emptySpace) {
-        this.emptySpace = emptySpace;
+    private Board(Offsets holes) {
+        this.holes = holes;
     }
 
-    public static Board from(Offsets emptySpace) {
+    public static Board from(Offsets holes) {
         // TODO
-        return new Board(emptySpace);
+        return new Board(holes);
     }
 
     public boolean isFull() {
-        return emptySpace.size() == 0;
+        return holes.size() == 0;
     }
 
     @Override
     public String toString() {
-        return "Board{" +"emptySpace=" + emptySpace + '}';
+        return "Board{" +"holes=" + holes + '}';
     }
 }
