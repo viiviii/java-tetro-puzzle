@@ -6,24 +6,22 @@ import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-// TODO: BlockShape offset이랑 blockType.offset이 같이 있으면 이름이 모호함
 public final class BlockShape {
     private final BlockType type;
-    private final Offsets offsets;
+    private final Offsets shape;
 
-    private BlockShape(BlockType type, Offsets offsets) {
+    private BlockShape(BlockType type, Offsets shape) {
         this.type = type;
-        this.offsets = offsets;
+        this.shape = shape;
     }
 
     // TODO: 뭔가 지저분해
-    // TODO: from이 맞나 of이 맞나?
     public static Rotatable<BlockShape> from(BlockType blockType) {
         return (rotation) -> {
-            final Offsets rotateOffsets = blockType.offsets
+            final Offsets rotatedShape = blockType.offsets
                     .rotate(rotation)
                     .translateToZeroOffset();
-            return new BlockShape(blockType, rotateOffsets);
+            return new BlockShape(blockType, rotatedShape);
         };
     }
 
@@ -32,12 +30,12 @@ public final class BlockShape {
         if (this == o) return true;
         if (!(o instanceof BlockShape)) return false;
         BlockShape that = (BlockShape) o;
-        return this.type == that.type && this.offsets.equals(that.offsets);
+        return this.type == that.type && this.shape.equals(that.shape);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, offsets);
+        return Objects.hash(type, shape);
     }
 
     public String toGridString() {
@@ -46,10 +44,10 @@ public final class BlockShape {
     }
 
     private boolean[][] gridFilledWithShapeOffsets() {
-        final int SIZE = offsets.size();
+        final int SIZE = shape.size();
         final boolean FILL = true;
         final boolean[][] grid = new boolean[SIZE][SIZE];
-        offsets.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        shape.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
         return grid;
     }
 
