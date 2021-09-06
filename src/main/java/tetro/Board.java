@@ -16,7 +16,7 @@ public final class Board {
         return new Board(holes);
     }
 
-    public boolean isFull() {
+    public boolean filled() {
         return holes.size() == 0;
     }
 

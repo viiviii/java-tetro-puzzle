@@ -15,7 +15,7 @@ public class BoardTest {
         Board board = Board.from(offsets);
 
         //when
-        boolean actual = board.isFull();
+        boolean actual = board.filled();
         //then
         assertTrue(actual);
     }
@@ -27,7 +27,7 @@ public class BoardTest {
         Board board = Board.from(offsets);
 
         //when
-        boolean actual = board.isFull();
+        boolean actual = board.filled();
 
         //then
         assertFalse(actual);
