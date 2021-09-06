@@ -45,13 +45,6 @@ public final class Offsets implements Translatable<Offsets>, Rotatable<Offsets> 
         return new Offsets(translateOffsets);
     }
 
-    public Offsets translateBy(Offset origin) {
-        final Offset first = this.first();
-        final int translateX = origin.x - first.x;
-        final int translateY = origin.y - first.y;
-        return translate(translateX, translateY);
-    }
-
     /**
      * 제1사분면의 원점(0,0)에 가깝게 이동
      */

@@ -153,20 +153,6 @@ public class OffsetsTest {
     }
 
     @Test
-    public void translateBy_positiveX10Y10_returnsFirstOffsetSame() throws Exception {
-        //given
-        Offset origin = Offset.of(10, 11);
-        Offsets offsets = BlockType.J.offsets;
-
-        //when
-        Offsets actual = offsets.translateBy(origin);
-
-        //then
-        assertEquals(origin.x, actual.first().x);
-        assertEquals(origin.y, actual.first().y);
-    }
-
-    @Test
     public void translatePositive_negativeOffsets_returnsPositiveOffsets() throws Exception {
         //given
         Offsets positive = BlockType.O.offsets;
