@@ -7,17 +7,10 @@
     - 메서드명 패턴 통일하기
     - 테스트 당 하나의 assert만 가지도록 분리하기
     - 참고하던 문서 나머지 부분 + 다른 글들도 읽고 추가 필요
-    - TestingBlockType 제거 가능?
-- Shape
-    - Offsets 하나로 변경할 수 있는가?
-      - EmptySpace도 Offset으로 변경할 수 있는가? 
-    - 주 생성자의 하는 일을 최소한으로 변경할 수 있는가?
 ---
 
-## Offset
-### Offset
-- [x] ~~좌표의 x, y 위치를 나타낸다~~
 ### Offsets
+- translate 정리
 
 ---
 
@@ -25,16 +18,6 @@
 ### Block
 - 위치
 - BlockShape
-### BlockType enum
-- 모양 갯수
-- BlockShapes
-### BLockShapes
-- List<BlockShape> shapes
-  - 캐싱
-### BlockShape
-- ~~BlockType~~ -> BlockType 카운트 필요할 때 그떄 적당한 곳에 추가하기
-- offsets
-
 
 ---
 
@@ -43,7 +26,7 @@
 - 정사각형이다
 - [x] ~~현재 사이즈는 모두 9*9이다~~
   - 추후 바뀔지 내가 알 수 없는 상태
-- 보드엔 빈 칸이 있고 블럭으로 채울 수 있다
+- 보드엔 빈 칸이 있고 블럭을 채울 수 있다
 - 값
   - [x] ~~비어있는 위치 목록: EmptySpace emptySpace~~
     [x] ~~정렬되어 있어서 읽기만 했으면 좋겠음~~ -> Offsets 클래스 생성됨
