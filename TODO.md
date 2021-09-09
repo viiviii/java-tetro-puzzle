@@ -8,7 +8,8 @@
     - 테스트 당 하나의 assert만 가지도록 분리하기
     - 참고하던 문서 나머지 부분 + 다른 글들도 읽고 추가 필요
       기존 Block은 다른 이름으로 변경하고 BlockShape -> Block으로 변경
-
+- 접근제어자
+- assert null 체크?
 ---
 
 ### Offsets
