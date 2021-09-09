@@ -26,6 +26,12 @@
 - BlockType `type`
 - Offsets `shape`
 
+- 예시
+    - 회전한 `ㅓ 모양의 T 블록`과 `ㅗ 모양의 T 블록`은 같은 블록인가? --> true
+        - Block(type: BlockType.T, rotation: 1) equals Block(type: BlockType.T, rotation: 2)
+        -  `Block`이 type, shape 를 가질 경우 `Offsets`가 다르기 때문에 false 일 것임 
+    
+
 ---
 
 ### Board
