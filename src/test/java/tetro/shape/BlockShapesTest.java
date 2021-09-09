@@ -10,20 +10,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class BlockShapesTest {
 
     @Test
-    public void blockShapes_size_returnsNumberOfAllBlockShapes() throws Exception {
+    public void blockShapes_allShapesSize_returnsNumberOfAllBlockShapes() throws Exception {
         //given
-        final int NUMBER_OF_ALL_BLOCK_SHAPES = numberOfAllBlockShapes();
+        final int NUMBER_OF_ALL_BLOCK_SHAPES = 19;
+        BlockShapeData data = new BlockShapeData();
+        BlockShapes blockShapes = new BlockShapes(data);
 
         //when
-        int actual = BlockShapes.SIZE;
+        int actual = Arrays.stream(BlockType.values())
+                .mapToInt(type -> blockShapes.get(type).size())
+                .sum();
 
         //then
         assertEquals(NUMBER_OF_ALL_BLOCK_SHAPES, actual);
-    }
-
-    private int numberOfAllBlockShapes() {
-        return Arrays.stream(BlockType.values())
-                .mapToInt(e -> e.numberOfShapes)
-                .sum();
     }
 }
