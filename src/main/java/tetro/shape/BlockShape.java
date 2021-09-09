@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public final class BlockShape {
-    private static final int SIZE = 4;
+    public static final int SIZE = 4;
     private final Offsets shape;
 
     private BlockShape(Offsets shape) {
