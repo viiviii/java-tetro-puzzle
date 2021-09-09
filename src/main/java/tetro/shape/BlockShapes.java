@@ -2,32 +2,25 @@ package tetro.shape;
 
 import tetro.block.BlockType;
 
-import java.util.Arrays;
-import java.util.Set;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public final class BlockShapes {
-    public static final int SIZE;
-    private static final Set<BlockShape> shapes;
+    private final EnumMap<BlockType, List<BlockShape>> shapes = new EnumMap(BlockType.class);
 
-    private BlockShapes() {
+    // TODO
+    public BlockShapes(BlockShapeData blockShapeData) {
+        blockShapeData.map.forEach((k, v) -> shapes.put(k, blockShapeListBy(v)));
     }
 
-    static {
-        shapes = allBlockShapes();
-        SIZE = shapes.size();
+    public List<BlockShape> get(BlockType blockType) {
+        return shapes.get(blockType);
     }
 
-    private static Set<BlockShape> allBlockShapes() {
-        return Arrays.stream(BlockType.values())
-                .flatMap(blockType -> allShapesOf(blockType))
-                .collect(Collectors.toUnmodifiableSet());
-    }
-
-    private static Stream<BlockShape> allShapesOf(BlockType blockType) {
-        return IntStream.range(0, blockType.numberOfShapes)
-                .mapToObj(rotation -> BlockShape.from(blockType).rotate(rotation));
+    private static List<BlockShape> blockShapeListBy(List<List<Integer>> list) {
+        return list.stream()
+                .map(innerList -> new BlockShape(innerList))
+                .collect(Collectors.toUnmodifiableList());
     }
 }
