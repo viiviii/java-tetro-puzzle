@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,5 +44,18 @@ class BlocksTest {
 
         //then
         assertTrue(actual);
+    }
+
+    @DisplayName("Blocks 갯수는 BlockType 갯수와 같다")
+    @Test
+    public void all_sizeEqualsNumberOfBlockType_returnsTrue() throws Exception {
+        //given
+        Set<Block> allBlocks = blocks.all();
+
+        //when
+        int actual = allBlocks.size();
+
+        //then
+        assertEquals(BlockType.values().length, actual);
     }
 }

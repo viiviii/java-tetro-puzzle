@@ -2,6 +2,7 @@ package tetro.block;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class Blocks {
@@ -15,6 +16,10 @@ public final class Blocks {
 
     public Block get(BlockType blockType) {
         return blocks.get(blockType);
+    }
+
+    public Set<Block> all() {
+        return Set.copyOf(blocks.values());
     }
 
     private List<BlockShape> blockShapes(List<List<Integer>> list) {
