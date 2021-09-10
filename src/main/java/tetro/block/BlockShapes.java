@@ -1,6 +1,4 @@
-package tetro.shape;
-
-import tetro.block.BlockType;
+package tetro.block;
 
 import java.util.EnumMap;
 import java.util.List;

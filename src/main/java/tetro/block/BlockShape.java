@@ -1,4 +1,4 @@
-package tetro.shape;
+package tetro.block;
 
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
