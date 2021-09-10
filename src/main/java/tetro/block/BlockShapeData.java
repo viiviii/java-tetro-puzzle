@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 // TODO: DB에서 가져올래
-final class BlockShapeData {
+public final class BlockShapeData {
     public final EnumMap<BlockType, List<List<Integer>>> map = new EnumMap(BlockType.class);
 
     public BlockShapeData() {
