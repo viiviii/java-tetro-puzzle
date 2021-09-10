@@ -6,7 +6,7 @@ import tetro.offset.Offsets;
 import java.util.*;
 import java.util.function.Predicate;
 
-public final class BlockShape {
+final class BlockShape {
     public static final int SIZE = 4;
     private final Offsets shape;
 

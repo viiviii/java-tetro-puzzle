@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class BlockShapes {
+final class BlockShapes {
     private final EnumMap<BlockType, List<BlockShape>> shapes = new EnumMap(BlockType.class);
 
     // TODO
