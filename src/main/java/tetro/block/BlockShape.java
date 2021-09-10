@@ -46,6 +46,10 @@ final class BlockShape {
         return offsets.stream().anyMatch(offset -> validRange.negate().test(offset));
     }
 
+    public Offsets offsets() {
+        return this.shape;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
