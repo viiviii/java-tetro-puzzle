@@ -29,6 +29,10 @@ public final class Offsets implements Translatable<Offsets> {
         return this.offsets.stream();
     }
 
+    public boolean containsAll(Offsets other) {
+        return this.offsets.containsAll(other.offsets);
+    }
+
     @Override
     public Offsets translate(int translateX, int translateY) {
         final List<Offset> translateOffsets = this.stream()

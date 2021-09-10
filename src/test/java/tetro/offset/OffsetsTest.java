@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import tetro.block.BlockType;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -89,5 +90,53 @@ public class OffsetsTest {
         //then
         assertEquals(origin.first().x + translateX, actual.first().x);
         assertEquals(origin.first().y + translateY, actual.first().y);
+    }
+
+    @Test
+    public void containsAll_containAllOffsets_returnsTrue() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+        Offsets offsets = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(o2);
+
+        //when
+        boolean actual = offsets.containsAll(other);
+
+        //then
+        assertTrue(actual);
+    }
+
+    @Test
+    public void containsAll_notContainAllOffsets_returnsFalse() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+        Offsets offsets = Offsets.of(o2);
+        Offsets other = Offsets.of(o1, o2, o3);
+
+        //when
+        boolean actual = offsets.containsAll(other);
+
+        //then
+        assertFalse(actual);
+    }
+
+    @Test
+    public void containsAll_notContainAnyOffsets_returnsFalse() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+        Offsets offsets = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(Offset.INVALID);
+
+        //when
+        boolean actual = offsets.containsAll(other);
+
+        //then
+        assertFalse(actual);
     }
 }
