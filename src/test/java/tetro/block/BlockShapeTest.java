@@ -18,9 +18,9 @@ public class BlockShapeTest {
     public void beforeEach() {
         final int NOT_ROTATION = 0;
         BlockShapeData data = new BlockShapeData();
-        BlockShapes blockShapes = new BlockShapes(data);
-        oBlockShape = blockShapes.get(BlockType.O).get(NOT_ROTATION);
-        sBlockShape = blockShapes.get(BlockType.S).get(NOT_ROTATION);
+        Blocks blocks = new Blocks(data);
+        oBlockShape = blocks.get(BlockType.O).shape(NOT_ROTATION);
+        sBlockShape = blocks.get(BlockType.S).shape(NOT_ROTATION);
     }
 
     @Test
