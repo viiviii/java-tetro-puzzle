@@ -24,7 +24,14 @@ public final class Blocks {
 
     private List<BlockShape> blockShapes(List<List<Integer>> list) {
         return list.stream()
-                .map(innerList -> new BlockShape(innerList))
+                .map(innerList -> toBlockShape(innerList))
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    // TODO
+    private BlockShape toBlockShape(List<Integer> list) {
+        return new BlockShape(
+                list.get(0), list.get(1), list.get(2), list.get(3),
+                list.get(4), list.get(5), list.get(6), list.get(7));
     }
 }
