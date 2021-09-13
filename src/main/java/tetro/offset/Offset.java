@@ -33,6 +33,10 @@ public final class Offset implements Comparable<Offset>, Translatable<Offset> {
         return Offset.of(this.x + translateX, this.y + translateY);
     }
 
+    public Offset difference(Offset other) {
+        return Offset.of(this.x - other.x, this.y - other.y);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

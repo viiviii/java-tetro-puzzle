@@ -286,4 +286,30 @@ public class OffsetTest {
         assertEquals(-2, actual.x);
         assertEquals(-2, actual.y);
     }
+
+    @Test
+    public void difference_positiveOtherOffset_returnsOriginMinusOtherOffset() throws Exception {
+        //given
+        Offset offset = Offset.of(10, 6);
+        Offset other = Offset.of(3, 1);
+
+        //when
+        Offset actual = offset.difference(other);
+
+        //then
+        assertEquals(Offset.of(7, 5), actual);
+    }
+
+    @Test
+    public void difference_negativeOtherOffset_returnsOriginPlusOtherOffset() throws Exception {
+        //given
+        Offset offset = Offset.of(10, 6);
+        Offset other = Offset.of(-3, -1);
+
+        //when
+        Offset actual = offset.difference(other);
+
+        //then
+        assertEquals(Offset.of(13, 7), actual);
+    }
 }
