@@ -13,11 +13,6 @@ public final class Offsets implements Translatable<Offsets> {
         this.offsets = new TreeSet(offsets);
     }
 
-    // TODO: 제거YN Offsets.of, ... EmptyGrid.of, ... BlockSHape.of,...
-    public static final Offsets of(Offset... offset) {
-        return new Offsets(Arrays.asList(offset));
-    }
-
     public static final Offsets of(Collection<Offset> offsets) {
         return new Offsets(List.copyOf(offsets));
     }
@@ -30,6 +25,7 @@ public final class Offsets implements Translatable<Offsets> {
         return this.offsets.first();
     }
 
+    // TODO: 제거YN
     public Stream<Offset> stream() {
         return this.offsets.stream();
     }
@@ -43,7 +39,6 @@ public final class Offsets implements Translatable<Offsets> {
         newInstance.offsets.removeAll(other.offsets);
         return newInstance;
     }
-
 
     // TODO: 리팩토링
     @Override
