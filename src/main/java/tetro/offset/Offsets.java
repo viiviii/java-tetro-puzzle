@@ -9,12 +9,12 @@ import java.util.stream.Stream;
 public final class Offsets implements Translatable<Offsets> {
     private final SortedSet<Offset> offsets;
 
-    private Offsets(List<Offset> offsets) {
+    private Offsets(Collection<Offset> offsets) {
         this.offsets = new TreeSet(offsets);
     }
 
     public static final Offsets of(Collection<Offset> offsets) {
-        return new Offsets(List.copyOf(offsets));
+        return new Offsets(Collections.unmodifiableCollection(offsets));
     }
 
     public int size() {
