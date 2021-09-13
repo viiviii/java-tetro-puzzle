@@ -20,7 +20,7 @@ class EmptyGridsTest {
     public void beforeEach() throws Exception {
         BlockShapeData data = new BlockShapeData();
         Blocks blocks = new Blocks(data);
-        fitBlockTypeO = new FitBlock(blocks.get(BlockType.O), 0, Offset.ZERO);
+        fitBlockTypeO = new FitBlock(blocks.get(BlockType.O), 0, Offset.of(0, 0));
     }
 
     @Test
@@ -68,7 +68,7 @@ class EmptyGridsTest {
     @Test
     public void canFit_unfitBlock_returnsFalse() throws Exception {
         //given
-        EmptyGrids emptyGrids = EmptyGrids.of(Set.of(Offset.ZERO));
+        EmptyGrids emptyGrids = EmptyGrids.of(Set.of(Offset.of(0, 0)));
 
         //when
         boolean actual = emptyGrids.canFit(fitBlockTypeO);

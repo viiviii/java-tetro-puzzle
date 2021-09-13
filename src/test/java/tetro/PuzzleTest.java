@@ -27,7 +27,7 @@ public class PuzzleTest {
     @Test
     public void put_unfitEmptyGrids_returnsEmptyList() throws Exception {
         //given
-        EmptyGrids emptyGrids = EmptyGrids.of(List.of(Offset.ZERO));
+        EmptyGrids emptyGrids = EmptyGrids.of(List.of(Offset.of(0, 0)));
 
         //when
         Set combinations = puzzle.put(emptyGrids);

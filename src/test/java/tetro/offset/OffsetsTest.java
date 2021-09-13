@@ -10,7 +10,7 @@ public class OffsetsTest {
     @Test
     public void size_twoDifferentOffset_returnsNumberTwo() throws Exception {
         //given
-        Offset o1 = Offset.ZERO;
+        Offset o1 = Offset.of(0, 0);
         Offset o2 = Offset.of(1, 2);
         Offsets offsets = Offsets.of(o1, o2);
 
@@ -139,7 +139,7 @@ public class OffsetsTest {
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
         Offsets offsets = Offsets.of(o1, o2, o3);
-        Offsets other = Offsets.of(Offset.INVALID);
+        Offsets other = Offsets.of(Offset.of(99, 99));
 
         //when
         boolean actual = offsets.containsAll(other);

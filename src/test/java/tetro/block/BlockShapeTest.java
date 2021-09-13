@@ -61,7 +61,7 @@ public class BlockShapeTest {
     @Test
     public void validate_duplicateValue_throwsException() throws Exception {
         //given
-        Offset offset = Offset.ZERO;
+        Offset offset = Offset.of(0, 0);
         List lengthIsNotEight = List.of(offset.x, offset.y, 1, 0, 0, 1, offset.x, offset.y);
 
         //then
