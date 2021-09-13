@@ -16,16 +16,11 @@ final class BlockShape {
     }
 
     private BlockShape(Offset o1, Offset o2, Offset o3, Offset o4) {
-        this(Offsets.of(o1, o2, o3, o4));
+        this(Offsets.of(Set.of(o1, o2, o3, o4)));
     }
 
-    private BlockShape(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+    public BlockShape(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
         this(Offset.of(x1, y1), Offset.of(x2, y2), Offset.of(x3, y3), Offset.of(x4, y4));
-    }
-
-    // TODO
-    public BlockShape(List<Integer> list) {
-       this(list.get(0), list.get(1), list.get(2), list.get(3), list.get(4), list.get(5), list.get(6), list.get(7));
     }
 
     private static void validate(Offsets offsets) throws IllegalArgumentException {
@@ -42,7 +37,7 @@ final class BlockShape {
     }
 
     private static boolean hasInvalidOffset(Offsets offsets) {
-        final Predicate<Offset> validRange = (e) -> (e.x >= 0 && e.x < SIZE) && (e.y >= 0  && e.y < SIZE);
+        final Predicate<Offset> validRange = (e) -> (e.x >= 0 && e.x < SIZE) && (e.y >= 0 && e.y < SIZE);
         return offsets.stream().anyMatch(offset -> validRange.negate().test(offset));
     }
 
