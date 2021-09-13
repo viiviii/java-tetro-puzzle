@@ -58,10 +58,8 @@ public final class Offsets implements Translatable<Offsets> {
      * offset 위치로 이동
      */
     public Offsets translateTo(Offset offset) {
-        final Offset first = this.first();
-        int translateX = offset.x - first.x;
-        int translateY = offset.y - first.y;
-        return translate(translateX, translateY);
+        final Offset difference = offset.difference(this.first());
+        return translate(difference.x, difference.y);
     }
 
     @Override
