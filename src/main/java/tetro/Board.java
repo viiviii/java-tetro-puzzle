@@ -3,7 +3,7 @@ package tetro;
 import tetro.offset.Offsets;
 
 public final class Board {
-    public static final int SIZE = 9;
+    public static final int LENGTH = 9;
 
     private final Offsets holes;
 
