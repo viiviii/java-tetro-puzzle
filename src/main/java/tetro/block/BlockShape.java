@@ -8,11 +8,11 @@ import java.util.function.Predicate;
 
 final class BlockShape {
     public static final int SIZE = 4;
-    private final Offsets shape;
+    private final Offsets offsets;
 
-    private BlockShape(Offsets shape) {
-        validate(shape);
-        this.shape = shape;
+    private BlockShape(Offsets offsets) {
+        validate(offsets);
+        this.offsets = offsets;
     }
 
     private BlockShape(Offset o1, Offset o2, Offset o3, Offset o4) {
@@ -42,7 +42,7 @@ final class BlockShape {
     }
 
     public Offsets offsets() {
-        return this.shape;
+        return this.offsets;
     }
 
     @Override
@@ -50,17 +50,17 @@ final class BlockShape {
         if (this == o) return true;
         if (!(o instanceof BlockShape)) return false;
         BlockShape that = (BlockShape) o;
-        return this.shape.equals(that.shape);
+        return this.offsets.equals(that.offsets);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(shape);
+        return Objects.hash(offsets);
     }
 
     @Override
     public String toString() {
-        return "BlockShape{" + shape + '}';
+        return "BlockShape{" + offsets + '}';
     }
 
     public String toGridString() {
@@ -71,7 +71,7 @@ final class BlockShape {
     private boolean[][] gridFilledWithShapeOffsets() {
         final boolean FILL = true;
         final boolean[][] grid = new boolean[SIZE][SIZE];
-        shape.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        offsets.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
         return grid;
     }
 
