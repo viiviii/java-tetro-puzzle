@@ -84,6 +84,21 @@ public class OffsetsTest {
         assertEquals(origin.first().x + translateX, actual.first().x);
         assertEquals(origin.first().y + translateY, actual.first().y);
     }
+    
+    @Test
+    public void translateTo_otherOffset_returnsOffsetsWithSameFirstOffset() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 3);
+        Offset o2 = Offset.of(2, 4);
+        Offsets origin = Offsets.of(o1, o2);
+        Offset offset = Offset.of(6, 3);
+        
+        //when
+        Offsets actual = origin.translateTo(offset);
+
+        //then
+        assertEquals(offset, actual.first());
+    }
 
     @Test
     public void containsAll_containAllOffsets_returnsTrue() throws Exception {

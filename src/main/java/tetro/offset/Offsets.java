@@ -44,12 +44,24 @@ public final class Offsets implements Translatable<Offsets> {
         return newInstance;
     }
 
+
+    // TODO: 리팩토링
     @Override
     public Offsets translate(int translateX, int translateY) {
         final List<Offset> translateOffsets = this.stream()
                 .map(e -> e.translate(translateX, translateY))
                 .collect(Collectors.toList());
         return new Offsets(translateOffsets);
+    }
+
+    /**
+     * offset 위치로 이동
+     */
+    public Offsets translateTo(Offset offset) {
+        final Offset first = this.first();
+        int translateX = offset.x - first.x;
+        int translateY = offset.y - first.y;
+        return translate(translateX, translateY);
     }
 
     @Override
