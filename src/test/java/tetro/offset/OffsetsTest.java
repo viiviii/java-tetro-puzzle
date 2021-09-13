@@ -1,13 +1,6 @@
 package tetro.offset;
 
 import org.junit.jupiter.api.Test;
-import tetro.block.BlockType;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -138,5 +131,56 @@ public class OffsetsTest {
 
         //then
         assertFalse(actual);
+    }
+
+    @Test
+    public void difference_emptyOffsets_returnsEqualsValue() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of();
+
+        //when
+        Offsets actual = origin.difference(other);
+
+        //then
+        assertEquals(origin, actual);
+    }
+
+    @Test
+    public void difference_emptyOffsets_returnNotSameInstance() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of();
+
+        //when
+        Offsets actual = origin.difference(other);
+
+        //then
+        assertNotSame(origin, actual);
+    }
+
+    @Test
+    public void difference_otherOffsets_returnsDifferentOffsets() throws Exception {
+        //given
+        Offset o1 = Offset.of(1, 2);
+        Offset o2 = Offset.of(3, 4);
+        Offset o3 = Offset.of(5, 6);
+
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(o2);
+
+        //when
+        Offsets actual = origin.difference(other);
+
+        //then
+        assertEquals(Offsets.of(o1, o3), actual);
     }
 }

@@ -13,8 +13,13 @@ public final class Offsets implements Translatable<Offsets> {
         this.offsets = new TreeSet(offsets);
     }
 
+    // TODO: 제거YN Offsets.of, ... EmptyGrid.of, ... BlockSHape.of,...
     public static final Offsets of(Offset... offset) {
         return new Offsets(Arrays.asList(offset));
+    }
+
+    public static final Offsets of(Collection<Offset> offsets) {
+        return new Offsets(List.copyOf(offsets));
     }
 
     public int size() {
@@ -31,6 +36,12 @@ public final class Offsets implements Translatable<Offsets> {
 
     public boolean containsAll(Offsets other) {
         return this.offsets.containsAll(other.offsets);
+    }
+
+    public Offsets difference(Offsets other) {
+        final Offsets newInstance = Offsets.of(this.offsets);
+        newInstance.offsets.removeAll(other.offsets);
+        return newInstance;
     }
 
     @Override
