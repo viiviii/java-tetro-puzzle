@@ -3,8 +3,6 @@ package tetro.block;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockTest {
@@ -48,7 +46,7 @@ public class BlockTest {
     public void oBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.O);
-        BlockShape expect = makeBlockShape(0, 0, 1, 0, 0, 1, 1, 1);
+        BlockShape expect = toBlockShape(0, 0, 1, 0, 0, 1, 1, 1);
 
         //when
         BlockShape actual = block.shape(0);
@@ -61,8 +59,8 @@ public class BlockTest {
     public void iBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.I);
-        BlockShape expect1 = makeBlockShape(0, 0, 0, 1, 0, 2, 0, 3);
-        BlockShape expect2 = makeBlockShape(0, 3, 1, 3, 2, 3, 3, 3);
+        BlockShape expect1 = toBlockShape(0, 0, 0, 1, 0, 2, 0, 3);
+        BlockShape expect2 = toBlockShape(0, 3, 1, 3, 2, 3, 3, 3);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -77,8 +75,8 @@ public class BlockTest {
     public void sBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.S);
-        BlockShape expect1 = makeBlockShape(0, 0, 0, 1, 1, 1, 1, 2);
-        BlockShape expect2 = makeBlockShape(1, 1, 2, 1, 0, 2, 1, 2);
+        BlockShape expect1 = toBlockShape(0, 0, 0, 1, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(1, 1, 2, 1, 0, 2, 1, 2);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -93,8 +91,8 @@ public class BlockTest {
     public void zBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.Z);
-        BlockShape expect1 = makeBlockShape(1, 0, 0, 1, 1, 1, 0, 2);
-        BlockShape expect2 = makeBlockShape(0, 1, 1, 1, 1, 2, 2, 2);
+        BlockShape expect1 = toBlockShape(1, 0, 0, 1, 1, 1, 0, 2);
+        BlockShape expect2 = toBlockShape(0, 1, 1, 1, 1, 2, 2, 2);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -109,10 +107,10 @@ public class BlockTest {
     public void tBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.T);
-        BlockShape expect1 = makeBlockShape(1, 0, 0, 1, 1, 1, 1, 2);
-        BlockShape expect2 = makeBlockShape(1, 1, 0, 2, 1, 2, 2, 2);
-        BlockShape expect3 = makeBlockShape(0, 0, 0, 1, 1, 1, 0, 2);
-        BlockShape expect4 = makeBlockShape(0, 1, 1, 1, 2, 1, 1, 2);
+        BlockShape expect1 = toBlockShape(1, 0, 0, 1, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(1, 1, 0, 2, 1, 2, 2, 2);
+        BlockShape expect3 = toBlockShape(0, 0, 0, 1, 1, 1, 0, 2);
+        BlockShape expect4 = toBlockShape(0, 1, 1, 1, 2, 1, 1, 2);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -131,10 +129,10 @@ public class BlockTest {
     public void jBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.J);
-        BlockShape expect1 = makeBlockShape(0, 0, 1, 0, 0, 1, 0, 2);
-        BlockShape expect2 = makeBlockShape(0, 1, 1, 1, 2, 1, 2, 2);
-        BlockShape expect3 = makeBlockShape(1, 0, 1, 1, 0, 2, 1, 2);
-        BlockShape expect4 = makeBlockShape(0, 1, 0, 2, 1, 2, 2, 2);
+        BlockShape expect1 = toBlockShape(0, 0, 1, 0, 0, 1, 0, 2);
+        BlockShape expect2 = toBlockShape(0, 1, 1, 1, 2, 1, 2, 2);
+        BlockShape expect3 = toBlockShape(1, 0, 1, 1, 0, 2, 1, 2);
+        BlockShape expect4 = toBlockShape(0, 1, 0, 2, 1, 2, 2, 2);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -153,10 +151,10 @@ public class BlockTest {
     public void lBlock_shapes() throws Exception {
         //given
         Block block = blocks.get(BlockType.L);
-        BlockShape expect1 = makeBlockShape(0, 0, 1, 0, 1, 1, 1, 2);
-        BlockShape expect2 = makeBlockShape(2, 1, 0, 2, 1, 2, 2, 2);
-        BlockShape expect3 = makeBlockShape(0, 0, 0, 1, 0, 2, 1, 2);
-        BlockShape expect4 = makeBlockShape(0, 1, 1, 1, 2, 1, 0, 2);
+        BlockShape expect1 = toBlockShape(0, 0, 1, 0, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(2, 1, 0, 2, 1, 2, 2, 2);
+        BlockShape expect3 = toBlockShape(0, 0, 0, 1, 0, 2, 1, 2);
+        BlockShape expect4 = toBlockShape(0, 1, 1, 1, 2, 1, 0, 2);
 
         //when
         BlockShape actual1 = block.shape(0);
@@ -262,9 +260,7 @@ public class BlockTest {
         assertEquals(expect, actual);
     }
 
-    private BlockShape makeBlockShape(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-        List list = List.of(x1, y1, x2, y2, x3, y3, x4, y4);
-        return new BlockShape(list);
+    private BlockShape toBlockShape(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+        return new BlockShape(x1, y1, x2, y2, x3, y3, x4, y4);
     }
-
 }
