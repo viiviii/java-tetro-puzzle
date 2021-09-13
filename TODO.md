@@ -8,8 +8,18 @@
     - 테스트 당 하나의 assert만 가지도록 분리하기
     - 참고하던 문서 나머지 부분 + 다른 글들도 읽고 추가 필요
       기존 Block은 다른 이름으로 변경하고 BlockShape -> Block으로 변경
+    - beforeEach blockShapeData 이 부분 리팩토링
+    - Offsets of 가변인자 제거하여 생겨난 toOffsets 이 부분 해결
+
 - 접근제어자
 - assert null 체크?
+- 퍼즐 결과가 0일 때 예외처리 누가?
+- 무슨 Block 글자만 들어가면 다 block 패키지로 할거여?
+- Offsets, BlockShape, EmptyGrids -> Grids 생성YN
+- List<Set<Block>> Combinations 같은 클래스 필요?YN
+    - 나 컬렉션을 너무 감싸고 있나?
+- 마지막엔 블럭 다 안돌텐데 지금처럼 가능한 블록 먼저 만들어?
+
 ---
 
 ### Offsets
@@ -17,9 +27,11 @@
 
 ---
 
-### UndecidedName
+### FitBlock
+- 클래스 및 메서드명
 - Block `block`
 - Offset `position`
+- int rotation
 
 ---
 
@@ -30,8 +42,7 @@
 - 예시
     - 회전한 `ㅓ 모양의 T 블록`과 `ㅗ 모양의 T 블록`은 같은 블록인가? --> true
         - Block(type: BlockType.T, rotation: 1) equals Block(type: BlockType.T, rotation: 2)
-        -  `Block`이 type, shape 를 가질 경우 `Offsets`가 다르기 때문에 false 일 것임 
-    
+        -  `Block`이 shape 를 가질 경우 `Offsets`가 다르기 때문에 false 일 것임 
 
 ---
 
@@ -41,53 +52,7 @@
   - 추후 바뀔지 내가 알 수 없는 상태
 - 보드엔 빈 칸이 있고 블럭을 채울 수 있다
 
----
-
-### 원하는 모양새
-- Q. List<Set<Block>> Combinations 같은 클래스 필요?YN
-- Offsets가 아닌 Holes 같은 클래스 필요?YN
-- fill은 언제고 fit은 언제쓰는 단어임?동일하게 맞추던가
-- 마지막엔 블럭 다 안돌텐데 lazy?YN 
-- UndecidedName: Block과 보드 위 블럭의 위치를 갖고있는 클래스의 이름
-```
-class Board {
-    public List<Set<UndecidedName>> combinationsFilled(){
-        List<Set<UndecidedName>> result = combinationsFillOf(this.holes);
-        if(result.size == 0) throws new Exception(); -- 이건 무조건 있어야되는거 아닌가
-        return result;
-    }
-}
-
-public Set<Block> fillableBlocks(Offsets holes) {
-    Set result = {};
-    for(block : blocks) {
-        boolean fitted = holes.containAll(block.shape.translate(holes.first())); // 분리
-        if(fitted) result.add(block);
-    }
-    return result;
-}
-
-public List<Set<UndecidedName>> combinationsFillOf(Offsets holes) {
-    List<Set<UndecidedName>> result = [];
-    if(holes.size() == 0) return result;
-    Offset firstHole = holes.first();
-    Set<Block> fillableBlocks = fillableBlocks(holes);
-    
-    for(fillableBlock : fillableBlocks) {
-        Offsets remainingHoles = holes.fit(fillableBlock);
-        List<Set<UndecidedName>> combinations = combinationsFillOf(remainingHoles);
-        if(combinations.isEmpty) continue; 
-        
-        for(combination : combinations) {
-            combination.add(new UndecidedName(fillableBlock, firstHole));
-        }
-        result.addAll(combinations);
-    }
-    return result;
-}
-
-```
-
+- 생성 시 emptyGrids length가 0일 때 예외 처리
 ---
 
 ### ???
