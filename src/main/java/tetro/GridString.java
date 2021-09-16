@@ -3,6 +3,7 @@ package tetro;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 // TODO: 클래스명, 메서드명
@@ -20,13 +21,13 @@ public final class GridString {
      * □ □ □ □ <br>
      * □ □ □ □ <br>
      *
-     * @param length  정사각형 그리드의 한쪽 길이
-     * @param offsets 채운 네모로 표시할 offsets
+     * @param length      정사각형 그리드의 한쪽 길이
+     * @param fillOffsets 채운 네모로 표시할 offsets
      * @return 비어있거나 채워진 네모로 이루어진 문자열
      */
-    public static String of(int length, Offsets offsets) {
-        validate(length, offsets);
-        final boolean[][] grid = grid(length, offsets);
+    public static String valueOf(int length, Offsets fillOffsets) {
+        validate(length, fillOffsets);
+        final boolean[][] grid = grid(length, fillOffsets);
         return toStringBy(grid);
     }
 
@@ -49,11 +50,16 @@ public final class GridString {
         return offsets.stream().anyMatch(offset -> validRange.negate().test(offset));
     }
 
-    private static boolean[][] grid(int length, Offsets offsets) {
-        final boolean FILL = true;
+    private static boolean[][] grid(int length, Offsets fillOffsets) {
         final boolean[][] grid = new boolean[length][length];
-        offsets.stream().forEach(offset -> grid[offset.y][offset.x] = FILL);
+        final Consumer<Offset> fillGrid = fillInOffsetOf(grid);
+        fillOffsets.stream().forEach(offset -> fillGrid.accept(offset));
         return grid;
+    }
+
+    private static Consumer<Offset> fillInOffsetOf(boolean[][] grid) {
+        final boolean FILL = true;
+        return (offset) -> grid[offset.y][offset.x] = FILL;
     }
 
     private static String toStringBy(boolean[][] grid) {

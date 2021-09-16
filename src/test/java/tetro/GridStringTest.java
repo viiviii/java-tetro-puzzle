@@ -13,7 +13,7 @@ public class GridStringTest {
     private final int LENGTH = 4;
 
     @Test
-    public void of() throws Exception {
+    public void valueOf() throws Exception {
         //given
         Offsets oBlockShapeOffsets = Offsets.of(Set.of(
                 Offset.of(0, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1)
@@ -25,7 +25,7 @@ public class GridStringTest {
                 "□ □ □ □ ";
 
         //when
-        String actual = GridString.of(LENGTH, oBlockShapeOffsets);
+        String actual = GridString.valueOf(LENGTH, oBlockShapeOffsets);
 
         //then
         assertEquals(expect, actual);
@@ -38,7 +38,7 @@ public class GridStringTest {
         Offsets offsets = Offsets.of(Set.of(offset));
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.of(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GridStringTest {
         Offsets offsets = Offsets.of(Set.of(offset));
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.of(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
     }
 
     @Test
@@ -58,6 +58,6 @@ public class GridStringTest {
         Offsets offsets = Offsets.of(Set.of(offset));
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.of(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
     }
 }
