@@ -1,14 +1,16 @@
-package tetro.block;
+package tetro.data;
+
+import tetro.block.BlockType;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
 // TODO: DB에서 가져올래
-public final class BlockShapeData {
+public final class BlockShapesData {
     public final EnumMap<BlockType, List<List<Integer>>> map = new EnumMap(BlockType.class);
 
-    public BlockShapeData() {
+    public BlockShapesData() {
         map.put(BlockType.O, oBlockShapes());
         map.put(BlockType.I, iBlockShapes());
         map.put(BlockType.S, sBlockShapes());

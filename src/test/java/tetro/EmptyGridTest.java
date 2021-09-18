@@ -2,7 +2,7 @@ package tetro;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tetro.block.BlockShapeData;
+import tetro.data.BlockShapesData;
 import tetro.block.BlockType;
 import tetro.block.Blocks;
 import tetro.block.FitBlock;
@@ -18,7 +18,7 @@ class EmptyGridTest {
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        BlockShapeData data = new BlockShapeData();
+        BlockShapesData data = new BlockShapesData();
         Blocks blocks = new Blocks(data);
         fitBlockTypeO = new FitBlock(blocks.get(BlockType.O), 0, Offset.of(0, 0));
     }

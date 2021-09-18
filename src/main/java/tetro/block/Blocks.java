@@ -1,5 +1,7 @@
 package tetro.block;
 
+import tetro.data.BlockShapesData;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Set;
@@ -9,8 +11,8 @@ public final class Blocks {
     private final EnumMap<BlockType, Block> blocks = new EnumMap(BlockType.class);
 
     // TODO
-    public Blocks(BlockShapeData blockShapeData) {
-        blockShapeData.map
+    public Blocks(BlockShapesData blockShapesData) {
+        blockShapesData.map
                 .forEach((k, v) -> blocks.put(k, new Block(k, blockShapes(v))));
     }
 

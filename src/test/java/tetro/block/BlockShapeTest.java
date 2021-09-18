@@ -2,6 +2,7 @@ package tetro.block;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ public class BlockShapeTest {
     @BeforeEach
     public void beforeEach() {
         final int NOT_ROTATION = 0;
-        BlockShapeData data = new BlockShapeData();
+        BlockShapesData data = new BlockShapesData();
         Blocks blocks = new Blocks(data);
         oBlockShape = blocks.get(BlockType.O).shape(NOT_ROTATION);
         sBlockShape = blocks.get(BlockType.S).shape(NOT_ROTATION);

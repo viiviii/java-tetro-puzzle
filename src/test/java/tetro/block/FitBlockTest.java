@@ -2,6 +2,7 @@ package tetro.block;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
@@ -14,7 +15,7 @@ class FitBlockTest {
 
     @BeforeEach
     public void beforeEach() {
-        BlockShapeData data = new BlockShapeData();
+        BlockShapesData data = new BlockShapesData();
         Blocks blocks = new Blocks(data);
         sBlock = blocks.get(BlockType.S);
     }

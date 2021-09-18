@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.block.*;
+import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 
 import java.util.HashSet;
@@ -18,7 +19,7 @@ public class PuzzleTest {
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        BlockShapeData data = new BlockShapeData();
+        BlockShapesData data = new BlockShapesData();
         blocks = new Blocks(data);
         puzzle = new Puzzle(blocks);
     }

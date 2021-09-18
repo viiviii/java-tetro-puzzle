@@ -3,6 +3,7 @@ package tetro.block;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tetro.data.BlockShapesData;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -14,7 +15,7 @@ class BlocksTest {
 
     @BeforeEach
     public void beforeEach() {
-        BlockShapeData data = new BlockShapeData();
+        BlockShapesData data = new BlockShapesData();
         blocks = new Blocks(data);
     }
 
