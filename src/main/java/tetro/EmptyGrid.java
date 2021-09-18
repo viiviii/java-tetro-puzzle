@@ -7,16 +7,16 @@ import tetro.offset.Offsets;
 import java.util.*;
 
 // TODO: validate
-public class EmptyGrids {
+public class EmptyGrid {
     public static final int CAPACITY = Board.LENGTH * Board.LENGTH;
     private final Offsets offsets;
 
-    private EmptyGrids(Offsets offsets) {
+    private EmptyGrid(Offsets offsets) {
         this.offsets = offsets;
     }
 
-    public static EmptyGrids of(Collection<Offset> offsets) {
-        return new EmptyGrids(Offsets.of(offsets));
+    public static EmptyGrid of(Collection<Offset> offsets) {
+        return new EmptyGrid(Offsets.of(offsets));
     }
 
     public boolean isFull() {
@@ -31,16 +31,16 @@ public class EmptyGrids {
         return offsets.containsAll(fitBlock.offsets());
     }
 
-    public EmptyGrids fit(FitBlock fitBlock) {
+    public EmptyGrid fit(FitBlock fitBlock) {
         final Offsets remainingEmptyGrids = offsets.difference(fitBlock.offsets());
-        return new EmptyGrids(remainingEmptyGrids);
+        return new EmptyGrid(remainingEmptyGrids);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof EmptyGrids)) return false;
-        EmptyGrids that = (EmptyGrids) o;
+        if (!(o instanceof EmptyGrid)) return false;
+        EmptyGrid that = (EmptyGrid) o;
         return this.offsets.equals(that.offsets);
     }
 

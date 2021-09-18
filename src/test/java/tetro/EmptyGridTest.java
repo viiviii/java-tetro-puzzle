@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmptyGridsTest {
+class EmptyGridTest {
     FitBlock fitBlockTypeO;
 
     @BeforeEach
@@ -26,10 +26,10 @@ class EmptyGridsTest {
     @Test
     public void isFull() throws Exception {
         //given
-        EmptyGrids emptyGrids = EmptyGrids.of(Collections.EMPTY_LIST);
+        EmptyGrid emptyGrid = EmptyGrid.of(Collections.EMPTY_LIST);
 
         //when
-        boolean actual = emptyGrids.isFull();
+        boolean actual = emptyGrid.isFull();
 
         //then
         assertTrue(actual);
@@ -40,10 +40,10 @@ class EmptyGridsTest {
         //given
         Offset o1 = Offset.of(2, 9);
         Offset o2 = Offset.of(0, 2);
-        EmptyGrids emptyGrids = EmptyGrids.of(Set.of(o1, o2));
+        EmptyGrid emptyGrid = EmptyGrid.of(Set.of(o1, o2));
 
         //when
-        Offset actual = emptyGrids.first();
+        Offset actual = emptyGrid.first();
 
         //then
         assertEquals(o2, actual);
@@ -56,10 +56,10 @@ class EmptyGridsTest {
         Offset o2 = Offset.of(1, 0);
         Offset o3 = Offset.of(0, 1);
         Offset o4 = Offset.of(1, 1);
-        EmptyGrids oBlockShapeEmptyGrids = EmptyGrids.of(Set.of(o1, o2, o3, o4));
+        EmptyGrid oBlockShapeEmptyGrid = EmptyGrid.of(Set.of(o1, o2, o3, o4));
 
         //when
-        boolean actual = oBlockShapeEmptyGrids.canFit(fitBlockTypeO);
+        boolean actual = oBlockShapeEmptyGrid.canFit(fitBlockTypeO);
 
         //then
         assertTrue(actual);
@@ -68,10 +68,10 @@ class EmptyGridsTest {
     @Test
     public void canFit_unfitBlock_returnsFalse() throws Exception {
         //given
-        EmptyGrids emptyGrids = EmptyGrids.of(Set.of(Offset.of(0, 0)));
+        EmptyGrid emptyGrid = EmptyGrid.of(Set.of(Offset.of(0, 0)));
 
         //when
-        boolean actual = emptyGrids.canFit(fitBlockTypeO);
+        boolean actual = emptyGrid.canFit(fitBlockTypeO);
 
         //then
         assertFalse(actual);
@@ -86,11 +86,11 @@ class EmptyGridsTest {
         Offset o4 = Offset.of(1, 1);
         Offset remainOffset= Offset.of(6, 8);
 
-        EmptyGrids oBlockShapeEmptyGrids = EmptyGrids.of(Set.of(o1, o2, o3, o4, remainOffset));
-        EmptyGrids expect = EmptyGrids.of(Set.of(remainOffset));
+        EmptyGrid oBlockShapeEmptyGrid = EmptyGrid.of(Set.of(o1, o2, o3, o4, remainOffset));
+        EmptyGrid expect = EmptyGrid.of(Set.of(remainOffset));
 
         //when
-        EmptyGrids actual = oBlockShapeEmptyGrids.fit(fitBlockTypeO);
+        EmptyGrid actual = oBlockShapeEmptyGrid.fit(fitBlockTypeO);
 
         //then
         assertEquals(expect, actual);

@@ -18,25 +18,25 @@ public final class Puzzle {
 
 
     // TODO: 메서드명
-    public Set<Set<FitBlock>> put(EmptyGrids emptyGrids) throws Exception {
-        Set<Set<FitBlock>> combinations = combinationsFitOf(emptyGrids);
+    public Set<Set<FitBlock>> put(EmptyGrid emptyGrid) throws Exception {
+        Set<Set<FitBlock>> combinations = combinationsFitOf(emptyGrid);
         return combinations;
     }
 
     // TODO: 메서드명
-    private Set<Set<FitBlock>> combinationsFitOf(EmptyGrids emptyGrids) {
+    private Set<Set<FitBlock>> combinationsFitOf(EmptyGrid emptyGrid) {
         final Set<Set<FitBlock>> result = new HashSet<>();
-        if (emptyGrids.isFull()) return result;
-        final Set<FitBlock> blocks = blocksFittingTo(emptyGrids);
+        if (emptyGrid.isFull()) return result;
+        final Set<FitBlock> blocks = blocksFittingTo(emptyGrid);
 
         for (FitBlock block : blocks) {
-            final EmptyGrids remainingEmptyGrids = emptyGrids.fit(block);
+            final EmptyGrid remainingEmptyGrid = emptyGrid.fit(block);
 
-            if (remainingEmptyGrids.isFull()) {
+            if (remainingEmptyGrid.isFull()) {
                 result.add(blocks);
                 return result;
             }
-            Set<Set<FitBlock>> combinations = combinationsFitOf(remainingEmptyGrids);
+            Set<Set<FitBlock>> combinations = combinationsFitOf(remainingEmptyGrid);
             if (combinations.isEmpty()) continue;
 
             for (Set<FitBlock> combination : combinations) {
@@ -48,13 +48,13 @@ public final class Puzzle {
     }
 
     // TODO: 메서드명
-    private Set<FitBlock> blocksFittingTo(EmptyGrids emptyGrids) {
+    private Set<FitBlock> blocksFittingTo(EmptyGrid emptyGrid) {
         final Set result = new HashSet();
-        final Offset offsetToStartFitting = emptyGrids.first();
+        final Offset offsetToStartFitting = emptyGrid.first();
         for (Block block : blocks.all()) {
             for (int rotation = 0; rotation < block.numberOfShapes(); rotation++) {
                 final FitBlock fitBlock = new FitBlock(block, rotation, offsetToStartFitting);
-                final boolean fitted = emptyGrids.canFit(fitBlock);
+                final boolean fitted = emptyGrid.canFit(fitBlock);
                 if (fitted) result.add(fitBlock);
             }
         }

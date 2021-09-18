@@ -27,10 +27,10 @@ public class PuzzleTest {
     @Test
     public void put_unfitEmptyGrids_returnsEmptyList() throws Exception {
         //given
-        EmptyGrids emptyGrids = EmptyGrids.of(List.of(Offset.of(0, 0)));
+        EmptyGrid emptyGrid = EmptyGrid.of(List.of(Offset.of(0, 0)));
 
         //when
-        Set combinations = puzzle.put(emptyGrids);
+        Set combinations = puzzle.put(emptyGrid);
         int actual = combinations.size();
 
         //then
@@ -45,10 +45,10 @@ public class PuzzleTest {
                 Offset.of(0, 0), Offset.of(1, 0),
                 Offset.of(0, 1), Offset.of(1, 1)
         );
-        EmptyGrids emptyGrids = EmptyGrids.of(oBlockShapeOffsets);
+        EmptyGrid emptyGrid = EmptyGrid.of(oBlockShapeOffsets);
 
         //when
-        Set combinations = puzzle.put(emptyGrids);
+        Set combinations = puzzle.put(emptyGrid);
         int actual = combinations.size();
 
         //then
@@ -67,7 +67,7 @@ public class PuzzleTest {
                 Offset.of(3, 3), Offset.of(4, 3), Offset.of(5, 3), Offset.of(6, 3),
                 Offset.of(3, 4), Offset.of(4, 4), Offset.of(5, 4), Offset.of(6, 4)
         );
-        EmptyGrids emptyGrids = EmptyGrids.of(rectangularOffsets);
+        EmptyGrid emptyGrid = EmptyGrid.of(rectangularOffsets);
 
         Set<Set<FitBlock>> expect = new HashSet<>();
         FitBlock oBlock1 = new FitBlock(blocks.get(BlockType.O), 0, Offset.of(3, 3));
@@ -84,7 +84,7 @@ public class PuzzleTest {
         expect.add(Set.of(jBlock1, jBlock2));
 
         //when
-        Set<Set<FitBlock>> combinations = puzzle.put(emptyGrids);
+        Set<Set<FitBlock>> combinations = puzzle.put(emptyGrid);
 
         //then
         assertEquals(expect, combinations);
