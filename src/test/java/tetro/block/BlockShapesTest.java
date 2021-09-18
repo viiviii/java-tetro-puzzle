@@ -10,13 +10,13 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BlocksTest {
-    Blocks blocks;
+class BlockShapesTest {
+    BlockShapes blockShapes;
 
     @BeforeEach
     public void beforeEach() {
         BlockShapesData data = new BlockShapesData();
-        blocks = new Blocks(data);
+        blockShapes = BlockShapes.from(data);
     }
 
     @DisplayName("블럭이 가진 BlockShape 총 갯수는 19개이다")
@@ -27,7 +27,7 @@ class BlocksTest {
 
         //when
         int actual = Arrays.stream(BlockType.values())
-                .mapToInt(type -> blocks.get(type).numberOfShapes())
+                .mapToInt(type -> blockShapes.get(type).size())
                 .sum();
 
         //then
@@ -39,24 +39,11 @@ class BlocksTest {
     public void numberOfShapes_numberRangesFrom1To4_returnsTrue() throws Exception {
         //when
         boolean actual = Arrays.stream(BlockType.values()).allMatch(type -> {
-            final int size = blocks.get(type).numberOfShapes();
+            final int size = blockShapes.get(type).size();
             return size >= 1 && size <= 4;
         });
 
         //then
         assertTrue(actual);
-    }
-
-    @DisplayName("Blocks 갯수는 BlockType 갯수와 같다")
-    @Test
-    public void all_sizeEqualsNumberOfBlockType_returnsTrue() throws Exception {
-        //given
-        Set<Block> allBlocks = blocks.all();
-
-        //when
-        int actual = allBlocks.size();
-
-        //then
-        assertEquals(BlockType.values().length, actual);
     }
 }
