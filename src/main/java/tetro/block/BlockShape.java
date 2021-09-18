@@ -5,7 +5,7 @@ import tetro.offset.Offsets;
 
 import java.util.*;
 
-final class BlockShape {
+public final class BlockShape {
     public static final int SIZE = 4;
     private final Offsets offsets;
 

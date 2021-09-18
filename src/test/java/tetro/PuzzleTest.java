@@ -14,14 +14,14 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PuzzleTest {
-    Blocks blocks;
+    BlockShapes blockShapes;
     Puzzle puzzle;
 
     @BeforeEach
     public void beforeEach() throws Exception {
         BlockShapesData data = new BlockShapesData();
-        blocks = new Blocks(data);
-        puzzle = new Puzzle(blocks);
+        blockShapes = BlockShapes.from(data);
+        puzzle = new Puzzle(blockShapes);
     }
 
     @DisplayName("빈 칸을 채울 수 없으면 빈 리스트를 반환한다")
@@ -71,14 +71,14 @@ public class PuzzleTest {
         EmptyGrid emptyGrid = EmptyGrid.of(rectangularOffsets);
 
         Set<Set<FitBlock>> expect = new HashSet<>();
-        FitBlock oBlock1 = new FitBlock(blocks.get(BlockType.O), 0, Offset.of(3, 3));
-        FitBlock oBlock2 = new FitBlock(blocks.get(BlockType.O), 0, Offset.of(5, 3));
-        FitBlock iBlock1 = new FitBlock(blocks.get(BlockType.I), 1, Offset.of(3, 3));
-        FitBlock iBlock2 = new FitBlock(blocks.get(BlockType.I), 1, Offset.of(3, 4));
-        FitBlock lBlock1 = new FitBlock(blocks.get(BlockType.L), 3, Offset.of(3, 3));
-        FitBlock lBlock2 = new FitBlock(blocks.get(BlockType.L), 1, Offset.of(6, 3));
-        FitBlock jBlock1 = new FitBlock(blocks.get(BlockType.J), 3, Offset.of(3, 3));
-        FitBlock jBlock2 = new FitBlock(blocks.get(BlockType.J), 1, Offset.of(4, 3));
+        FitBlock oBlock1 = new FitBlock(new Block(BlockType.O, blockShapes.get(BlockType.O)), 0, Offset.of(3, 3));
+        FitBlock oBlock2 = new FitBlock(new Block(BlockType.O, blockShapes.get(BlockType.O)), 0, Offset.of(5, 3));
+        FitBlock iBlock1 = new FitBlock(new Block(BlockType.I, blockShapes.get(BlockType.I)), 1, Offset.of(3, 3));
+        FitBlock iBlock2 = new FitBlock(new Block(BlockType.I, blockShapes.get(BlockType.I)), 1, Offset.of(3, 4));
+        FitBlock lBlock1 = new FitBlock(new Block(BlockType.L, blockShapes.get(BlockType.L)), 3, Offset.of(3, 3));
+        FitBlock lBlock2 = new FitBlock(new Block(BlockType.L, blockShapes.get(BlockType.L)), 1, Offset.of(6, 3));
+        FitBlock jBlock1 = new FitBlock(new Block(BlockType.J, blockShapes.get(BlockType.J)), 3, Offset.of(3, 3));
+        FitBlock jBlock2 = new FitBlock(new Block(BlockType.J, blockShapes.get(BlockType.J)), 1, Offset.of(4, 3));
         expect.add(Set.of(oBlock1, oBlock2));
         expect.add(Set.of(iBlock1, iBlock2));
         expect.add(Set.of(lBlock1, lBlock2));

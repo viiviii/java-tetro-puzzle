@@ -1,19 +1,18 @@
 package tetro;
 
-import tetro.block.Block;
-import tetro.block.Blocks;
-import tetro.block.FitBlock;
+import tetro.block.*;
 import tetro.offset.Offset;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 // TODO: 클래스명
 public final class Puzzle {
-    private final Blocks blocks; // TODO
+    private final BlockShapes blockShapes; // TODO
 
-    public Puzzle(Blocks blocks) {
-        this.blocks = blocks;
+    public Puzzle(BlockShapes blockShapes) {
+        this.blockShapes = blockShapes;
     }
 
 
@@ -51,9 +50,10 @@ public final class Puzzle {
     private Set<FitBlock> blocksFittingTo(EmptyGrid emptyGrid) {
         final Set result = new HashSet();
         final Offset offsetToStartFitting = emptyGrid.first();
-        for (Block block : blocks.all()) {
-            for (int rotation = 0; rotation < block.numberOfShapes(); rotation++) {
-                final FitBlock fitBlock = new FitBlock(block, rotation, offsetToStartFitting);
+        for (BlockType type : BlockType.values()) {
+            List<BlockShape> blockShapes = this.blockShapes.get(type);
+            for (int rotation = 0; rotation < blockShapes.size(); rotation++) {
+                final FitBlock fitBlock = new FitBlock(new Block(type, blockShapes), rotation, offsetToStartFitting);
                 final boolean fitted = emptyGrid.canFit(fitBlock);
                 if (fitted) result.add(fitBlock);
             }

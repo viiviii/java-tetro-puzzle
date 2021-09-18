@@ -7,6 +7,7 @@ import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,9 +16,10 @@ class FitBlockTest {
 
     @BeforeEach
     public void beforeEach() {
+        BlockType type = BlockType.S;
         BlockShapesData data = new BlockShapesData();
-        Blocks blocks = new Blocks(data);
-        sBlock = blocks.get(BlockType.S);
+        List<BlockShape> shapes = BlockShapes.from(data).get(type);
+        sBlock = new Block(type,shapes);
     }
 
     @Test
