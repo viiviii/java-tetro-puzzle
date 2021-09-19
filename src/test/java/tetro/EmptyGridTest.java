@@ -3,10 +3,10 @@ package tetro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetro.block.Block;
+import tetro.block.BlockShape;
 import tetro.data.BlockShapesData;
 import tetro.block.BlockType;
 import tetro.block.BlockShapes;
-import tetro.block.FitBlock;
 import tetro.offset.Offset;
 
 import java.util.Collections;
@@ -15,13 +15,14 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmptyGridTest {
-    FitBlock fitBlockTypeO;
+    Block oBlock;
 
     @BeforeEach
     public void beforeEach() throws Exception {
         BlockShapesData data = new BlockShapesData();
         BlockShapes blockShapes = BlockShapes.from(data);
-        fitBlockTypeO = new FitBlock(new Block(BlockType.O, blockShapes.get(BlockType.O)), 0, Offset.of(0, 0));
+        BlockShape oBlockShape = blockShapes.get(BlockType.O, 0);
+        oBlock = new Block(oBlockShape, Offset.of(0, 0));
     }
 
     @Test
@@ -60,7 +61,7 @@ class EmptyGridTest {
         EmptyGrid oBlockShapeEmptyGrid = EmptyGrid.of(Set.of(o1, o2, o3, o4));
 
         //when
-        boolean actual = oBlockShapeEmptyGrid.canFit(fitBlockTypeO);
+        boolean actual = oBlockShapeEmptyGrid.canFit(oBlock);
 
         //then
         assertTrue(actual);
@@ -72,7 +73,7 @@ class EmptyGridTest {
         EmptyGrid emptyGrid = EmptyGrid.of(Set.of(Offset.of(0, 0)));
 
         //when
-        boolean actual = emptyGrid.canFit(fitBlockTypeO);
+        boolean actual = emptyGrid.canFit(oBlock);
 
         //then
         assertFalse(actual);
@@ -91,7 +92,7 @@ class EmptyGridTest {
         EmptyGrid expect = EmptyGrid.of(Set.of(remainOffset));
 
         //when
-        EmptyGrid actual = oBlockShapeEmptyGrid.fit(fitBlockTypeO);
+        EmptyGrid actual = oBlockShapeEmptyGrid.fit(oBlock);
 
         //then
         assertEquals(expect, actual);

@@ -70,22 +70,22 @@ public class PuzzleTest {
         );
         EmptyGrid emptyGrid = EmptyGrid.of(rectangularOffsets);
 
-        Set<Set<FitBlock>> expect = new HashSet<>();
-        FitBlock oBlock1 = new FitBlock(new Block(BlockType.O, blockShapes.get(BlockType.O)), 0, Offset.of(3, 3));
-        FitBlock oBlock2 = new FitBlock(new Block(BlockType.O, blockShapes.get(BlockType.O)), 0, Offset.of(5, 3));
-        FitBlock iBlock1 = new FitBlock(new Block(BlockType.I, blockShapes.get(BlockType.I)), 1, Offset.of(3, 3));
-        FitBlock iBlock2 = new FitBlock(new Block(BlockType.I, blockShapes.get(BlockType.I)), 1, Offset.of(3, 4));
-        FitBlock lBlock1 = new FitBlock(new Block(BlockType.L, blockShapes.get(BlockType.L)), 3, Offset.of(3, 3));
-        FitBlock lBlock2 = new FitBlock(new Block(BlockType.L, blockShapes.get(BlockType.L)), 1, Offset.of(6, 3));
-        FitBlock jBlock1 = new FitBlock(new Block(BlockType.J, blockShapes.get(BlockType.J)), 3, Offset.of(3, 3));
-        FitBlock jBlock2 = new FitBlock(new Block(BlockType.J, blockShapes.get(BlockType.J)), 1, Offset.of(4, 3));
+        Set<Set<Block>> expect = new HashSet<>();
+        Block oBlock1 = new Block(blockShapes.get(BlockType.O, 0), Offset.of(3, 3));
+        Block oBlock2 = new Block(blockShapes.get(BlockType.O, 0), Offset.of(5, 3));
+        Block iBlock1 = new Block(blockShapes.get(BlockType.I, 1), Offset.of(3, 3));
+        Block iBlock2 = new Block(blockShapes.get(BlockType.I, 1), Offset.of(3, 4));
+        Block lBlock1 = new Block(blockShapes.get(BlockType.L, 3), Offset.of(3, 3));
+        Block lBlock2 = new Block(blockShapes.get(BlockType.L, 1), Offset.of(6, 3));
+        Block jBlock1 = new Block(blockShapes.get(BlockType.J, 3), Offset.of(3, 3));
+        Block jBlock2 = new Block(blockShapes.get(BlockType.J, 1), Offset.of(4, 3));
         expect.add(Set.of(oBlock1, oBlock2));
         expect.add(Set.of(iBlock1, iBlock2));
         expect.add(Set.of(lBlock1, lBlock2));
         expect.add(Set.of(jBlock1, jBlock2));
 
         //when
-        Set<Set<FitBlock>> combinations = puzzle.put(emptyGrid);
+        Set<Set<Block>> combinations = puzzle.put(emptyGrid);
 
         //then
         assertEquals(expect, combinations);

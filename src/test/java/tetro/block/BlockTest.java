@@ -3,8 +3,11 @@ package tetro.block;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetro.data.BlockShapesData;
+import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,30 +21,24 @@ public class BlockTest {
     }
 
     @Test
-    public void equals_sameType_returnsTrue() throws Exception {
+    public void offsets() throws Exception {
         //given
-        BlockType type = BlockType.I;
-        Block block1 = new Block(type, blockShapes.get(type));
-        Block block2 = new Block(type, blockShapes.get(type));
+        BlockShape sBlockShape = blockShapes.get(BlockType.S, 0);
+        Block block = new Block(sBlockShape, Offset.of(3, 4));
+        Offsets expect = toOffsets(
+                Offset.of(3, 4), Offset.of(3, 5),
+                Offset.of(4, 5), Offset.of(4, 6)
+        );
 
         //when
-        boolean actual = block1.equals(block2);
+        Offsets offsets = block.offsets();
 
         //then
-        assertTrue(actual);
+        assertEquals(expect, offsets);
     }
 
-    @Test
-    public void equals_differentType_returnsFalse() throws Exception {
-        //given
-        Block block1 = new Block(BlockType.S, blockShapes.get(BlockType.S));
-        Block block2 = new Block(BlockType.Z, blockShapes.get(BlockType.Z));
-
-        //when
-        boolean actual = block1.equals(block2);
-
-        //then
-        assertFalse(actual);
+    private Offsets toOffsets(Offset... offsets) {
+        return Offsets.of(Arrays.asList(offsets));
     }
 
     //////////////////////////////////////////////////////////////
@@ -49,11 +46,11 @@ public class BlockTest {
     @Test
     public void oBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.O);
-        BlockShape expect = toBlockShape(0, 0, 1, 0, 0, 1, 1, 1);
+        BlockType type = BlockType.O;
+        BlockShape expect = toBlockShape(type, 0, 0, 0, 1, 0, 0, 1, 1, 1);
 
         //when
-        BlockShape actual = shapes.get(0);
+        BlockShape actual = blockShapes.get(type, 0);
 
         //then
         assertEquals(expect, actual);
@@ -62,13 +59,13 @@ public class BlockTest {
     @Test
     public void iBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.I);
-        BlockShape expect1 = toBlockShape(0, 0, 0, 1, 0, 2, 0, 3);
-        BlockShape expect2 = toBlockShape(0, 3, 1, 3, 2, 3, 3, 3);
+        BlockType type = BlockType.I;
+        BlockShape expect1 = toBlockShape(type, 0, 0, 0, 0, 1, 0, 2, 0, 3);
+        BlockShape expect2 = toBlockShape(type, 1, 0, 3, 1, 3, 2, 3, 3, 3);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
 
         //then
         assertEquals(expect1, actual1);
@@ -78,13 +75,13 @@ public class BlockTest {
     @Test
     public void sBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.S);
-        BlockShape expect1 = toBlockShape(0, 0, 0, 1, 1, 1, 1, 2);
-        BlockShape expect2 = toBlockShape(1, 1, 2, 1, 0, 2, 1, 2);
+        BlockType type = BlockType.S;
+        BlockShape expect1 = toBlockShape(type, 0, 0, 0, 0, 1, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(type, 1, 1, 1, 2, 1, 0, 2, 1, 2);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
 
         //then
         assertEquals(expect1, actual1);
@@ -94,13 +91,13 @@ public class BlockTest {
     @Test
     public void zBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.Z);
-        BlockShape expect1 = toBlockShape(1, 0, 0, 1, 1, 1, 0, 2);
-        BlockShape expect2 = toBlockShape(0, 1, 1, 1, 1, 2, 2, 2);
+        BlockType type = BlockType.Z;
+        BlockShape expect1 = toBlockShape(type, 0, 1, 0, 0, 1, 1, 1, 0, 2);
+        BlockShape expect2 = toBlockShape(type, 1, 0, 1, 1, 1, 1, 2, 2, 2);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
 
         //then
         assertEquals(expect1, actual1);
@@ -110,17 +107,17 @@ public class BlockTest {
     @Test
     public void tBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.T);
-        BlockShape expect1 = toBlockShape(1, 0, 0, 1, 1, 1, 1, 2);
-        BlockShape expect2 = toBlockShape(1, 1, 0, 2, 1, 2, 2, 2);
-        BlockShape expect3 = toBlockShape(0, 0, 0, 1, 1, 1, 0, 2);
-        BlockShape expect4 = toBlockShape(0, 1, 1, 1, 2, 1, 1, 2);
+        BlockType type = BlockType.T;
+        BlockShape expect1 = toBlockShape(type, 0, 1, 0, 0, 1, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(type, 1, 1, 1, 0, 2, 1, 2, 2, 2);
+        BlockShape expect3 = toBlockShape(type, 2, 0, 0, 0, 1, 1, 1, 0, 2);
+        BlockShape expect4 = toBlockShape(type, 3, 0, 1, 1, 1, 2, 1, 1, 2);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
-        BlockShape actual3 = shapes.get(2);
-        BlockShape actual4 = shapes.get(3);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
+        BlockShape actual3 = blockShapes.get(type, 2);
+        BlockShape actual4 = blockShapes.get(type, 3);
 
         //then
         assertEquals(expect1, actual1);
@@ -132,17 +129,17 @@ public class BlockTest {
     @Test
     public void jBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.J);
-        BlockShape expect1 = toBlockShape(0, 0, 1, 0, 0, 1, 0, 2);
-        BlockShape expect2 = toBlockShape(0, 1, 1, 1, 2, 1, 2, 2);
-        BlockShape expect3 = toBlockShape(1, 0, 1, 1, 0, 2, 1, 2);
-        BlockShape expect4 = toBlockShape(0, 1, 0, 2, 1, 2, 2, 2);
+        BlockType type = BlockType.J;
+        BlockShape expect1 = toBlockShape(type, 0, 0, 0, 1, 0, 0, 1, 0, 2);
+        BlockShape expect2 = toBlockShape(type, 1, 0, 1, 1, 1, 2, 1, 2, 2);
+        BlockShape expect3 = toBlockShape(type, 2, 1, 0, 1, 1, 0, 2, 1, 2);
+        BlockShape expect4 = toBlockShape(type, 3, 0, 1, 0, 2, 1, 2, 2, 2);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
-        BlockShape actual3 = shapes.get(2);
-        BlockShape actual4 = shapes.get(3);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
+        BlockShape actual3 = blockShapes.get(type, 2);
+        BlockShape actual4 = blockShapes.get(type, 3);
 
         //then
         assertEquals(expect1, actual1);
@@ -154,17 +151,17 @@ public class BlockTest {
     @Test
     public void lBlock_shapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.L);
-        BlockShape expect1 = toBlockShape(0, 0, 1, 0, 1, 1, 1, 2);
-        BlockShape expect2 = toBlockShape(2, 1, 0, 2, 1, 2, 2, 2);
-        BlockShape expect3 = toBlockShape(0, 0, 0, 1, 0, 2, 1, 2);
-        BlockShape expect4 = toBlockShape(0, 1, 1, 1, 2, 1, 0, 2);
+        BlockType type = BlockType.L;
+        BlockShape expect1 = toBlockShape(type, 0, 0, 0, 1, 0, 1, 1, 1, 2);
+        BlockShape expect2 = toBlockShape(type, 1, 2, 1, 0, 2, 1, 2, 2, 2);
+        BlockShape expect3 = toBlockShape(type, 2, 0, 0, 0, 1, 0, 2, 1, 2);
+        BlockShape expect4 = toBlockShape(type, 3, 0, 1, 1, 1, 2, 1, 0, 2);
 
         //when
-        BlockShape actual1 = shapes.get(0);
-        BlockShape actual2 = shapes.get(1);
-        BlockShape actual3 = shapes.get(2);
-        BlockShape actual4 = shapes.get(3);
+        BlockShape actual1 = blockShapes.get(type, 0);
+        BlockShape actual2 = blockShapes.get(type, 1);
+        BlockShape actual3 = blockShapes.get(type, 2);
+        BlockShape actual4 = blockShapes.get(type, 3);
 
         //then
         assertEquals(expect1, actual1);
@@ -176,7 +173,7 @@ public class BlockTest {
     @Test
     public void oBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.O);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.O);
         int expect = 1;
 
         //when
@@ -189,7 +186,7 @@ public class BlockTest {
     @Test
     public void iBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.I);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.I);
         int expect = 2;
 
         //when
@@ -202,7 +199,7 @@ public class BlockTest {
     @Test
     public void sBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.S);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.S);
         int expect = 2;
 
         //when
@@ -215,7 +212,7 @@ public class BlockTest {
     @Test
     public void zBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.Z);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.Z);
         int expect = 2;
 
         //when
@@ -228,7 +225,7 @@ public class BlockTest {
     @Test
     public void tBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.T);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.T);
         int expect = 4;
 
         //when
@@ -241,7 +238,7 @@ public class BlockTest {
     @Test
     public void jBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.J);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.J);
         int expect = 4;
 
         //when
@@ -254,7 +251,7 @@ public class BlockTest {
     @Test
     public void lBlock_numberOfShapes() throws Exception {
         //given
-        List<BlockShape> shapes = blockShapes.get(BlockType.L);
+        Set<BlockShape> shapes = blockShapes.get(BlockType.L);
         int expect = 4;
 
         //when
@@ -264,7 +261,7 @@ public class BlockTest {
         assertEquals(expect, actual);
     }
 
-    private BlockShape toBlockShape(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-        return new BlockShape(x1, y1, x2, y2, x3, y3, x4, y4);
+    private BlockShape toBlockShape(BlockType type, int rotation, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
+        return new BlockShape(type, rotation, x1, y1, x2, y2, x3, y3, x4, y4);
     }
 }
