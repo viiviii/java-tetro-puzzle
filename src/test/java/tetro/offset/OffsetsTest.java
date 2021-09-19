@@ -14,7 +14,7 @@ public class OffsetsTest {
         //given
         Offset o1 = Offset.of(0, 0);
         Offset o2 = Offset.of(1, 2);
-        Offsets offsets = toOffsets(o1, o2);
+        Offsets offsets = Offsets.of(o1, o2);
 
         //when
         int actual = offsets.size();
@@ -28,7 +28,7 @@ public class OffsetsTest {
         //given
         Offset o1 = Offset.of(4, 1);
         Offset o2 = Offset.of(4, 1);
-        Offsets offsets = toOffsets(o1, o2);
+        Offsets offsets = Offsets.of(o1, o2);
 
         //when
         int actual = offsets.size();
@@ -42,7 +42,7 @@ public class OffsetsTest {
         //given
         Offset o1 = Offset.of(5, 3);
         Offset o2 = Offset.of(1, 2);
-        Offsets offsets = toOffsets(o1, o2);
+        Offsets offsets = Offsets.of(o1, o2);
 
         //when
         Offset actual = offsets.first();
@@ -58,7 +58,7 @@ public class OffsetsTest {
         //given
         Offset o1 = Offset.of(-3, -3);
         Offset o2 = Offset.of(-2, -2);
-        Offsets offsets = toOffsets(o1, o2);
+        Offsets offsets = Offsets.of(o1, o2);
 
         //when
         Offset actual = offsets.first();
@@ -77,7 +77,7 @@ public class OffsetsTest {
 
         Offset o1 = Offset.of(-3, -3);
         Offset o2 = Offset.of(-2, -2);
-        Offsets origin = toOffsets(o1, o2);
+        Offsets origin = Offsets.of(o1, o2);
 
         //when
         Offsets actual = origin.translate(translateX, translateY);
@@ -92,7 +92,7 @@ public class OffsetsTest {
         //given
         Offset o1 = Offset.of(1, 3);
         Offset o2 = Offset.of(2, 4);
-        Offsets origin = toOffsets(o1, o2);
+        Offsets origin = Offsets.of(o1, o2);
         Offset offset = Offset.of(6, 3);
         
         //when
@@ -108,8 +108,8 @@ public class OffsetsTest {
         Offset o1 = Offset.of(1, 2);
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
-        Offsets offsets = toOffsets(o1, o2, o3);
-        Offsets other = toOffsets(o2);
+        Offsets offsets = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(o2);
 
         //when
         boolean actual = offsets.containsAll(other);
@@ -124,8 +124,8 @@ public class OffsetsTest {
         Offset o1 = Offset.of(1, 2);
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
-        Offsets offsets = toOffsets(o2);
-        Offsets other = toOffsets(o1, o2, o3);
+        Offsets offsets = Offsets.of(o2);
+        Offsets other = Offsets.of(o1, o2, o3);
 
         //when
         boolean actual = offsets.containsAll(other);
@@ -140,8 +140,8 @@ public class OffsetsTest {
         Offset o1 = Offset.of(1, 2);
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
-        Offsets offsets = toOffsets(o1, o2, o3);
-        Offsets other = toOffsets(Offset.of(99, 99));
+        Offsets offsets = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(Offset.of(99, 99));
 
         //when
         boolean actual = offsets.containsAll(other);
@@ -157,8 +157,8 @@ public class OffsetsTest {
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
 
-        Offsets origin = toOffsets(o1, o2, o3);
-        Offsets other = toOffsets();
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of();
 
         //when
         Offsets actual = origin.difference(other);
@@ -174,8 +174,8 @@ public class OffsetsTest {
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
 
-        Offsets origin = toOffsets(o1, o2, o3);
-        Offsets other = toOffsets();
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of();
 
         //when
         Offsets actual = origin.difference(other);
@@ -191,17 +191,13 @@ public class OffsetsTest {
         Offset o2 = Offset.of(3, 4);
         Offset o3 = Offset.of(5, 6);
 
-        Offsets origin = toOffsets(o1, o2, o3);
-        Offsets other = toOffsets(o2);
+        Offsets origin = Offsets.of(o1, o2, o3);
+        Offsets other = Offsets.of(o2);
 
         //when
         Offsets actual = origin.difference(other);
 
         //then
-        assertEquals(toOffsets(o1, o3), actual);
-    }
-
-    private Offsets toOffsets(Offset... offsets) {
-        return Offsets.of(Arrays.asList(offsets));
+        assertEquals(Offsets.of(o1, o3), actual);
     }
 }

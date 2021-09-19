@@ -6,7 +6,6 @@ import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +24,8 @@ public class BlockTest {
         //given
         BlockShape sBlockShape = blockShapes.get(BlockType.S, 0);
         Block block = new Block(sBlockShape, Offset.of(3, 4));
-        Offsets expect = toOffsets(
+
+        Offsets expect = Offsets.of(
                 Offset.of(3, 4), Offset.of(3, 5),
                 Offset.of(4, 5), Offset.of(4, 6)
         );
@@ -35,10 +35,6 @@ public class BlockTest {
 
         //then
         assertEquals(expect, offsets);
-    }
-
-    private Offsets toOffsets(Offset... offsets) {
-        return Offsets.of(Arrays.asList(offsets));
     }
 
     //////////////////////////////////////////////////////////////
