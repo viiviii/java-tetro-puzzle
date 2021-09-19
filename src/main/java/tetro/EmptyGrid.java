@@ -1,6 +1,6 @@
 package tetro;
 
-import tetro.block.FitBlock;
+import tetro.block.Block;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
@@ -27,12 +27,12 @@ public class EmptyGrid {
         return offsets.first();
     }
 
-    public boolean canFit(FitBlock fitBlock) {
-        return offsets.containsAll(fitBlock.offsets());
+    public boolean canFit(Block block) {
+        return offsets.containsAll(block.offsets());
     }
 
-    public EmptyGrid fit(FitBlock fitBlock) {
-        final Offsets remainingEmptyGrids = offsets.difference(fitBlock.offsets());
+    public EmptyGrid fit(Block block) {
+        final Offsets remainingEmptyGrids = offsets.difference(block.offsets());
         return new EmptyGrid(remainingEmptyGrids);
     }
 

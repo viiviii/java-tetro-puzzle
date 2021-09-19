@@ -2,10 +2,7 @@ package tetro.block;
 
 import tetro.data.BlockShapesData;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class BlockShapes {
@@ -13,30 +10,46 @@ public final class BlockShapes {
     private BlockShapes() {
     }
 
-    private static final EnumMap<BlockType, List<BlockShape>> cache = new EnumMap(BlockType.class);
+    private static final Set<BlockShape> cache = new HashSet();
 
     // TODO
     public static BlockShapes from(BlockShapesData blockShapesData) {
         if (cache.isEmpty()) {
-            blockShapesData.map.forEach((type, value) -> cache.put(type, blockShapes(value)));
+            blockShapesData.map.forEach((type, value) -> cache.addAll(blockShapes(type, value)));
         }
         return new BlockShapes();
     }
 
-    public List<BlockShape> get(BlockType blockType) {
-        return cache.get(blockType);
+    // TODO
+    public Set<BlockShape> get(BlockType blockType) {
+        return cache.stream()
+                .filter(shape -> shape.type() == blockType)
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    public BlockShape get(BlockType blockType, int rotation) {
+        return cache.stream()
+                .filter(shape -> shape.type() == blockType && shape.rotation() == rotation)
+                .findAny().get();
+    }
+
+    public Set<BlockShape> all() {
+        return Set.copyOf(cache);
     }
 
     // TODO
-    private static List<BlockShape> blockShapes(List<List<Integer>> list) {
-        return list.stream()
-                .map(innerList -> toBlockShape(innerList))
-                .collect(Collectors.toUnmodifiableList());
+    private static List<BlockShape> blockShapes(BlockType type, List<List<Integer>> list) {
+        final List<BlockShape> result = new ArrayList<>();
+        for (int rotation = 0; rotation < list.size(); rotation++) {
+            result.add(toBlockShape(type, rotation, list.get(rotation)));
+        }
+        return result;
     }
 
     // TODO
-    private static BlockShape toBlockShape(List<Integer> list) {
+    private static BlockShape toBlockShape(BlockType type, int rotation, List<Integer> list) {
         return new BlockShape(
+                type, rotation,
                 list.get(0), list.get(1), list.get(2), list.get(3),
                 list.get(4), list.get(5), list.get(6), list.get(7));
     }
