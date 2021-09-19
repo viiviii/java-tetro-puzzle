@@ -17,6 +17,14 @@ public final class Offsets implements Translatable<Offsets> {
         return new Offsets(Collections.unmodifiableCollection(offsets));
     }
 
+    public static final Offsets of(Offset offset) {
+        return new Offsets(Set.of(offset));
+    }
+
+    public static final Offsets of(Offset... offsets) {
+        return new Offsets(Arrays.asList(offsets));
+    }
+
     public int size() {
         return this.offsets.size();
     }
