@@ -1,23 +1,21 @@
 package tetro.block;
 
-import java.util.List;
+import tetro.offset.Offset;
+import tetro.offset.Offsets;
+
 import java.util.Objects;
 
 public final class Block {
-    private final BlockType type;
-    private final List<BlockShape> shapes;
+    private final BlockShape shape;
+    private final Offset offsetOnTheBoard;
 
-    public Block(BlockType type, List<BlockShape> shapes) {
-        this.type = type;
-        this.shapes = shapes;
+    public Block(BlockShape shape, Offset offsetOnTheBoard) {
+        this.shape = shape;
+        this.offsetOnTheBoard = offsetOnTheBoard;
     }
 
-    public BlockShape shape(int rotation) {
-        return shapes.get(rotation);
-    }
-
-    public int numberOfShapes() {
-        return shapes.size();
+    public Offsets offsets() {
+        return shape.offsets().translateTo(offsetOnTheBoard);
     }
 
     @Override
@@ -25,16 +23,19 @@ public final class Block {
         if (this == o) return true;
         if (!(o instanceof Block)) return false;
         Block that = (Block) o;
-        return this.type == that.type && this.shapes.equals(that.shapes);
+        return this.shape.equals(that.shape) && this.offsetOnTheBoard.equals(that.offsetOnTheBoard);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, shapes);
+        return Objects.hash(shape, offsetOnTheBoard);
     }
 
     @Override
     public String toString() {
-        return "Block{" + "type=" + type + ", shapes=" + shapes + '}';
+        return "Block{" +
+                "shape=" + shape +
+                ", offsetOnTheBoard=" + offsetOnTheBoard +
+                '}';
     }
 }
