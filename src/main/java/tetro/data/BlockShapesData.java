@@ -2,22 +2,24 @@ package tetro.data;
 
 import tetro.block.BlockType;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.*;
+import java.util.function.BiConsumer;
 
-// TODO: DB에서 가져올래
 public final class BlockShapesData {
-    public final EnumMap<BlockType, List<List<Integer>>> map = new EnumMap(BlockType.class);
+    private final Map<BlockType, int[][]> m = new EnumMap(BlockType.class);
 
-    public BlockShapesData() {
-        map.put(BlockType.O, oBlockShapes());
-        map.put(BlockType.I, iBlockShapes());
-        map.put(BlockType.S, sBlockShapes());
-        map.put(BlockType.Z, zBlockShapes());
-        map.put(BlockType.T, tBlockShapes());
-        map.put(BlockType.J, jBlockShapes());
-        map.put(BlockType.L, lBlockShapes());
+    {
+        m.put(BlockType.O, oBlockShapes());
+        m.put(BlockType.I, iBlockShapes());
+        m.put(BlockType.S, sBlockShapes());
+        m.put(BlockType.Z, zBlockShapes());
+        m.put(BlockType.T, tBlockShapes());
+        m.put(BlockType.J, jBlockShapes());
+        m.put(BlockType.L, lBlockShapes());
+    }
+
+    public final void forEach(BiConsumer<BlockType, int[][]> action) {
+        m.forEach(action);
     }
 
     /*
@@ -25,10 +27,10 @@ public final class BlockShapesData {
         ■ ■ □ □
         □ □ □ □
         □ □ □ □  */
-    private List<List<Integer>> oBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(0, 0, 1, 0, 0, 1, 1, 1));
-        return list;
+    private int[][] oBlockShapes() {
+        return new int[][]{
+                {0, 0, 1, 0, 0, 1, 1, 1}
+        };
     }
 
     /*
@@ -36,11 +38,11 @@ public final class BlockShapesData {
         ■ □ □ □    □ □ □ □
         ■ □ □ □    □ □ □ □
         ■ □ □ □    ■ ■ ■ ■  */
-    private List<List<Integer>> iBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(0, 0, 0, 1, 0, 2, 0, 3));
-        list.add(List.of(0, 3, 1, 3, 2, 3, 3, 3));
-        return list;
+    private int[][] iBlockShapes() {
+        return new int[][]{
+                {0, 0, 0, 1, 0, 2, 0, 3},
+                {0, 3, 1, 3, 2, 3, 3, 3}
+        };
     }
 
     /*
@@ -48,11 +50,11 @@ public final class BlockShapesData {
         ■ ■ □ □    □ ■ ■ □
         □ ■ □ □    ■ ■ □ □
         □ □ □ □    □ □ □ □  */
-    private List<List<Integer>> sBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(0, 0, 0, 1, 1, 1, 1, 2));
-        list.add(List.of(1, 1, 2, 1, 0, 2, 1, 2));
-        return list;
+    private int[][] sBlockShapes() {
+        return new int[][]{
+                {0, 0, 0, 1, 1, 1, 1, 2},
+                {1, 1, 2, 1, 0, 2, 1, 2}
+        };
     }
 
     /*
@@ -60,11 +62,11 @@ public final class BlockShapesData {
         ■ ■ □ □    ■ ■ □ □
         ■ □ □ □    □ ■ ■ □
         □ □ □ □    □ □ □ □  */
-    private List<List<Integer>> zBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(1, 0, 0, 1, 1, 1, 0, 2));
-        list.add(List.of(0, 1, 1, 1, 1, 2, 2, 2));
-        return list;
+    private int[][] zBlockShapes() {
+        return new int[][]{
+                {1, 0, 0, 1, 1, 1, 0, 2},
+                {0, 1, 1, 1, 1, 2, 2, 2}
+        };
     }
 
     /*
@@ -72,13 +74,13 @@ public final class BlockShapesData {
         ■ ■ □ □    □ ■ □ □    ■ ■ □ □    ■ ■ ■ □
         □ ■ □ □    ■ ■ ■ □    ■ □ □ □    □ ■ □ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private List<List<Integer>> tBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(1, 0, 0, 1, 1, 1, 1, 2));
-        list.add(List.of(1, 1, 0, 2, 1, 2, 2, 2));
-        list.add(List.of(0, 0, 0, 1, 1, 1, 0, 2));
-        list.add(List.of(0, 1, 1, 1, 2, 1, 1, 2));
-        return list;
+    private int[][] tBlockShapes() {
+        return new int[][]{
+                {1, 0, 0, 1, 1, 1, 1, 2},
+                {1, 1, 0, 2, 1, 2, 2, 2},
+                {0, 0, 0, 1, 1, 1, 0, 2},
+                {0, 1, 1, 1, 2, 1, 1, 2}
+        };
     }
 
     /*
@@ -86,13 +88,13 @@ public final class BlockShapesData {
         ■ □ □ □    ■ ■ ■ □    □ ■ □ □    ■ □ □ □
         ■ □ □ □    □ □ ■ □    ■ ■ □ □    ■ ■ ■ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private List<List<Integer>> jBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(0, 0, 1, 0, 0, 1, 0, 2));
-        list.add(List.of(0, 1, 1, 1, 2, 1, 2, 2));
-        list.add(List.of(1, 0, 1, 1, 0, 2, 1, 2));
-        list.add(List.of(0, 1, 0, 2, 1, 2, 2, 2));
-        return list;
+    private int[][] jBlockShapes() {
+        return new int[][]{
+                {0, 0, 1, 0, 0, 1, 0, 2},
+                {0, 1, 1, 1, 2, 1, 2, 2},
+                {1, 0, 1, 1, 0, 2, 1, 2},
+                {0, 1, 0, 2, 1, 2, 2, 2}
+        };
     }
 
     /*
@@ -100,12 +102,12 @@ public final class BlockShapesData {
         □ ■ □ □    □ □ ■ □    ■ □ □ □    ■ ■ ■ □
         □ ■ □ □    ■ ■ ■ □    ■ ■ □ □    ■ □ □ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private List<List<Integer>> lBlockShapes() {
-        final List list = new ArrayList();
-        list.add(List.of(0, 0, 1, 0, 1, 1, 1, 2));
-        list.add(List.of(2, 1, 0, 2, 1, 2, 2, 2));
-        list.add(List.of(0, 0, 0, 1, 0, 2, 1, 2));
-        list.add(List.of(0, 1, 1, 1, 2, 1, 0, 2));
-        return list;
+    private int[][] lBlockShapes() {
+        return new int[][]{
+                {0, 0, 1, 0, 1, 1, 1, 2},
+                {2, 1, 0, 2, 1, 2, 2, 2},
+                {0, 0, 0, 1, 0, 2, 1, 2},
+                {0, 1, 1, 1, 2, 1, 0, 2}
+        };
     }
 }
