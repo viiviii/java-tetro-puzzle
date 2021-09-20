@@ -1,7 +1,8 @@
-package tetro.block;
+package tetro.block.shape;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tetro.block.BlockType;
 
 import java.util.Arrays;
 

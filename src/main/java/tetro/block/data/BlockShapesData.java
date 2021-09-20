@@ -1,4 +1,4 @@
-package tetro.data;
+package tetro.block.data;
 
 import tetro.block.BlockType;
 

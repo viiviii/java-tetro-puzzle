@@ -3,9 +3,9 @@ package tetro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetro.block.Block;
-import tetro.block.BlockShape;
 import tetro.block.BlockType;
-import tetro.block.BlockShapes;
+import tetro.block.shape.BlockShape;
+import tetro.block.shape.BlockShapes;
 import tetro.offset.Offset;
 
 import java.util.Collections;

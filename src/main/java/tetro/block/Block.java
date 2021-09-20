@@ -1,5 +1,6 @@
 package tetro.block;
 
+import tetro.block.shape.BlockShape;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 

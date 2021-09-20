@@ -1,6 +1,6 @@
-package tetro.block;
+package tetro.block.shape;
 
-import tetro.offset.Offset;
+import tetro.block.BlockType;
 import tetro.offset.Offsets;
 
 import java.util.*;

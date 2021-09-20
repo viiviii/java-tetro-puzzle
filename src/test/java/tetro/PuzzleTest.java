@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.block.*;
+import tetro.block.shape.BlockShapes;
 import tetro.offset.Offset;
 
 import java.util.HashSet;

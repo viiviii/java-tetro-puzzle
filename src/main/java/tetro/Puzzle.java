@@ -1,6 +1,7 @@
 package tetro;
 
 import tetro.block.*;
+import tetro.block.shape.BlockShapes;
 import tetro.offset.Offset;
 
 import java.util.HashSet;
