@@ -5,7 +5,7 @@ import tetro.block.BlockType;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-public final class BlockShapesData {
+final class BlockShapesData {
     private final Map<BlockType, int[][]> m = new EnumMap(BlockType.class);
 
     {
