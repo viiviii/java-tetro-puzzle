@@ -9,12 +9,6 @@ import java.util.stream.Collectors;
 
 // TODO: 클래스명
 public final class Puzzle {
-    private final BlockShapes blockShapes; // TODO
-
-    public Puzzle(BlockShapes blockShapes) {
-        this.blockShapes = blockShapes;
-    }
-
 
     // TODO: 메서드명
     public Set<Set<Block>> put(EmptyGrid emptyGrid) throws Exception {
@@ -49,7 +43,7 @@ public final class Puzzle {
     // TODO: 메서드명, unmodifiableSet?
     private Set<Block> blocksFittingTo(EmptyGrid emptyGrid) {
         final Offset offsetOnTheBoard = emptyGrid.first();
-        return this.blockShapes.all().stream()
+        return BlockShapes.all().stream()
                 .map(shape -> new Block(shape, offsetOnTheBoard))
                 .filter(block -> emptyGrid.canFit(block))
                 .collect(Collectors.toSet());
