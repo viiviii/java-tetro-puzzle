@@ -1,31 +1,19 @@
 package tetro.block;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockShapeTest {
     final int NOT_ROTATION = 0;
 
-    BlockShape oBlockShape;
-    BlockShape sBlockShape;
-
-    @BeforeEach
-    public void beforeEach() {
-        BlockShapesData data = new BlockShapesData();
-        BlockShapes blockShapes = BlockShapes.from(data);
-        oBlockShape = blockShapes.get(BlockType.O, NOT_ROTATION);
-        sBlockShape = blockShapes.get(BlockType.S, NOT_ROTATION);
-    }
-
     @Test
-    public void equals_sameOffsets_returnsTrue() throws Exception {
+    public void equals_sameShape_returnsTrue() throws Exception {
         //given
-        BlockShape shape1 = oBlockShape;
-        BlockShape shape2 = new BlockShape(BlockType.O, NOT_ROTATION, 0, 0, 1, 0, 0, 1, 1, 1);
+        BlockShape shape1 = BlockShapes.get(BlockType.O, NOT_ROTATION);
+        BlockShape shape2 = BlockShapes.get(BlockType.O, NOT_ROTATION);
 
         //when
         boolean actual = shape1.equals(shape2);
@@ -35,10 +23,10 @@ public class BlockShapeTest {
     }
 
     @Test
-    public void equals_differentOffsets_returnsFalse() throws Exception {
+    public void equals_differentShape_returnsFalse() throws Exception {
         //given
-        BlockShape shape1 = oBlockShape;
-        BlockShape shape2 = sBlockShape;
+        BlockShape shape1 = BlockShapes.get(BlockType.O, NOT_ROTATION);
+        BlockShape shape2 = BlockShapes.get(BlockType.S, NOT_ROTATION);
 
         //when
         boolean actual = shape1.equals(shape2);
@@ -47,14 +35,14 @@ public class BlockShapeTest {
         assertFalse(actual);
     }
 
-    // TODO
     @Test
     public void validate_duplicateOffset_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(2, 3);
+        Offset duplicateOffset = Offset.of(2, 3);
+        Offsets offsets = Offsets.of(Offset.of(0, 0), duplicateOffset, Offset.of(4, 5), duplicateOffset);
 
         //then
         assertThrows(IllegalArgumentException.class,
-                () -> new BlockShape(BlockType.L, NOT_ROTATION, offset.x, offset.y, 1, 0, offset.x, offset.y, 4, 6));
+                () -> new BlockShape(BlockType.L, NOT_ROTATION, offsets));
     }
 }
