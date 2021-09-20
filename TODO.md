@@ -12,6 +12,8 @@
 - assert 추가? ex) null 체크, ...etc
 - 퍼즐 결과가 0일 때 예외처리 누가?
 - Offsets, BlockShape, EmptyGrids -> Grids 생성YN
+  - Board의 EmptySpace(Offsets wrapping class)와
+    Block의 BlockShape(Offsets wrapping class)에 연관성을 주고싶음
 - List<Set<Block>> Combinations 같은 클래스 필요?YN
     - 나 컬렉션을 너무 감싸고 있나?
 - 마지막엔 블럭 다 안돌텐데 지금처럼 가능한 블록 먼저 만들어?
