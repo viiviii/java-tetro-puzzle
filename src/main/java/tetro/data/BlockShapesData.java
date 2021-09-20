@@ -27,7 +27,7 @@ public final class BlockShapesData {
         ■ ■ □ □
         □ □ □ □
         □ □ □ □  */
-    private int[][] oBlockShapes() {
+    int[][] oBlockShapes() {
         return new int[][]{
                 {0, 0, 1, 0, 0, 1, 1, 1}
         };
@@ -38,7 +38,7 @@ public final class BlockShapesData {
         ■ □ □ □    □ □ □ □
         ■ □ □ □    □ □ □ □
         ■ □ □ □    ■ ■ ■ ■  */
-    private int[][] iBlockShapes() {
+    int[][] iBlockShapes() {
         return new int[][]{
                 {0, 0, 0, 1, 0, 2, 0, 3},
                 {0, 3, 1, 3, 2, 3, 3, 3}
@@ -50,7 +50,7 @@ public final class BlockShapesData {
         ■ ■ □ □    □ ■ ■ □
         □ ■ □ □    ■ ■ □ □
         □ □ □ □    □ □ □ □  */
-    private int[][] sBlockShapes() {
+    int[][] sBlockShapes() {
         return new int[][]{
                 {0, 0, 0, 1, 1, 1, 1, 2},
                 {1, 1, 2, 1, 0, 2, 1, 2}
@@ -62,7 +62,7 @@ public final class BlockShapesData {
         ■ ■ □ □    ■ ■ □ □
         ■ □ □ □    □ ■ ■ □
         □ □ □ □    □ □ □ □  */
-    private int[][] zBlockShapes() {
+    int[][] zBlockShapes() {
         return new int[][]{
                 {1, 0, 0, 1, 1, 1, 0, 2},
                 {0, 1, 1, 1, 1, 2, 2, 2}
@@ -74,7 +74,7 @@ public final class BlockShapesData {
         ■ ■ □ □    □ ■ □ □    ■ ■ □ □    ■ ■ ■ □
         □ ■ □ □    ■ ■ ■ □    ■ □ □ □    □ ■ □ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private int[][] tBlockShapes() {
+    int[][] tBlockShapes() {
         return new int[][]{
                 {1, 0, 0, 1, 1, 1, 1, 2},
                 {1, 1, 0, 2, 1, 2, 2, 2},
@@ -88,7 +88,7 @@ public final class BlockShapesData {
         ■ □ □ □    ■ ■ ■ □    □ ■ □ □    ■ □ □ □
         ■ □ □ □    □ □ ■ □    ■ ■ □ □    ■ ■ ■ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private int[][] jBlockShapes() {
+    int[][] jBlockShapes() {
         return new int[][]{
                 {0, 0, 1, 0, 0, 1, 0, 2},
                 {0, 1, 1, 1, 2, 1, 2, 2},
@@ -102,7 +102,7 @@ public final class BlockShapesData {
         □ ■ □ □    □ □ ■ □    ■ □ □ □    ■ ■ ■ □
         □ ■ □ □    ■ ■ ■ □    ■ ■ □ □    ■ □ □ □
         □ □ □ □    □ □ □ □    □ □ □ □    □ □ □ □  */
-    private int[][] lBlockShapes() {
+    int[][] lBlockShapes() {
         return new int[][]{
                 {0, 0, 1, 0, 1, 1, 1, 2},
                 {2, 1, 0, 2, 1, 2, 2, 2},
