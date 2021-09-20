@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tetro.block.Block;
 import tetro.block.BlockShape;
-import tetro.data.BlockShapesData;
 import tetro.block.BlockType;
 import tetro.block.BlockShapes;
 import tetro.offset.Offset;
@@ -19,9 +18,7 @@ class EmptyGridTest {
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        BlockShapesData data = new BlockShapesData();
-        BlockShapes blockShapes = BlockShapes.from(data);
-        BlockShape oBlockShape = blockShapes.get(BlockType.O, 0);
+        BlockShape oBlockShape = BlockShapes.get(BlockType.O, 0);
         oBlock = new Block(oBlockShape, Offset.of(0, 0));
     }
 
@@ -86,7 +83,7 @@ class EmptyGridTest {
         Offset o2 = Offset.of(1, 0);
         Offset o3 = Offset.of(0, 1);
         Offset o4 = Offset.of(1, 1);
-        Offset remainOffset= Offset.of(6, 8);
+        Offset remainOffset = Offset.of(6, 8);
 
         EmptyGrid oBlockShapeEmptyGrid = EmptyGrid.of(Set.of(o1, o2, o3, o4, remainOffset));
         EmptyGrid expect = EmptyGrid.of(Set.of(remainOffset));

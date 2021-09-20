@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.block.*;
-import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 
 import java.util.HashSet;
@@ -14,14 +13,11 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PuzzleTest {
-    BlockShapes blockShapes;
     Puzzle puzzle;
 
     @BeforeEach
     public void beforeEach() throws Exception {
-        BlockShapesData data = new BlockShapesData();
-        blockShapes = BlockShapes.from(data);
-        puzzle = new Puzzle(blockShapes);
+        puzzle = new Puzzle();
     }
 
     @DisplayName("빈 칸을 채울 수 없으면 빈 리스트를 반환한다")
@@ -71,14 +67,14 @@ public class PuzzleTest {
         EmptyGrid emptyGrid = EmptyGrid.of(rectangularOffsets);
 
         Set<Set<Block>> expect = new HashSet<>();
-        Block oBlock1 = new Block(blockShapes.get(BlockType.O, 0), Offset.of(3, 3));
-        Block oBlock2 = new Block(blockShapes.get(BlockType.O, 0), Offset.of(5, 3));
-        Block iBlock1 = new Block(blockShapes.get(BlockType.I, 1), Offset.of(3, 3));
-        Block iBlock2 = new Block(blockShapes.get(BlockType.I, 1), Offset.of(3, 4));
-        Block lBlock1 = new Block(blockShapes.get(BlockType.L, 3), Offset.of(3, 3));
-        Block lBlock2 = new Block(blockShapes.get(BlockType.L, 1), Offset.of(6, 3));
-        Block jBlock1 = new Block(blockShapes.get(BlockType.J, 3), Offset.of(3, 3));
-        Block jBlock2 = new Block(blockShapes.get(BlockType.J, 1), Offset.of(4, 3));
+        Block oBlock1 = new Block(BlockShapes.get(BlockType.O, 0), Offset.of(3, 3));
+        Block oBlock2 = new Block(BlockShapes.get(BlockType.O, 0), Offset.of(5, 3));
+        Block iBlock1 = new Block(BlockShapes.get(BlockType.I, 1), Offset.of(3, 3));
+        Block iBlock2 = new Block(BlockShapes.get(BlockType.I, 1), Offset.of(3, 4));
+        Block lBlock1 = new Block(BlockShapes.get(BlockType.L, 3), Offset.of(3, 3));
+        Block lBlock2 = new Block(BlockShapes.get(BlockType.L, 1), Offset.of(6, 3));
+        Block jBlock1 = new Block(BlockShapes.get(BlockType.J, 3), Offset.of(3, 3));
+        Block jBlock2 = new Block(BlockShapes.get(BlockType.J, 1), Offset.of(4, 3));
         expect.add(Set.of(oBlock1, oBlock2));
         expect.add(Set.of(iBlock1, iBlock2));
         expect.add(Set.of(lBlock1, lBlock2));
