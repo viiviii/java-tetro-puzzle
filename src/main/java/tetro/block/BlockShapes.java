@@ -1,56 +1,60 @@
 package tetro.block;
 
 import tetro.data.BlockShapesData;
+import tetro.offset.Offset;
+import tetro.offset.Offsets;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class BlockShapes {
 
     private BlockShapes() {
     }
 
-    private static final Set<BlockShape> cache = new HashSet();
+    private static final Map<BlockType, Set<BlockShape>> m = new EnumMap(BlockType.class);
 
-    // TODO
-    public static BlockShapes from(BlockShapesData blockShapesData) {
-        if (cache.isEmpty()) {
-            blockShapesData.map.forEach((type, value) -> cache.addAll(blockShapes(type, value)));
-        }
-        return new BlockShapes();
+    static {
+        final BlockShapesData data = new BlockShapesData();
+        data.forEach((type, value) -> m.put(type, blockShapes(type, value)));
     }
 
-    // TODO
-    public Set<BlockShape> get(BlockType blockType) {
-        return cache.stream()
-                .filter(shape -> shape.type() == blockType)
+    private static Set<BlockShape> blockShapes(BlockType type, int[][] data) {
+        final int NUMBER_OF_SHAPES = data.length;
+        return IntStream.range(0, NUMBER_OF_SHAPES)
+                .mapToObj(rotation -> new BlockShape(type, rotation, offsetsBy(data[rotation])))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    public BlockShape get(BlockType blockType, int rotation) {
-        return cache.stream()
-                .filter(shape -> shape.type() == blockType && shape.rotation() == rotation)
+    private static Offsets offsetsBy(int[] data) {
+        final int OFFSET_LENGTH = 2;
+        final List<Offset> list = new ArrayList();
+        for (int i = 0; i < data.length; i += OFFSET_LENGTH) {
+            final int x = data[i];
+            final int y = data[i + 1];
+            list.add(Offset.of(x, y));
+        }
+        return Offsets.of(list);
+    }
+
+    public static Set<BlockShape> all() {
+        return m.values().stream()
+                .flatMap(e -> e.stream())
+                .collect(Collectors.toUnmodifiableSet());
+    }
+
+    // TODO
+    public static BlockShape get(BlockType blockType, int rotation) {
+        final Set<BlockShape> blockShapes = m.get(blockType);
+        final int NUMBER_OF_ROTATION = blockShapes.size();
+        final int COLLECT_ROTATION = rotation % NUMBER_OF_ROTATION;
+        return blockShapes.stream()
+                .filter(shape -> shape.rotation() == COLLECT_ROTATION)
                 .findAny().get();
     }
 
-    public Set<BlockShape> all() {
-        return Set.copyOf(cache);
-    }
-
-    // TODO
-    private static List<BlockShape> blockShapes(BlockType type, List<List<Integer>> list) {
-        final List<BlockShape> result = new ArrayList<>();
-        for (int rotation = 0; rotation < list.size(); rotation++) {
-            result.add(toBlockShape(type, rotation, list.get(rotation)));
-        }
-        return result;
-    }
-
-    // TODO
-    private static BlockShape toBlockShape(BlockType type, int rotation, List<Integer> list) {
-        return new BlockShape(
-                type, rotation,
-                list.get(0), list.get(1), list.get(2), list.get(3),
-                list.get(4), list.get(5), list.get(6), list.get(7));
+    public static Set<BlockShape> get(BlockType blockType) {
+        return m.get(blockType);
     }
 }
