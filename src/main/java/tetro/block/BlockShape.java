@@ -12,20 +12,11 @@ public final class BlockShape {
     private final int rotation;
     private final Offsets offsets;
 
-    private BlockShape(BlockType type, int rotation, Offsets offsets) {
+    public BlockShape(BlockType type, int rotation, Offsets offsets) {
         validate(offsets);
         this.type = type;
         this.rotation = rotation;
         this.offsets = offsets;
-    }
-
-    private BlockShape(BlockType type, int rotation, Offset o1, Offset o2, Offset o3, Offset o4) {
-        this(type, rotation, Offsets.of(Set.of(o1, o2, o3, o4)));
-    }
-
-    // TODO x1, x2, ...
-    public BlockShape(BlockType type, int rotation, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) {
-        this(type, rotation, Offset.of(x1, y1), Offset.of(x2, y2), Offset.of(x3, y3), Offset.of(x4, y4));
     }
 
     private static void validate(Offsets offsets) throws IllegalArgumentException {
