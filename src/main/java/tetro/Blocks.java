@@ -1,6 +1,6 @@
-package tetro.block.shape;
+package tetro;
 
-import tetro.block.BlockType;
+import tetro.data.BlockShapesData;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
@@ -8,22 +8,22 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class BlockShapes {
+public final class Blocks {
 
-    private BlockShapes() {
+    private Blocks() {
     }
 
-    private static final Map<BlockType, Set<BlockShape>> m = new EnumMap(BlockType.class);
+    private static final Map<BlockType, Set<Block>> m = new EnumMap(BlockType.class);
 
     static {
         final BlockShapesData data = new BlockShapesData();
-        data.forEach((type, value) -> m.put(type, blockShapes(type, value)));
+        data.forEach((type, value) -> m.put(type, blocks(type, value)));
     }
 
-    private static Set<BlockShape> blockShapes(BlockType type, int[][] data) {
+    private static Set<Block> blocks(BlockType type, int[][] data) {
         final int NUMBER_OF_SHAPES = data.length;
         return IntStream.range(0, NUMBER_OF_SHAPES)
-                .mapToObj(rotation -> new BlockShape(type, rotation, offsetsBy(data[rotation])))
+                .mapToObj(rotation -> new Block(offsetsBy(data[rotation]), type, rotation))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
@@ -38,23 +38,28 @@ public final class BlockShapes {
         return Offsets.of(list);
     }
 
-    public static Set<BlockShape> all() {
+    public static Set<Block> all() {
         return m.values().stream()
                 .flatMap(e -> e.stream())
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    // TODO
-    public static BlockShape get(BlockType blockType, int rotation) {
-        final Set<BlockShape> blockShapes = m.get(blockType);
-        final int NUMBER_OF_ROTATION = blockShapes.size();
+    // todo
+    public static Block get(BlockType blockType, int rotation) {
+        final Set<Block> blocks = m.get(blockType);
+        final int NUMBER_OF_ROTATION = blocks.size();
         final int COLLECT_ROTATION = rotation % NUMBER_OF_ROTATION;
-        return blockShapes.stream()
-                .filter(shape -> shape.rotation() == COLLECT_ROTATION)
+        return blocks.stream()
+                .filter(block -> block.rotation() == COLLECT_ROTATION)
                 .findAny().get();
     }
 
-    public static Set<BlockShape> get(BlockType blockType) {
+    public static Set<Block> get(BlockType blockType) {
         return m.get(blockType);
+    }
+
+    // todo: 메서드명
+    public static Block basic(BlockType blockType) {
+        return get(blockType, 0);
     }
 }
