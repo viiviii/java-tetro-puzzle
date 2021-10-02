@@ -158,7 +158,7 @@ public class OffsetsTest {
         Offset o3 = Offset.of(5, 6);
 
         Offsets origin = Offsets.of(o1, o2, o3);
-        Offsets other = Offsets.of();
+        Offsets other = Offsets.EMPTY;
 
         //when
         Offsets actual = origin.difference(other);
@@ -175,7 +175,7 @@ public class OffsetsTest {
         Offset o3 = Offset.of(5, 6);
 
         Offsets origin = Offsets.of(o1, o2, o3);
-        Offsets other = Offsets.of();
+        Offsets other = Offsets.EMPTY;
 
         //when
         Offsets actual = origin.difference(other);

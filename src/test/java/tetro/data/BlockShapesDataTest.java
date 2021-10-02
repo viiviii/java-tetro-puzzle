@@ -1,4 +1,4 @@
-package tetro.block.shape;
+package tetro.data;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

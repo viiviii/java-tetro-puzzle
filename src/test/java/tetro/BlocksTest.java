@@ -1,14 +1,15 @@
-package tetro.block.shape;
+package tetro;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tetro.block.BlockType;
+import tetro.BlockType;
+import tetro.Blocks;
 
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BlockShapesTest {
+class BlocksTest {
 
     @DisplayName("블럭이 가진 BlockShape 총 갯수는 19개이다")
     @Test
@@ -17,7 +18,7 @@ class BlockShapesTest {
         final int TOTAL_NUMBER_OF_BLOCK_SHAPES = 19;
 
         //when
-        int actual = BlockShapes.all().size();
+        int actual = Blocks.all().size();
 
         //then
         assertEquals(TOTAL_NUMBER_OF_BLOCK_SHAPES, actual);
@@ -28,7 +29,7 @@ class BlockShapesTest {
     public void numberOfShapes_numberRangesFrom1To4_returnsTrue() throws Exception {
         //when
         boolean allMatch = Arrays.stream(BlockType.values()).allMatch(type -> {
-            final int size = BlockShapes.get(type).size();
+            final int size = Blocks.get(type).size();
             return size >= 1 && size <= 4;
         });
 

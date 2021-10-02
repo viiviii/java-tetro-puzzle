@@ -1,20 +1,21 @@
-package tetro.block.shape;
+package tetro;
 
 import org.junit.jupiter.api.Test;
-import tetro.block.BlockType;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockShapeTest {
-    final int NOT_ROTATION = 0;
+    final Block oBlock = Blocks.basic(BlockType.O);
+    final Block sBlock = Blocks.basic(BlockType.S);
 
     @Test
     public void equals_sameShape_returnsTrue() throws Exception {
         //given
-        BlockShape shape1 = BlockShapes.get(BlockType.O, NOT_ROTATION);
-        BlockShape shape2 = BlockShapes.get(BlockType.O, NOT_ROTATION);
+        Offsets oBlockOffsets = oBlock.cells().offsets();
+        Block.Shape shape1 = new Block.Shape(oBlockOffsets);
+        Block.Shape shape2 = new Block.Shape(oBlockOffsets);
 
         //when
         boolean actual = shape1.equals(shape2);
@@ -26,11 +27,11 @@ public class BlockShapeTest {
     @Test
     public void equals_differentShape_returnsFalse() throws Exception {
         //given
-        BlockShape shape1 = BlockShapes.get(BlockType.O, NOT_ROTATION);
-        BlockShape shape2 = BlockShapes.get(BlockType.S, NOT_ROTATION);
+        Block.Shape oShape = new Block.Shape(oBlock.cells().offsets());
+        Block.Shape sShape = new Block.Shape(sBlock.cells().offsets());
 
         //when
-        boolean actual = shape1.equals(shape2);
+        boolean actual = oShape.equals(sShape);
 
         //then
         assertFalse(actual);
@@ -40,10 +41,11 @@ public class BlockShapeTest {
     public void validate_duplicateOffset_throwsException() throws Exception {
         //given
         Offset duplicateOffset = Offset.of(2, 3);
-        Offsets offsets = Offsets.of(Offset.of(0, 0), duplicateOffset, Offset.of(4, 5), duplicateOffset);
+        Offsets offsets = Offsets.of(
+                Offset.of(0, 0), duplicateOffset,
+                Offset.of(4, 5), duplicateOffset);
 
         //then
-        assertThrows(IllegalArgumentException.class,
-                () -> new BlockShape(BlockType.L, NOT_ROTATION, offsets));
+        assertThrows(IllegalArgumentException.class, () -> new Block.Shape(offsets));
     }
 }

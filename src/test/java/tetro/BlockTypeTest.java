@@ -1,7 +1,8 @@
-package tetro.block;
+package tetro;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tetro.BlockType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
