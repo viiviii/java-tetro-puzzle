@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Offsets implements Translatable<Offsets> {
+    public static final Offsets EMPTY = Offsets.of(Collections.EMPTY_LIST);
+
     private final SortedSet<Offset> offsets;
 
     private Offsets(Collection<Offset> offsets) {
