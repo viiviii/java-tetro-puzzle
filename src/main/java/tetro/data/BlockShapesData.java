@@ -1,11 +1,11 @@
-package tetro.block.shape;
+package tetro.data;
 
-import tetro.block.BlockType;
+import tetro.BlockType;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 
-final class BlockShapesData {
+public final class BlockShapesData {
     private final Map<BlockType, int[][]> m = new EnumMap(BlockType.class);
 
     {
