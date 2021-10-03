@@ -8,18 +8,29 @@ import tetro.offset.Offsets;
 import java.util.Objects;
 
 public final class Block extends AbstractGrid<Block.Shape> {
-
+    private Shape shape;
     private final BlockType type;
     private final int rotation;
 
     private Block(Shape shape, BlockType type, int rotation) {
         super(Shape.SIZE, shape);
+        this.shape = shape;
         this.type = type;
         this.rotation = rotation;
     }
 
     public Block(Offsets offsets, BlockType type, int rotation) {
         this(new Shape(offsets), type, rotation);
+    }
+
+    @Override
+    public int length() {
+        return Shape.SIZE;
+    }
+
+    @Override
+    public Shape cells() {
+        return shape;
     }
 
     public BlockType type() {
@@ -68,6 +79,11 @@ public final class Block extends AbstractGrid<Block.Shape> {
         @Override
         public Offsets offsets() {
             return this.offsets;
+        }
+
+        @Override
+        public String toString() {
+            return "Shape{" + offsets + '}';
         }
     }
 }

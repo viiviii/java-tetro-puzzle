@@ -11,13 +11,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class Board extends AbstractGrid<Board.EmptyCells> {
+    private static final int LENGTH = 9;
 
-    private Board(int length, EmptyCells cells) {
-        super(length, cells);
+    private final EmptyCells emptyCells;
+
+    private Board(int length, EmptyCells emptyCells) {
+        super(length, emptyCells);
+        this.emptyCells = emptyCells;
     }
 
     public Board(Offsets offsets) {
-        this(9, new EmptyCells(offsets));
+        this(LENGTH, new EmptyCells(offsets));
+    }
+
+    @Override
+    public int length() {
+        return LENGTH;
+    }
+
+    @Override
+    public EmptyCells cells() {
+        return this.emptyCells;
     }
 
     public Set<Set<Block>> allFitCombinations() {
@@ -60,6 +74,7 @@ public final class Board extends AbstractGrid<Board.EmptyCells> {
                 .collect(Collectors.toSet());
     }
 
+
     protected static final class EmptyCells extends AbstractEmptyCells {
         private final Offsets offsets;
 
@@ -84,6 +99,11 @@ public final class Board extends AbstractGrid<Board.EmptyCells> {
         @Override
         public Offsets offsets() {
             return this.offsets;
+        }
+
+        @Override
+        public String toString() {
+            return "EmptyCells{" + offsets + '}';
         }
     }
 }
