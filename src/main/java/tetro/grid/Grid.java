@@ -6,13 +6,8 @@ public interface Grid<E extends Grid.Cells> {
 
     E cells();
 
-    interface Cells<EE> {
-        enum CellState {BLANK, NON_BLANK}
-
-        CellState state();
+    interface Cells {
 
         int size();
-
-        EE first();
     }
 }

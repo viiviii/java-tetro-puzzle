@@ -6,18 +6,21 @@ import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-public abstract class AbstractCells implements Grid.Cells<Offset> {
+public abstract class AbstractCells implements Grid.Cells {
+
+    protected enum CellState {BLANK, NON_BLANK}
+
+    abstract public CellState state();
 
     abstract public Offsets offsets();
+
+    public final Offset first() {
+        return offsets().first();
+    }
 
     @Override
     public final int size() {
         return offsets().size();
-    }
-
-    @Override
-    public final Offset first() {
-        return offsets().first();
     }
 
     @Override
