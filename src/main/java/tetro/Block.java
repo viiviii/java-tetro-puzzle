@@ -41,11 +41,6 @@ public final class Block extends AbstractGrid<Block.Shape> {
         return this.rotation;
     }
 
-    public Block translateTo(Offset offset) {
-        final Offsets translateOffsets = this.cells().offsets().translateTo(offset);
-        return new Block(translateOffsets, this.type, this.rotation);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
