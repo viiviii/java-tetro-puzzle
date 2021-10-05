@@ -1,26 +1,26 @@
 package tetro;
 
 import tetro.grid.AbstractGrid;
-import tetro.grid.cells.AbstractEmptyCells;
-import tetro.grid.cells.AbstractFillCells;
+import tetro.grid.cells.AbstractBlankCells;
+import tetro.grid.cells.AbstractNonBlankCells;
 import tetro.offset.Offsets;
 
-public final class Board extends AbstractGrid<Board.EmptyCells> {
+public final class Board extends AbstractGrid<Board.BlankCells> {
     private static final int LENGTH = 9;
 
-    private final EmptyCells emptyCells;
+    private final BlankCells blankCells;
 
-    private Board(int length, EmptyCells emptyCells) {
-        super(length, emptyCells);
-        this.emptyCells = emptyCells;
+    private Board(int length, BlankCells blankCells) {
+        super(length, blankCells);
+        this.blankCells = blankCells;
     }
 
-    public Board(EmptyCells cells) {
+    public Board(BlankCells cells) {
         this(LENGTH, cells);
     }
 
     public Board(Offsets offsets) {
-        this(new EmptyCells(offsets));
+        this(new BlankCells(offsets));
     }
 
     @Override
@@ -29,14 +29,14 @@ public final class Board extends AbstractGrid<Board.EmptyCells> {
     }
 
     @Override
-    public EmptyCells cells() {
-        return this.emptyCells;
+    public BlankCells cells() {
+        return this.blankCells;
     }
 
-    protected static final class EmptyCells extends AbstractEmptyCells {
+    protected static final class BlankCells extends AbstractBlankCells {
         private final Offsets offsets;
 
-        public EmptyCells(Offsets offsets) {
+        public BlankCells(Offsets offsets) {
             this.offsets = offsets;
         }
 
@@ -45,13 +45,13 @@ public final class Board extends AbstractGrid<Board.EmptyCells> {
             return this.offsets().size() == 0;
         }
 
-        public boolean canFit(AbstractFillCells other) {
+        public boolean canFit(AbstractNonBlankCells other) {
             return this.offsets().containsAll(other.offsets());
         }
 
-        public EmptyCells fit(AbstractFillCells other) {
+        public BlankCells fit(AbstractNonBlankCells other) {
             final Offsets remaining = this.offsets().difference(other.offsets());
-            return new EmptyCells(remaining);
+            return new BlankCells(remaining);
         }
 
         @Override
@@ -61,7 +61,7 @@ public final class Board extends AbstractGrid<Board.EmptyCells> {
 
         @Override
         public String toString() {
-            return "EmptyCells{" + offsets + '}';
+            return "BlankCells{" + offsets + '}';
         }
     }
 }

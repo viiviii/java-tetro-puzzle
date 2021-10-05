@@ -1,7 +1,7 @@
 package tetro;
 
 import tetro.grid.AbstractGrid;
-import tetro.grid.cells.AbstractFillCells;
+import tetro.grid.cells.AbstractNonBlankCells;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
@@ -24,7 +24,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
 
     public Optional<Puzzle> fit(Block block, Offset boardOffset) {
         final PuzzleBlock puzzleBlock = new PuzzleBlock(block, boardOffset);
-        final boolean canFit = remainEmptyCells().canFit(puzzleBlock);
+        final boolean canFit = remainBlankCells().canFit(puzzleBlock);
         if (!canFit) return Optional.empty();
         return Optional.of(new Puzzle(this.board, fittedBlocks.add(puzzleBlock)));
     }
@@ -39,7 +39,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
         return this.fittedBlocks;
     }
 
-    public Board.EmptyCells remainEmptyCells() {
+    public Board.BlankCells remainBlankCells() {
         return board.cells().fit(this.cells());
     }
 
@@ -62,7 +62,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
     }
 
     // todo: 클래스명
-    public static final class FittedBlocks extends AbstractFillCells {
+    public static final class FittedBlocks extends AbstractNonBlankCells {
         public static final FittedBlocks NONE = new FittedBlocks(Collections.EMPTY_SET);
 
         private final Set<PuzzleBlock> puzzleBlocks;

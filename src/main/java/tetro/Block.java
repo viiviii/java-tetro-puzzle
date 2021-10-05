@@ -1,8 +1,7 @@
 package tetro;
 
 import tetro.grid.AbstractGrid;
-import tetro.grid.cells.AbstractFillCells;
-import tetro.offset.Offset;
+import tetro.grid.cells.AbstractNonBlankCells;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
@@ -55,7 +54,7 @@ public final class Block extends AbstractGrid<Block.Shape> {
         return Objects.hash(super.hashCode(), type, rotation);
     }
 
-    protected static final class Shape extends AbstractFillCells {
+    protected static final class Shape extends AbstractNonBlankCells {
         private static final int SIZE = 4;
 
         private final Offsets offsets;

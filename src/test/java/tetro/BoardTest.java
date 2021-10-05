@@ -15,7 +15,7 @@ public class BoardTest {
 
     @DisplayName("빈 칸을 채울 수 없으면 빈 리스트를 반환한다")
     @Test
-    public void put_unfitEmptyGrids_returnsEmptyList() throws Exception {
+    public void put_unfitBoard_returnsEmptyList() throws Exception {
         //given
         Offsets unfitOffsets = Offsets.of(Offset.of(0, 0));
         Board board = new Board(unfitOffsets);
@@ -30,10 +30,10 @@ public class BoardTest {
     }
 
     @Test
-    public void allFitCombinations_oBlockShapeEmptyGrid_returnsSizeOneSet() throws Exception {
+    public void allFitCombinations_oBlockShapeBoard_returnsSizeOneSet() throws Exception {
         //given
-        Offsets emptyOffsets = Blocks.get(BlockType.O, 0).cells().offsets();
-        Board board = new Board(emptyOffsets);
+        Offsets offsets = Blocks.get(BlockType.O, 0).cells().offsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         //when
@@ -50,13 +50,13 @@ public class BoardTest {
      * ㅁㅁㅁㅁ
      * */
     @Test
-    public void allFitCombinations_4x2RectangularEmptyGrid_returnsSizeFourSet() throws Exception {
+    public void allFitCombinations_4x2RectangularBoard_returnsSizeFourSet() throws Exception {
         //given
-        Offsets emptyOffsets = Offsets.of(
+        Offsets offsets = Offsets.of(
                 Offset.of(3, 3), Offset.of(4, 3), Offset.of(5, 3), Offset.of(6, 3),
                 Offset.of(3, 4), Offset.of(4, 4), Offset.of(5, 4), Offset.of(6, 4)
         );
-        Board board = new Board(emptyOffsets);
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         Set<Set<PuzzleBlock.State>> expect = new HashSet<>();

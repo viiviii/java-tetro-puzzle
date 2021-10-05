@@ -21,16 +21,16 @@ public final class PuzzleSolver {
 
     // TODO: 메서드명
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
-        if (puzzle.remainEmptyCells().isNone()) return Collections.EMPTY_SET;
+        if (puzzle.remainBlankCells().isNone()) return Collections.EMPTY_SET;
         final Set<Puzzle> result = new HashSet<>();
-        final Offset firstEmptyOffset = puzzle.remainEmptyCells().first(); // todo: 변수명
+        final Offset firstBlank = puzzle.remainBlankCells().first(); // todo: 변수명
 
         for (Block block : Blocks.all()) { // todo: Blocks.all()
-            Optional<Puzzle> optional = puzzle.fit(block, firstEmptyOffset); // todo: 변수명
+            Optional<Puzzle> optional = puzzle.fit(block, firstBlank); // todo: 변수명
             if (optional.isEmpty()) continue;
 
             Puzzle blockPutPuzzle = optional.get(); // todo: 변수명
-            if (blockPutPuzzle.remainEmptyCells().isNone()) {
+            if (blockPutPuzzle.remainBlankCells().isNone()) {
                 result.add(blockPutPuzzle);
                 return result;
             }
