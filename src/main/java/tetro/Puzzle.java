@@ -8,22 +8,22 @@ import tetro.offset.Offsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
+public final class Puzzle extends AbstractGrid<Puzzle.FitBlocks> {
     private final Board board;
-    private final FittedBlocks fittedBlocks;
+    private final FitBlocks fittedBlocks;
 
-    private Puzzle(Board board, FittedBlocks fittedBlocks) {
+    private Puzzle(Board board, FitBlocks fittedBlocks) {
         super(board.length(), fittedBlocks);
         this.board = board;
         this.fittedBlocks = fittedBlocks;
     }
 
     public Puzzle(Board board) {
-        this(board, FittedBlocks.NONE); // todo
+        this(board, FitBlocks.NONE); // todo
     }
 
     public Optional<Puzzle> fit(Block block, Offset boardOffset) {
-        final PuzzleBlock puzzleBlock = new PuzzleBlock(block, boardOffset);
+        final FitBlock puzzleBlock = new FitBlock(block, boardOffset);
         final boolean canFit = remainBlankCells().canFit(puzzleBlock);
         if (!canFit) return Optional.empty();
         return Optional.of(new Puzzle(this.board, fittedBlocks.add(puzzleBlock)));
@@ -35,7 +35,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
     }
 
     @Override
-    public FittedBlocks cells() {
+    public FitBlocks cells() {
         return this.fittedBlocks;
     }
 
@@ -43,7 +43,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
         return board.cells().fit(this.cells());
     }
 
-    public FittedBlocks blocks() {
+    public FitBlocks blocks() {
         return this.fittedBlocks;
     }
 
@@ -62,19 +62,19 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
     }
 
     // todo: 클래스명
-    public static final class FittedBlocks extends AbstractNonBlankCells {
-        public static final FittedBlocks NONE = new FittedBlocks(Collections.EMPTY_SET);
+    public static final class FitBlocks extends AbstractNonBlankCells {
+        public static final FitBlocks NONE = new FitBlocks(Collections.EMPTY_SET);
 
-        private final Set<PuzzleBlock> puzzleBlocks;
+        private final Set<FitBlock> puzzleBlocks;
 
-        public FittedBlocks(Set<PuzzleBlock> puzzleBlocks) {
+        public FitBlocks(Set<FitBlock> puzzleBlocks) {
             this.puzzleBlocks = puzzleBlocks;
         }
 
-        public FittedBlocks add(PuzzleBlock puzzleBlock) {
-            final Set<PuzzleBlock> newInstance = new HashSet<>(this.puzzleBlocks);
+        public FitBlocks add(FitBlock puzzleBlock) {
+            final Set<FitBlock> newInstance = new HashSet<>(this.puzzleBlocks);
             newInstance.add(puzzleBlock);
-            return new FittedBlocks(newInstance);
+            return new FitBlocks(newInstance);
         }
 
         @Override
@@ -88,7 +88,7 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
         }
 
         // todo: 메서드명
-        public Set<PuzzleBlock.State> blockStates() {
+        public Set<FitBlock.State> blockStates() {
             return this.puzzleBlocks.stream()
                     .map(e -> e.blockState())
                     .collect(Collectors.toUnmodifiableSet());
@@ -97,9 +97,9 @@ public final class Puzzle extends AbstractGrid<Puzzle.FittedBlocks> {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof FittedBlocks)) return false;
+            if (!(o instanceof FitBlocks)) return false;
             if (!super.equals(o)) return false;
-            FittedBlocks that = (FittedBlocks) o;
+            FitBlocks that = (FitBlocks) o;
             return puzzleBlocks.equals(that.puzzleBlocks);
         }
 

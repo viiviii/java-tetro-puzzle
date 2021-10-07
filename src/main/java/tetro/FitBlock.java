@@ -6,11 +6,12 @@ import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-public final class PuzzleBlock extends AbstractNonBlankCells {
+// todo
+public final class FitBlock extends AbstractNonBlankCells {
     private final Block block;
     private final Offset offsetInThePuzzle;
 
-    public PuzzleBlock(Block block, Offset offsetInThePuzzle) {
+    public FitBlock(Block block, Offset offsetInThePuzzle) {
         this.block = block;
         this.offsetInThePuzzle = offsetInThePuzzle;
     }
@@ -21,16 +22,16 @@ public final class PuzzleBlock extends AbstractNonBlankCells {
     }
 
     // todo: 메서드명, 클래스명 fillState랑 헷갈림
-    public PuzzleBlock.State blockState() {
+    public FitBlock.State blockState() {
         return new State(this.block, this.offsetInThePuzzle);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PuzzleBlock)) return false;
+        if (!(o instanceof FitBlock)) return false;
         if (!super.equals(o)) return false;
-        PuzzleBlock that = (PuzzleBlock) o;
+        FitBlock that = (FitBlock) o;
         return block.equals(that.block) && offsetInThePuzzle.equals(that.offsetInThePuzzle);
     }
 

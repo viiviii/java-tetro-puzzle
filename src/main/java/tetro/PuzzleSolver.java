@@ -12,7 +12,7 @@ public final class PuzzleSolver {
     private PuzzleSolver() {
     }
 
-    public static Set<Puzzle.FittedBlocks> allFitCombinations(Puzzle puzzle) {
+    public static Set<Puzzle.FitBlocks> allFitCombinations(Puzzle puzzle) {
         final Set<Puzzle> combinations = combinationsFitOf(puzzle);
         return combinations.stream()
                 .map(e -> e.blocks())
