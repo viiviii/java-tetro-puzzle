@@ -8,11 +8,11 @@ import java.util.Objects;
 
 public abstract class AbstractCells implements Grid.Cells {
 
-    protected enum CellState {BLANK, NON_BLANK}
+    protected enum CellState {BLANK, NON_BLANK, FIT}
 
-    abstract public CellState state();
+    public abstract CellState state();
 
-    abstract public Offsets offsets();
+    public abstract Offsets offsets();
 
     public final Offset first() {
         return offsets().first();
