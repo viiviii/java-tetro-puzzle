@@ -6,31 +6,13 @@ import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
 public final class Board extends AbstractGrid<Board.BlankCells> {
-    private static final int LENGTH = 9;
-
-    private final BlankCells blankCells;
 
     private Board(int length, BlankCells blankCells) {
         super(length, blankCells);
-        this.blankCells = blankCells;
-    }
-
-    public Board(BlankCells cells) {
-        this(LENGTH, cells);
     }
 
     public Board(Offsets offsets) {
-        this(new BlankCells(offsets));
-    }
-
-    @Override
-    public int length() {
-        return LENGTH;
-    }
-
-    @Override
-    public BlankCells cells() {
-        return this.blankCells;
+        this(9, new BlankCells(offsets));
     }
 
     protected static final class BlankCells extends AbstractBlankCells {

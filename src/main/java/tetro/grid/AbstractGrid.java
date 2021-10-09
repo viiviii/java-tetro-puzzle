@@ -6,10 +6,15 @@ import tetro.offset.Offset;
 import java.util.Objects;
 import java.util.function.Predicate;
 
+// todo: abstract 메서드 없음
 public abstract class AbstractGrid<E extends AbstractCells> implements Grid<E> {
+    private final int length;
+    private final E cells;
 
     protected AbstractGrid(int length, E cells) {
         validate(length, cells);
+        this.length = length;
+        this.cells = cells;
     }
 
     private void validate(int length, E cells) throws IllegalArgumentException {
@@ -38,21 +43,25 @@ public abstract class AbstractGrid<E extends AbstractCells> implements Grid<E> {
     }
 
     @Override
-    public abstract int length();
+    public final int length() {
+        return this.length;
+    }
 
     @Override
-    public abstract E cells();
+    public final E cells() {
+        return this.cells;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbstractGrid)) return false;
-        AbstractGrid that = (AbstractGrid) o;
-        return this.length() == that.length() && this.cells().equals(that.cells());
+        AbstractGrid<?> that = (AbstractGrid<?>) o;
+        return length == that.length && cells.equals(that.cells);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(length(), cells());
+        return Objects.hash(length, cells);
     }
 }
