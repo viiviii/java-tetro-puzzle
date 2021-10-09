@@ -22,7 +22,7 @@ public class BoardTest {
         Puzzle puzzle = new Puzzle(board);
 
         //when
-        Set<Puzzle.FitBlocks> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
+        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
         int actual = allCombinations.size();
 
         //then
@@ -37,7 +37,7 @@ public class BoardTest {
         Puzzle puzzle = new Puzzle(board);
 
         //when
-        Set<Puzzle.FitBlocks> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
+        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
         int actual = allCombinations.size();
 
         //then
@@ -74,7 +74,7 @@ public class BoardTest {
         expect.add(Set.of(jBlock1, jBlock2));
 
         //when
-        Set<Puzzle.FitBlocks> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
+        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
         Set<Set<FitBlock.State>> actual = allCombinations
                 .stream().map(e -> e.blockStates())
                 .collect(Collectors.toSet());

@@ -2,7 +2,6 @@ package tetro;
 
 import tetro.offset.Offset;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -12,33 +11,33 @@ public final class PuzzleSolver {
     private PuzzleSolver() {
     }
 
-    public static Set<Puzzle.FitBlocks> allFitCombinations(Puzzle puzzle) {
+    public static Set<Puzzle.FitCells> allFitCombinations(Puzzle puzzle) {
         final Set<Puzzle> combinations = combinationsFitOf(puzzle);
         return combinations.stream()
-                .map(e -> e.blocks())
+                .map(e -> e.fitCells())
                 .collect(Collectors.toUnmodifiableSet());
     }
 
     // TODO: 메서드명
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
-        if (puzzle.remainBlankCells().isNone()) return Collections.EMPTY_SET;
+        assert puzzle.remainingBlankCells().size() != 0;
         final Set<Puzzle> result = new HashSet<>();
-        final Offset firstBlank = puzzle.remainBlankCells().first(); // todo: 변수명
+        final Offset offset = puzzle.remainingBlankCells().first(); // todo: 변수명
 
         for (Block block : Blocks.all()) { // todo: Blocks.all()
-            Optional<Puzzle> optional = puzzle.fit(block, firstBlank); // todo: 변수명
+            Optional<Puzzle> optional = puzzle.put(block, offset); // todo: 변수명
             if (optional.isEmpty()) continue;
 
-            Puzzle blockPutPuzzle = optional.get(); // todo: 변수명
-            if (blockPutPuzzle.remainBlankCells().isNone()) {
-                result.add(blockPutPuzzle);
+            Puzzle nextPuzzle = optional.get(); // todo: 변수명
+            if (nextPuzzle.completed()) {
+                result.add(nextPuzzle);
                 return result;
             }
 
-            Set<Puzzle> combinations = combinationsFitOf(blockPutPuzzle);
-            if (combinations.isEmpty()) continue;
+            Set<Puzzle> nextCombinations = combinationsFitOf(nextPuzzle);
+            if (nextCombinations.isEmpty()) continue;
 
-            result.addAll(combinations);
+            result.addAll(nextCombinations);
         }
         return result;
     }

@@ -2,7 +2,7 @@ package tetro;
 
 import tetro.grid.AbstractGrid;
 import tetro.grid.cells.AbstractBlankCells;
-import tetro.grid.cells.AbstractNonBlankCells;
+import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
 public final class Board extends AbstractGrid<Board.BlankCells> {
@@ -40,18 +40,13 @@ public final class Board extends AbstractGrid<Board.BlankCells> {
             this.offsets = offsets;
         }
 
-        // todo: 메서드명
-        public boolean isNone() {
-            return this.offsets().size() == 0;
+        public BlankCells difference(AbstractCells cells) {
+            final Offsets difference = offsets().difference(cells.offsets());
+            return new BlankCells(difference);
         }
 
-        public boolean canFit(AbstractNonBlankCells other) {
-            return this.offsets().containsAll(other.offsets());
-        }
-
-        public BlankCells fit(AbstractNonBlankCells other) {
-            final Offsets remaining = this.offsets().difference(other.offsets());
-            return new BlankCells(remaining);
+        public boolean containsAll(AbstractCells cells) {
+            return offsets().containsAll(cells.offsets());
         }
 
         @Override

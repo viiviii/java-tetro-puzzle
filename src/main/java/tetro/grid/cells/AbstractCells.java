@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public abstract class AbstractCells implements Grid.Cells {
 
-    protected enum CellState {BLANK, NON_BLANK, FIT}
+    protected enum CellState {BLANK, NON_BLANK}
 
     public abstract CellState state();
 

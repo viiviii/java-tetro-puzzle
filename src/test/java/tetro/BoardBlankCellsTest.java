@@ -21,18 +21,6 @@ class BoardBlankCellsTest {
     }
 
     @Test
-    public void isNone() throws Exception {
-        //given
-        Board.BlankCells cells = new Board.BlankCells(Offsets.EMPTY);
-
-        //when
-        boolean actual = cells.isNone();
-
-        //then
-        assertTrue(actual);
-    }
-
-    @Test
     public void first() throws Exception {
         //given
         Offset o1 = Offset.of(2, 9);
@@ -47,32 +35,32 @@ class BoardBlankCellsTest {
     }
 
     @Test
-    public void canFit_fitBlock_returnsTrue() throws Exception {
+    public void containsAll_fitBlock_returnsTrue() throws Exception {
         //given
         Board.BlankCells cells = new Board.BlankCells(oBlockShapeCells.offsets());
 
         //when
-        boolean actual = cells.canFit(oBlockShapeCells);
+        boolean actual = cells.containsAll(oBlockShapeCells);
 
         //then
         assertTrue(actual);
     }
 
     @Test
-    public void canFit_unfitBlock_returnsFalse() throws Exception {
+    public void containsAll_unfitBlock_returnsFalse() throws Exception {
         //given
         Offsets unfitOffsets = Offsets.of(Offset.of(0, 0));
         Board.BlankCells cells = new Board.BlankCells(unfitOffsets);
 
         //when
-        boolean actual = cells.canFit(oBlockShapeCells);
+        boolean actual = cells.containsAll(oBlockShapeCells);
 
         //then
         assertFalse(actual);
     }
 
     @Test
-    public void fit_fitBlock_returnsRemainingCells() throws Exception {
+    public void difference_fitBlock_returnsRemainingCells() throws Exception {
         //given
         Offset remainOffset = Offset.of(6, 8);
         Set<Offset> set = oBlockShapeCells.offsets().stream().collect(Collectors.toSet());
@@ -81,7 +69,7 @@ class BoardBlankCellsTest {
         Board.BlankCells cells = new Board.BlankCells(offsets);
 
         //when
-        Board.BlankCells actual = cells.fit(oBlockShapeCells);
+        Board.BlankCells actual = cells.difference(oBlockShapeCells);
 
         //then
         Board.BlankCells expect = new Board.BlankCells(Offsets.of(remainOffset));
