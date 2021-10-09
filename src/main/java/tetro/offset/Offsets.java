@@ -44,6 +44,12 @@ public final class Offsets implements Translatable<Offsets> {
         return this.offsets.containsAll(other.offsets);
     }
 
+    public Offsets add(Offsets other) {
+        final Offsets newInstance = Offsets.of(this.offsets);
+        newInstance.offsets.addAll(other.offsets);
+        return newInstance;
+    }
+
     public Offsets difference(Offsets other) {
         final Offsets newInstance = Offsets.of(this.offsets);
         newInstance.offsets.removeAll(other.offsets);
