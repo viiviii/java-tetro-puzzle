@@ -38,6 +38,12 @@ public abstract class AbstractGrid<E extends AbstractCells> implements Grid<E> {
     }
 
     @Override
+    public abstract int length();
+
+    @Override
+    public abstract E cells();
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbstractGrid)) return false;
