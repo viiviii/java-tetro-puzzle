@@ -12,9 +12,6 @@
 - assert 추가? ex) null 체크, ...etc
 - Board 생성 시 emptyGrids length가 0일 때 예외 처리
 - 최종 경우의 수가 0일 때 예외처리
-- List<Set<Block>> Combinations 같은 클래스 필요?YN
-    - 나 컬렉션을 너무 감싸고 있나?
-- 마지막엔 블럭 다 안돌텐데 지금처럼 가능한 블록 먼저 만들어?
 - inner class test 다들 어떻게 하는지 -> 현재 테스트 클래스 따로 분리했음
 - GridString Grid에 합칠까?
 - 테스트 리팩토링 및 테스트 추가 필요
