@@ -71,10 +71,10 @@ public final class Puzzle {
         }
 
         public FitCells add(FitBlock fitBlock) {
-            final Offsets newOffsets = this.offsets.add(fitBlock.offsets());
-            final Set<FitBlock> newBlocks = new HashSet<>(this.fitBlocks);
-            newBlocks.add(fitBlock);
-            return new FitCells(newOffsets, newBlocks);
+            final Offsets unionOffsets = Offsets.union(this.offsets, fitBlock.offsets());
+            final Set<FitBlock> newFitBlocks = new HashSet<>(this.fitBlocks);
+            newFitBlocks.add(fitBlock);
+            return new FitCells(unionOffsets, newFitBlocks);
         }
 
         @Override

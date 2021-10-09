@@ -41,7 +41,7 @@ public final class Board extends AbstractGrid<Board.BlankCells> {
         }
 
         public BlankCells difference(AbstractCells cells) {
-            final Offsets difference = offsets().difference(cells.offsets());
+            final Offsets difference = Offsets.difference(offsets(), cells.offsets());
             return new BlankCells(difference);
         }
 

@@ -27,6 +27,19 @@ public final class Offsets implements Translatable<Offsets> {
         return new Offsets(Arrays.asList(offsets));
     }
 
+    public static final Offsets union(Offsets o1, Offsets o2) {
+        final Set<Offset> unionSet = Stream.concat(o1.stream(), o2.stream())
+                .collect(Collectors.toUnmodifiableSet());
+        return Offsets.of(unionSet);
+    }
+
+    public static final Offsets difference(Offsets target, Offsets other) {
+        final Set<Offset> differenceSet = target.stream()
+                .filter(e -> !other.contains(e))
+                .collect(Collectors.toUnmodifiableSet());
+        return Offsets.of(differenceSet);
+    }
+
     public int size() {
         return this.offsets.size();
     }
@@ -40,20 +53,12 @@ public final class Offsets implements Translatable<Offsets> {
         return this.offsets.stream();
     }
 
+    public boolean contains(Offset offset) {
+        return this.offsets.contains(offset);
+    }
+
     public boolean containsAll(Offsets other) {
         return this.offsets.containsAll(other.offsets);
-    }
-
-    public Offsets add(Offsets other) {
-        final Offsets newInstance = Offsets.of(this.offsets);
-        newInstance.offsets.addAll(other.offsets);
-        return newInstance;
-    }
-
-    public Offsets difference(Offsets other) {
-        final Offsets newInstance = Offsets.of(this.offsets);
-        newInstance.offsets.removeAll(other.offsets);
-        return newInstance;
     }
 
     // TODO: 리팩토링

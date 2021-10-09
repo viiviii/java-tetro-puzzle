@@ -161,7 +161,7 @@ public class OffsetsTest {
         Offsets other = Offsets.EMPTY;
 
         //when
-        Offsets actual = origin.difference(other);
+        Offsets actual = Offsets.difference(origin, other);
 
         //then
         assertEquals(origin, actual);
@@ -178,7 +178,7 @@ public class OffsetsTest {
         Offsets other = Offsets.EMPTY;
 
         //when
-        Offsets actual = origin.difference(other);
+        Offsets actual = Offsets.difference(origin, other);
 
         //then
         assertNotSame(origin, actual);
@@ -195,7 +195,7 @@ public class OffsetsTest {
         Offsets other = Offsets.of(o2);
 
         //when
-        Offsets actual = origin.difference(other);
+        Offsets actual = Offsets.difference(origin, other);
 
         //then
         assertEquals(Offsets.of(o1, o3), actual);
