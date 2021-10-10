@@ -1,18 +1,30 @@
 package tetro;
 
-import tetro.grid.AbstractGrid;
+import tetro.grid.Grid;
 import tetro.grid.cells.AbstractBlankCells;
 import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
-public final class Board extends AbstractGrid<Board.BlankCells> {
+public final class Board {
+    private static final int LENGTH = 9;
 
-    private Board(int length, BlankCells blankCells) {
-        super(length, blankCells);
+    private final Grid<BlankCells> grid;
+
+    private Board(Grid<BlankCells> grid) {
+        this.grid = grid;
     }
 
+    private Board(BlankCells cells) {
+        this(new Grid(LENGTH, cells));
+    }
+
+    // todo
     public Board(Offsets offsets) {
-        this(9, new BlankCells(offsets));
+        this(new BlankCells(offsets));
+    }
+
+    public BlankCells blanks() {
+        return grid.cells();
     }
 
     protected static final class BlankCells extends AbstractBlankCells {

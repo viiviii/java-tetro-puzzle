@@ -1,25 +1,34 @@
 package tetro;
 
-import tetro.grid.AbstractGrid;
+import tetro.grid.Grid;
 import tetro.grid.cells.AbstractNonBlankCells;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-public final class Block extends AbstractGrid<Block.Shape> {
+public final class Block {
+    private final Grid<Shape> shapeGrid;
     private final BlockType type;
     private final int rotation;
 
-    private Block(Shape shape, BlockType type, int rotation) {
-        super(Shape.SIZE, shape);
+    private Block(Grid<Shape> shapeGrid, BlockType type, int rotation) {
+        this.shapeGrid = shapeGrid;
         this.type = type;
         this.rotation = rotation;
     }
 
+    private Block(Shape shape, BlockType type, int rotation) {
+        this(new Grid(Shape.SIZE, shape), type, rotation);
+    }
+
+    // todo
     public Block(Offsets offsets, BlockType type, int rotation) {
         this(new Shape(offsets), type, rotation);
     }
 
+    public Shape shape() {
+        return shapeGrid.cells();
+    }
     public BlockType type() {
         return this.type;
     }
