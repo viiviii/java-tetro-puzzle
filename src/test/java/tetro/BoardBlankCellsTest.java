@@ -17,7 +17,7 @@ class BoardBlankCellsTest {
     @BeforeEach
     public void beforeEach() throws Exception {
         final Block oBlock = Blocks.basic(BlockType.O);
-        oBlockShapeCells = new Block.Shape(oBlock.cells().offsets());
+        oBlockShapeCells = oBlock.shape();
     }
 
     @Test

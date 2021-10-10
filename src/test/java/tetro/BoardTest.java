@@ -32,7 +32,7 @@ public class BoardTest {
     @Test
     public void allFitCombinations_oBlockShapeBoard_returnsSizeOneSet() throws Exception {
         //given
-        Offsets offsets = Blocks.get(BlockType.O, 0).cells().offsets();
+        Offsets offsets = Blocks.get(BlockType.O, 0).shape().offsets();
         Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
