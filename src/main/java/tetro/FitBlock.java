@@ -18,7 +18,7 @@ public final class FitBlock extends AbstractNonBlankCells {
 
     @Override
     public Offsets offsets() {
-        return this.block.cells().offsets().translateTo(offsetInThePuzzle);
+        return this.block.shape().offsets().translateTo(offsetInThePuzzle);
     }
 
     // todo: 메서드명, 클래스명 fillState랑 헷갈림

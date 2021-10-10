@@ -15,7 +15,7 @@ public final class Puzzle {
     private Puzzle(Board board, FitCells fitCells) {
         this.board = board;
         this.fitCells = fitCells;
-        this.remainingBlankCells = board.cells().difference(fitCells);
+        this.remainingBlankCells = board.blanks().difference(fitCells);
     }
 
     public Puzzle(Board board) {

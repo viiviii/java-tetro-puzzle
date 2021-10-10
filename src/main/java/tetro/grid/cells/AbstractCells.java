@@ -1,12 +1,12 @@
 package tetro.grid.cells;
 
-import tetro.grid.Grid;
+import tetro.grid.Cells;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-public abstract class AbstractCells implements Grid.Cells {
+public abstract class AbstractCells implements Cells {
 
     protected enum CellState {BLANK, NON_BLANK}
 
