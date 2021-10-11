@@ -1,106 +1,83 @@
 package tetro;
 
+
+import tetro.grid.cells.AbstractBlankCells;
 import tetro.grid.cells.AbstractNonBlankCells;
-import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public final class Puzzle {
-    private final Board board;
-    private final FitCells fitCells;
-    private final Board.BlankCells remainingBlankCells;
+import static java.util.stream.Collectors.collectingAndThen;
 
-    private Puzzle(Board board, FitCells fitCells) {
-        this.board = board;
-        this.fitCells = fitCells;
-        this.remainingBlankCells = board.blanks().difference(fitCells);
-    }
+public final class Puzzle {
+    private final NonBlanks nonBlanks = new NonBlanks(); // todo: mutable 명시적이게
+    private final Board board;
 
     public Puzzle(Board board) {
-        this(board, FitCells.EMPTY);
+        this.board = board;
     }
 
-    public boolean completed() {
-        return remainingBlankCells.size() == 0;
+    public boolean hasBlanks() {
+        return blanks().size() == 0;
     }
 
-    public Board.BlankCells remainingBlankCells() {
-        return remainingBlankCells;
+    public boolean put(FitBlock fitBlock) {
+        return nonBlanks.add(fitBlock);
     }
 
-    public FitCells fitCells() {
-        return fitCells;
+    public boolean take(FitBlock fitBlock) {
+        return nonBlanks.remove(fitBlock);
     }
 
-    // todo: 메서드명이랑 Optional 리턴하는게 안어울려
-    public Optional<Puzzle> put(Block block, Offset boardOffset) {
-        final FitBlock fitBlock = new FitBlock(block, boardOffset);
-        final boolean canFit = remainingBlankCells.containsAll(fitBlock);
-        return canFit
-                ? Optional.of(new Puzzle(this.board, fitCells.add(fitBlock)))
-                : Optional.empty();
+    public Set<FitBlock> fitBlockSet() {
+        return nonBlanks.fitBlockSet();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Puzzle)) return false;
-        Puzzle that = (Puzzle) o;
-        return board.equals(that.board)
-                && fitCells.equals(that.fitCells)
-                && remainingBlankCells.equals(that.remainingBlankCells);
+    private Puzzle.Blanks blanks() {
+        final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks);
+        return new Puzzle.Blanks(remainingBoardBlanks);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(board, fitCells, remainingBlankCells);
-    }
-
-    // todo: 클래스명
-    public static final class FitCells extends AbstractNonBlankCells {
-        public static final FitCells EMPTY = new FitCells(Offsets.EMPTY, Collections.EMPTY_SET);
-
+    private static final class Blanks extends AbstractBlankCells {
         private final Offsets offsets;
-        private final Set<FitBlock> fitBlocks;
 
-        private FitCells(Offsets offsets, Set<FitBlock> fitBlocks) {
-            this.offsets = offsets;
-            this.fitBlocks = fitBlocks;
+        public Blanks(Board.Blanks boardBlanks) {
+            this.offsets = boardBlanks.offsets();
         }
 
-        public FitCells add(FitBlock fitBlock) {
-            final Offsets unionOffsets = Offsets.union(this.offsets, fitBlock.offsets());
-            final Set<FitBlock> newFitBlocks = new HashSet<>(this.fitBlocks);
-            newFitBlocks.add(fitBlock);
-            return new FitCells(unionOffsets, newFitBlocks);
+        public boolean canFit(FitBlock puzzleBlock) {
+            return this.offsets().containsAll(puzzleBlock.offsets());
         }
 
         @Override
         public Offsets offsets() {
             return this.offsets;
         }
+    }
 
-        // todo
-        public Set<FitBlock.State> blockStates() {
-            return this.fitBlocks.stream()
-                    .map(e -> e.blockState())
-                    .collect(Collectors.toUnmodifiableSet());
+    private final class NonBlanks extends AbstractNonBlankCells {
+        private final Set<FitBlock> fitBlocks = new HashSet<>();
+
+        public boolean add(FitBlock fitBlock) {
+            final boolean canFit = Puzzle.this.blanks().canFit(fitBlock);
+            return canFit && fitBlocks.add(fitBlock);
+        }
+
+        public boolean remove(FitBlock fitBlock) {
+            return fitBlocks.remove(fitBlock);
+        }
+
+        public Set<FitBlock> fitBlockSet() {
+            return Set.copyOf(fitBlocks);
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof FitCells)) return false;
-            if (!super.equals(o)) return false;
-            FitCells that = (FitCells) o;
-            return offsets.equals(that.offsets) && fitBlocks.equals(that.fitBlocks);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(super.hashCode(), offsets, fitBlocks);
+        public Offsets offsets() {
+            return fitBlocks.stream()
+                    .flatMap(e -> e.offsets().stream())
+                    .collect(collectingAndThen(Collectors.toSet(), Offsets::of));
         }
     }
 }
