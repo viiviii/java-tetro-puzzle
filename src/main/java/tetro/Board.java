@@ -8,35 +8,35 @@ import tetro.offset.Offsets;
 public final class Board {
     private static final int LENGTH = 9;
 
-    private final Grid<BlankCells> grid;
+    private final Grid<Blanks> grid;
 
-    private Board(Grid<BlankCells> grid) {
+    private Board(Grid<Blanks> grid) {
         this.grid = grid;
     }
 
-    private Board(BlankCells cells) {
+    private Board(Blanks cells) {
         this(new Grid(LENGTH, cells));
     }
 
     // todo
     public Board(Offsets offsets) {
-        this(new BlankCells(offsets));
+        this(new Blanks(offsets));
     }
 
-    public BlankCells blanks() {
+    public Blanks blanks() {
         return grid.cells();
     }
 
-    protected static final class BlankCells extends AbstractBlankCells {
+    protected static final class Blanks extends AbstractBlankCells {
         private final Offsets offsets;
 
-        public BlankCells(Offsets offsets) {
+        public Blanks(Offsets offsets) {
             this.offsets = offsets;
         }
 
-        public BlankCells difference(AbstractCells cells) {
+        public Blanks difference(AbstractCells cells) {
             final Offsets difference = Offsets.difference(offsets(), cells.offsets());
-            return new BlankCells(difference);
+            return new Blanks(difference);
         }
 
         public boolean containsAll(AbstractCells cells) {
@@ -50,7 +50,7 @@ public final class Board {
 
         @Override
         public String toString() {
-            return "BlankCells{" + offsets + '}';
+            return "Blanks{" + offsets + '}';
         }
     }
 }

@@ -25,7 +25,7 @@ class BoardBlankCellsTest {
         //given
         Offset o1 = Offset.of(2, 9);
         Offset o2 = Offset.of(0, 2);
-        Board.BlankCells cells = new Board.BlankCells(Offsets.of(o1, o2));
+        Board.Blanks cells = new Board.Blanks(Offsets.of(o1, o2));
 
         //when
         Offset actual = cells.first();
@@ -37,7 +37,7 @@ class BoardBlankCellsTest {
     @Test
     public void containsAll_fitBlock_returnsTrue() throws Exception {
         //given
-        Board.BlankCells cells = new Board.BlankCells(oBlockShapeCells.offsets());
+        Board.Blanks cells = new Board.Blanks(oBlockShapeCells.offsets());
 
         //when
         boolean actual = cells.containsAll(oBlockShapeCells);
@@ -50,7 +50,7 @@ class BoardBlankCellsTest {
     public void containsAll_unfitBlock_returnsFalse() throws Exception {
         //given
         Offsets unfitOffsets = Offsets.of(Offset.of(0, 0));
-        Board.BlankCells cells = new Board.BlankCells(unfitOffsets);
+        Board.Blanks cells = new Board.Blanks(unfitOffsets);
 
         //when
         boolean actual = cells.containsAll(oBlockShapeCells);
@@ -66,13 +66,13 @@ class BoardBlankCellsTest {
         Set<Offset> set = oBlockShapeCells.offsets().stream().collect(Collectors.toSet());
         set.add(remainOffset);
         Offsets offsets = Offsets.of(set);
-        Board.BlankCells cells = new Board.BlankCells(offsets);
+        Board.Blanks cells = new Board.Blanks(offsets);
 
         //when
-        Board.BlankCells actual = cells.difference(oBlockShapeCells);
+        Board.Blanks actual = cells.difference(oBlockShapeCells);
 
         //then
-        Board.BlankCells expect = new Board.BlankCells(Offsets.of(remainOffset));
+        Board.Blanks expect = new Board.Blanks(Offsets.of(remainOffset));
         assertEquals(expect, actual);
     }
 }
