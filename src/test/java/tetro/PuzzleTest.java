@@ -62,7 +62,7 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Offsets.EMPTY;
+        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
@@ -100,7 +100,7 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Offsets.EMPTY;
+        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
@@ -139,7 +139,7 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Offsets.EMPTY;
+        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
