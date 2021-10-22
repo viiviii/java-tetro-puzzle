@@ -7,7 +7,6 @@ import tetro.offset.Offsets;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +21,7 @@ public class BoardTest {
         Puzzle puzzle = new Puzzle(board);
 
         //when
-        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
+        Set<Set<FitBlock>> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
         int actual = allCombinations.size();
 
         //then
@@ -37,7 +36,7 @@ public class BoardTest {
         Puzzle puzzle = new Puzzle(board);
 
         //when
-        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
+        Set<Set<FitBlock>> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
         int actual = allCombinations.size();
 
         //then
@@ -59,25 +58,22 @@ public class BoardTest {
         Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
-        Set<Set<FitBlock.State>> expect = new HashSet<>();
-        FitBlock.State oBlock1 = new FitBlock.State(BlockType.O, 0, Offset.of(3, 3));
-        FitBlock.State oBlock2 = new FitBlock.State(BlockType.O, 0, Offset.of(5, 3));
-        FitBlock.State iBlock1 = new FitBlock.State(BlockType.I, 1, Offset.of(3, 3));
-        FitBlock.State iBlock2 = new FitBlock.State(BlockType.I, 1, Offset.of(3, 4));
-        FitBlock.State lBlock1 = new FitBlock.State(BlockType.L, 3, Offset.of(3, 3));
-        FitBlock.State lBlock2 = new FitBlock.State(BlockType.L, 1, Offset.of(6, 3));
-        FitBlock.State jBlock1 = new FitBlock.State(BlockType.J, 3, Offset.of(3, 3));
-        FitBlock.State jBlock2 = new FitBlock.State(BlockType.J, 1, Offset.of(4, 3));
+        Set<Set<FitBlock>> expect = new HashSet<>();
+        FitBlock oBlock1 = new FitBlock(Blocks.get(BlockType.O, 0), Offset.of(3, 3));
+        FitBlock oBlock2 = new FitBlock(Blocks.get(BlockType.O, 0), Offset.of(5, 3));
+        FitBlock iBlock1 = new FitBlock(Blocks.get(BlockType.I, 1), Offset.of(3, 3));
+        FitBlock iBlock2 = new FitBlock(Blocks.get(BlockType.I, 1), Offset.of(3, 4));
+        FitBlock lBlock1 = new FitBlock(Blocks.get(BlockType.L, 3), Offset.of(3, 3));
+        FitBlock lBlock2 = new FitBlock(Blocks.get(BlockType.L, 1), Offset.of(6, 3));
+        FitBlock jBlock1 = new FitBlock(Blocks.get(BlockType.J, 3), Offset.of(3, 3));
+        FitBlock jBlock2 = new FitBlock(Blocks.get(BlockType.J, 1), Offset.of(4, 3));
         expect.add(Set.of(oBlock1, oBlock2));
         expect.add(Set.of(iBlock1, iBlock2));
         expect.add(Set.of(lBlock1, lBlock2));
         expect.add(Set.of(jBlock1, jBlock2));
 
         //when
-        Set<Puzzle.FitCells> allCombinations = PuzzleSolver.allFitCombinations(puzzle);
-        Set<Set<FitBlock.State>> actual = allCombinations
-                .stream().map(e -> e.blockStates())
-                .collect(Collectors.toSet());
+        Set<Set<FitBlock>> actual = PuzzleSolver.allFitCombinations(puzzle);
 
         //then
         assertEquals(expect, actual);

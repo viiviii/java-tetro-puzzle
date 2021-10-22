@@ -35,12 +35,12 @@ public final class Puzzle {
         return nonBlanks.fitBlockSet();
     }
 
-    private Puzzle.Blanks blanks() {
+    public Puzzle.Blanks blanks() {
         final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks);
         return new Puzzle.Blanks(remainingBoardBlanks);
     }
 
-    private static final class Blanks extends AbstractBlankCells {
+    public static final class Blanks extends AbstractBlankCells {
         private final Offsets offsets;
 
         public Blanks(Board.Blanks boardBlanks) {

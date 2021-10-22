@@ -11,33 +11,30 @@ public final class PuzzleSolver {
     private PuzzleSolver() {
     }
 
-    public static Set<Puzzle.FitCells> allFitCombinations(Puzzle puzzle) {
+    public static Set<Set<FitBlock>> allFitCombinations(Puzzle puzzle) {
         final Set<Puzzle> combinations = combinationsFitOf(puzzle);
         return combinations.stream()
-                .map(e -> e.fitCells())
+                .map(e -> e.fitBlockSet())
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    // TODO: 메서드명
+    // TODO: 메서드명, 변수명, Blocks.all(0
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
-        assert puzzle.remainingBlankCells().size() != 0;
         final Set<Puzzle> result = new HashSet<>();
-        final Offset offset = puzzle.remainingBlankCells().first(); // todo: 변수명
-
-        for (Block block : Blocks.all()) { // todo: Blocks.all()
-            Optional<Puzzle> optional = puzzle.put(block, offset); // todo: 변수명
-            if (optional.isEmpty()) continue;
-
-            Puzzle nextPuzzle = optional.get(); // todo: 변수명
-            if (nextPuzzle.completed()) {
-                result.add(nextPuzzle);
+        final Offset first = puzzle.blanks().first();
+        for (Block block : Blocks.all()) {
+            final FitBlock fitBlock = new FitBlock(block, first);
+            boolean put = puzzle.put(fitBlock);
+            if (!put) continue;
+            if (!puzzle.hasBlanks()) {
+                result.add(puzzle);
                 return result;
             }
 
-            Set<Puzzle> nextCombinations = combinationsFitOf(nextPuzzle);
-            if (nextCombinations.isEmpty()) continue;
+            Set<Puzzle> remainingCombinations = combinationsFitOf(puzzle);
+            if (remainingCombinations.isEmpty()) continue;
 
-            result.addAll(nextCombinations);
+            result.addAll(remainingCombinations);
         }
         return result;
     }
