@@ -20,7 +20,7 @@ public final class Puzzle {
     }
 
     public boolean hasBlanks() {
-        return blanks().size() == 0;
+        return blanks().size() != 0;
     }
 
     public boolean put(FitBlock fitBlock) {
