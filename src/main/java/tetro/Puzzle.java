@@ -35,6 +35,10 @@ public final class Puzzle {
         return nonBlanks.fitBlockSet();
     }
 
+    public Board.Blanks boardBlanks() {
+        return board.blanks();
+    }
+
     public Puzzle.Blanks blanks() {
         final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks);
         return new Puzzle.Blanks(remainingBoardBlanks);
