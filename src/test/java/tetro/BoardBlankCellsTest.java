@@ -2,7 +2,7 @@ package tetro;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import tetro.grid.cells.AbstractNonBlankCells;
+import tetro.grid.Cells;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardBlankCellsTest {
-    AbstractNonBlankCells oBlockShapeCells;
+    Block.Shape oBlockShapeCells;
 
     @BeforeEach
     public void beforeEach() throws Exception {
