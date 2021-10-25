@@ -33,8 +33,8 @@ public final class Board {
             this.offsets = offsets;
         }
 
-        public Blanks difference(AbstractCells cells) {
-            final Offsets difference = offsets.difference(cells.offsets());
+        public Blanks difference(Offsets other) {
+            final Offsets difference = this.offsets.difference(other);
             return new Blanks(difference);
         }
 

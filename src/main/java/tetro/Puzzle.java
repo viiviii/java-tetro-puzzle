@@ -39,7 +39,7 @@ public final class Puzzle {
     }
 
     public Puzzle.Blanks blanks() {
-        final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks);
+        final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks.offsets());
         return new Puzzle.Blanks(remainingBoardBlanks);
     }
 

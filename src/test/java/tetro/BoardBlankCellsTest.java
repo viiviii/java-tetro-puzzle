@@ -30,7 +30,7 @@ class BoardBlankCellsTest {
         Board.Blanks cells = new Board.Blanks(offsets);
 
         //when
-        Board.Blanks actual = cells.difference(oBlockShapeCells);
+        Board.Blanks actual = cells.difference(oBlockShapeCells.offsets());
 
         //then
         Board.Blanks expect = new Board.Blanks(Offsets.of(remainOffset));
