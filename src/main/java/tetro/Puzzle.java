@@ -39,19 +39,19 @@ public final class Puzzle {
     }
 
     public Puzzle.Blanks blanks() {
-        final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks.offsets());
+        final Offsets remainingBoardBlanks = board.blanks().offsets().difference(nonBlanks.offsets());
         return new Puzzle.Blanks(remainingBoardBlanks);
     }
 
     public static final class Blanks extends AbstractCells {
         private final Offsets offsets;
 
-        public Blanks(Board.Blanks boardBlanks) {
-            this.offsets = boardBlanks.offsets();
+        public Blanks(Offsets offsets) {
+            this.offsets = offsets;
         }
 
-        public boolean canFit(FitBlock puzzleBlock) {
-            return this.offsets().containsAll(puzzleBlock.offsets());
+        public boolean canFit(Offsets offsets) {
+            return this.offsets.containsAll(offsets);
         }
 
         @Override
@@ -64,7 +64,7 @@ public final class Puzzle {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
-            final boolean canFit = Puzzle.this.blanks().canFit(fitBlock);
+            final boolean canFit = Puzzle.this.blanks().canFit(fitBlock.offsets());
             return canFit && fitBlocks.add(fitBlock);
         }
 
