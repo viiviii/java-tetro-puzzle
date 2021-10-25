@@ -33,11 +33,6 @@ public final class Board {
             this.offsets = offsets;
         }
 
-        public Blanks difference(Offsets other) {
-            final Offsets difference = this.offsets.difference(other);
-            return new Blanks(difference);
-        }
-
         @Override
         public Offsets offsets() {
             return this.offsets;
