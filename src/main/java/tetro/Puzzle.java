@@ -19,7 +19,7 @@ public final class Puzzle {
     }
 
     public boolean hasBlanks() {
-        return blanks().size() != 0;
+        return remainingBlankOffsets().size() != 0;
     }
 
     public boolean put(FitBlock fitBlock) {
@@ -38,9 +38,8 @@ public final class Puzzle {
         return board.blankOffsets();
     }
 
-    public Puzzle.Blanks blanks() {
-        final Offsets remainingBoardBlanks = board.blankOffsets().difference(nonBlanks.offsets());
-        return new Puzzle.Blanks(remainingBoardBlanks);
+    public Offsets remainingBlankOffsets() {
+        return board.blankOffsets().difference(nonBlanks.offsets());
     }
 
     public static final class Blanks extends AbstractCells {
@@ -64,7 +63,7 @@ public final class Puzzle {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
-            final boolean canFit = Puzzle.this.blanks().canFit(fitBlock.offsets());
+            final boolean canFit = Puzzle.this.remainingBlankOffsets().containsAll(fitBlock.offsets());
             return canFit && fitBlocks.add(fitBlock);
         }
 
