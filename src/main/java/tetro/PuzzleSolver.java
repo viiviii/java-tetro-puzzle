@@ -35,9 +35,8 @@ public final class PuzzleSolver {
     }
 
     private static Puzzle copyOf(Puzzle puzzle) {
-        Board.Blanks blanks = puzzle.boardBlanks();
         Set<FitBlock> fitBlocks = puzzle.fitBlockSet();
-        Puzzle newPuzzle = new Puzzle(new Board(blanks.offsets()));
+        Puzzle newPuzzle = new Puzzle(new Board(puzzle.boardBlankOffsets()));
         fitBlocks.forEach(e -> newPuzzle.put(e));
         return newPuzzle;
     }

@@ -34,12 +34,12 @@ public final class Puzzle {
         return nonBlanks.fitBlockSet();
     }
 
-    public Board.Blanks boardBlanks() {
-        return board.blanks();
+    public Offsets boardBlankOffsets() {
+        return board.blankOffsets();
     }
 
     public Puzzle.Blanks blanks() {
-        final Offsets remainingBoardBlanks = board.blanks().offsets().difference(nonBlanks.offsets());
+        final Offsets remainingBoardBlanks = board.blankOffsets().difference(nonBlanks.offsets());
         return new Puzzle.Blanks(remainingBoardBlanks);
     }
 

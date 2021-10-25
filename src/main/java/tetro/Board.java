@@ -22,8 +22,8 @@ public final class Board {
         this(new Blanks(offsets));
     }
 
-    public Blanks blanks() {
-        return grid.cells();
+    public Offsets blankOffsets() {
+        return grid.cells().offsets();
     }
 
     protected static final class Blanks extends AbstractCells {
