@@ -23,25 +23,30 @@ public final class PuzzleSolver {
         if (!puzzle.hasBlanks()) return Collections.EMPTY_SET;
         final Set<Puzzle> result = new HashSet<>();
         final Offset first = puzzle.blanks().first();
-        Board currentBoard = new Board(puzzle.boardBlanks().offsets());
-        Set<FitBlock> currentFitBlocks = puzzle.fitBlockSet();
 
         for (Block block : Blocks.all()) {
             final FitBlock fitBlock = new FitBlock(block, first);
-            Puzzle newPuzzle = new Puzzle(currentBoard);
-            currentFitBlocks.forEach(e -> newPuzzle.put(e));
-            boolean put = newPuzzle.put(fitBlock);
-            if (!put) continue;
-            if (!newPuzzle.hasBlanks()) {
-                result.add(newPuzzle);
-                return result;
-            }
+            final Set<Puzzle> combinations = recursivePutWith(fitBlock, copyOf(puzzle));
 
-            Set<Puzzle> remainingCombinations = combinationsFitOf(newPuzzle);
-            if (remainingCombinations.isEmpty()) continue;
-
-            result.addAll(remainingCombinations);
+            if (combinations.isEmpty()) continue;
+            result.addAll(combinations);
         }
         return result;
+    }
+
+    private static Puzzle copyOf(Puzzle puzzle) {
+        Board.Blanks blanks = puzzle.boardBlanks();
+        Set<FitBlock> fitBlocks = puzzle.fitBlockSet();
+        Puzzle newPuzzle = new Puzzle(new Board(blanks.offsets()));
+        fitBlocks.forEach(e -> newPuzzle.put(e));
+        return newPuzzle;
+    }
+
+    private static Set<Puzzle> recursivePutWith(FitBlock fitBlock, Puzzle puzzle) {
+        if (!puzzle.put(fitBlock)) return Collections.EMPTY_SET;
+        if (puzzle.hasBlanks())
+            return combinationsFitOf(puzzle);
+        else
+            return Set.of(puzzle);
     }
 }
