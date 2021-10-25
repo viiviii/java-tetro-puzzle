@@ -1,13 +1,13 @@
 package tetro;
 
-import tetro.grid.cells.AbstractNonBlankCells;
+import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offset;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
 
 // todo
-public final class FitBlock extends AbstractNonBlankCells {
+public final class FitBlock extends AbstractCells {
     private final Block block;
     private final Offset offsetInThePuzzle;
 

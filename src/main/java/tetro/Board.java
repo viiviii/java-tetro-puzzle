@@ -1,7 +1,6 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.grid.cells.AbstractBlankCells;
 import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
@@ -27,7 +26,7 @@ public final class Board {
         return grid.cells();
     }
 
-    protected static final class Blanks extends AbstractBlankCells {
+    protected static final class Blanks extends AbstractCells {
         private final Offsets offsets;
 
         public Blanks(Offsets offsets) {

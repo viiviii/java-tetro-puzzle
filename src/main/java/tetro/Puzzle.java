@@ -1,8 +1,7 @@
 package tetro;
 
 
-import tetro.grid.cells.AbstractBlankCells;
-import tetro.grid.cells.AbstractNonBlankCells;
+import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
 import java.util.HashSet;
@@ -44,7 +43,7 @@ public final class Puzzle {
         return new Puzzle.Blanks(remainingBoardBlanks);
     }
 
-    public static final class Blanks extends AbstractBlankCells {
+    public static final class Blanks extends AbstractCells {
         private final Offsets offsets;
 
         public Blanks(Board.Blanks boardBlanks) {
@@ -61,7 +60,7 @@ public final class Puzzle {
         }
     }
 
-    private final class NonBlanks extends AbstractNonBlankCells {
+    private final class NonBlanks extends AbstractCells {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
