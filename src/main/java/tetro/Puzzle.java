@@ -42,23 +42,6 @@ public final class Puzzle {
         return board.blankOffsets().difference(nonBlanks.offsets());
     }
 
-    public static final class Blanks extends AbstractCells {
-        private final Offsets offsets;
-
-        public Blanks(Offsets offsets) {
-            this.offsets = offsets;
-        }
-
-        public boolean canFit(Offsets offsets) {
-            return this.offsets.containsAll(offsets);
-        }
-
-        @Override
-        public Offsets offsets() {
-            return this.offsets;
-        }
-    }
-
     private final class NonBlanks extends AbstractCells {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
