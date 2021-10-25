@@ -46,8 +46,11 @@ public final class Puzzle {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
-            final boolean canFit = Puzzle.this.remainingBlankOffsets().containsAll(fitBlock.offsets());
-            return canFit && fitBlocks.add(fitBlock);
+            return canFit(fitBlock.offsets()) && fitBlocks.add(fitBlock);
+        }
+
+        private boolean canFit(Offsets offsets) {
+            return Puzzle.this.remainingBlankOffsets().containsAll(offsets);
         }
 
         public boolean remove(FitBlock fitBlock) {
