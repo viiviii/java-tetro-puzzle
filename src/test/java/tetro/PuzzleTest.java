@@ -14,8 +14,8 @@ class PuzzleTest {
     @Test
     void hasBlanks_returnsTrue() {
         //given
-        Offsets blanks = Offsets.of(Offset.of(1, 3));
-        Board board = new Board(blanks);
+        Offsets offsets = Offsets.of(Offset.of(1, 3));
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         //when
@@ -28,8 +28,8 @@ class PuzzleTest {
     @Test
     void hasBlanks_returnsFalse() {
         //given
-        Offsets blanks = Offsets.EMPTY;
-        Board board = new Board(blanks);
+        Offsets offsets = Offsets.EMPTY;
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         //when
@@ -44,8 +44,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = block.shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = block.shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -62,8 +62,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = Blocks.get(BlockType.S, 1).shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -80,8 +80,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = block.shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = block.shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -100,8 +100,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = Blocks.get(BlockType.S, 1).shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -119,8 +119,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = block.shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = block.shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -139,8 +139,8 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = Blocks.get(BlockType.S, 1).shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = Blocks.get(BlockType.S, 1).shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         FitBlock fitBlock = new FitBlock(block, puzzle.remainingBlankOffsets().first());
@@ -159,14 +159,14 @@ class PuzzleTest {
         //given
         Block block = Blocks.get(BlockType.O, 1);
 
-        Offsets blanks = block.shape().offsets();
-        Board board = new Board(blanks);
+        Offsets offsets = block.shapeOffsets();
+        Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 
         //when
         Offsets actual = puzzle.remainingBlankOffsets();
 
         //then
-        assertEquals(blanks, actual);
+        assertEquals(offsets, actual);
     }
 }

@@ -6,7 +6,6 @@ import tetro.offset.Offsets;
 
 import java.util.Objects;
 
-// todo
 public final class FitBlock extends AbstractCells {
     private final Block block;
     private final Offset offsetInThePuzzle;
@@ -18,7 +17,7 @@ public final class FitBlock extends AbstractCells {
 
     @Override
     public Offsets offsets() {
-        return this.block.shape().offsets().translateTo(offsetInThePuzzle);
+        return this.block.shapeOffsets().translateTo(offsetInThePuzzle);
     }
 
     @Override

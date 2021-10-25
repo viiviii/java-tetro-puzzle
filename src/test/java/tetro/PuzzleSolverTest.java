@@ -31,7 +31,7 @@ class PuzzleSolverTest {
     @Test
     public void allFitCombinations_oBlockShapeBoard_returnsOneSizeSet() throws Exception {
         //given
-        Offsets offsets = Blocks.get(BlockType.O, 0).shape().offsets();
+        Offsets offsets = Blocks.get(BlockType.O, 0).shapeOffsets();
         Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 

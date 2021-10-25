@@ -13,7 +13,7 @@ public class BlockShapeTest {
     @Test
     public void equals_sameShape_returnsTrue() throws Exception {
         //given
-        Offsets oBlockOffsets = oBlock.shape().offsets();
+        Offsets oBlockOffsets = oBlock.shapeOffsets();
         Block.Shape shape1 = new Block.Shape(oBlockOffsets);
         Block.Shape shape2 = new Block.Shape(oBlockOffsets);
 
@@ -27,8 +27,10 @@ public class BlockShapeTest {
     @Test
     public void equals_differentShape_returnsFalse() throws Exception {
         //given
-        Block.Shape oShape = oBlock.shape();
-        Block.Shape sShape = sBlock.shape();
+        Offsets oShapeOffsets = oBlock.shapeOffsets();
+        Offsets sShapeOffsets = sBlock.shapeOffsets();
+        Block.Shape oShape = new Block.Shape(oShapeOffsets);
+        Block.Shape sShape = new Block.Shape(sShapeOffsets);
 
         //when
         boolean actual = oShape.equals(sShape);

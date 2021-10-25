@@ -26,8 +26,8 @@ public final class Block {
         this(new Shape(offsets), type, rotation);
     }
 
-    public Shape shape() {
-        return shapeGrid.cells();
+    public Offsets shapeOffsets() {
+        return shapeGrid.cells().offsets();
     }
     public BlockType type() {
         return this.type;
