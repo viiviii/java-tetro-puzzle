@@ -27,14 +27,14 @@ public final class Offsets implements Translatable<Offsets> {
         return new Offsets(Arrays.asList(offsets));
     }
 
-    public static final Offsets union(Offsets o1, Offsets o2) {
-        final Set<Offset> unionSet = Stream.concat(o1.stream(), o2.stream())
+    public Offsets union(Offsets other) {
+        final Set<Offset> unionSet = Stream.concat(this.stream(), other.stream())
                 .collect(Collectors.toUnmodifiableSet());
         return Offsets.of(unionSet);
     }
 
-    public static final Offsets difference(Offsets target, Offsets other) {
-        final Set<Offset> differenceSet = target.stream()
+    public Offsets difference(Offsets other) {
+        final Set<Offset> differenceSet = this.stream()
                 .filter(e -> !other.contains(e))
                 .collect(Collectors.toUnmodifiableSet());
         return Offsets.of(differenceSet);

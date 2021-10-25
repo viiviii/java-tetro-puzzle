@@ -34,7 +34,7 @@ public final class Board {
         }
 
         public Blanks difference(AbstractCells cells) {
-            final Offsets difference = Offsets.difference(offsets(), cells.offsets());
+            final Offsets difference = offsets.difference(cells.offsets());
             return new Blanks(difference);
         }
 
