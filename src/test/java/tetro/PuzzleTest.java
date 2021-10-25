@@ -48,7 +48,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
 
         //when
         boolean actual = puzzle.put(fitBlock);
@@ -66,7 +66,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
 
         //when
         boolean actual = puzzle.put(fitBlock);
@@ -84,7 +84,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
         puzzle.put(fitBlock);
 
         //when
@@ -104,7 +104,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
 
         //when
         puzzle.put(fitBlock);
@@ -123,7 +123,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
         puzzle.put(fitBlock);
 
         //when
@@ -143,7 +143,7 @@ class PuzzleTest {
         Board board = new Board(blanks);
         Puzzle puzzle = new Puzzle(board);
 
-        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().first());
+        FitBlock fitBlock = new FitBlock(block, puzzle.blanks().offsets().first());
         puzzle.put(fitBlock);
 
         //when

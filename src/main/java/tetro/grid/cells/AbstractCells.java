@@ -14,10 +14,6 @@ public abstract class AbstractCells implements Cells {
 
     public abstract Offsets offsets();
 
-    public final Offset first() {
-        return offsets().first();
-    }
-
     @Override
     public final int size() {
         return offsets().size();

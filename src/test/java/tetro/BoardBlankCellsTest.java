@@ -21,20 +21,6 @@ class BoardBlankCellsTest {
     }
 
     @Test
-    public void first() throws Exception {
-        //given
-        Offset o1 = Offset.of(2, 9);
-        Offset o2 = Offset.of(0, 2);
-        Board.Blanks cells = new Board.Blanks(Offsets.of(o1, o2));
-
-        //when
-        Offset actual = cells.first();
-
-        //then
-        assertEquals(o2, actual);
-    }
-
-    @Test
     public void containsAll_fitBlock_returnsTrue() throws Exception {
         //given
         Board.Blanks cells = new Board.Blanks(oBlockShapeCells.offsets());
