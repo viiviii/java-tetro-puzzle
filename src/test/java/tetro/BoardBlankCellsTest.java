@@ -21,31 +21,6 @@ class BoardBlankCellsTest {
     }
 
     @Test
-    public void containsAll_fitBlock_returnsTrue() throws Exception {
-        //given
-        Board.Blanks cells = new Board.Blanks(oBlockShapeCells.offsets());
-
-        //when
-        boolean actual = cells.containsAll(oBlockShapeCells);
-
-        //then
-        assertTrue(actual);
-    }
-
-    @Test
-    public void containsAll_unfitBlock_returnsFalse() throws Exception {
-        //given
-        Offsets unfitOffsets = Offsets.of(Offset.of(0, 0));
-        Board.Blanks cells = new Board.Blanks(unfitOffsets);
-
-        //when
-        boolean actual = cells.containsAll(oBlockShapeCells);
-
-        //then
-        assertFalse(actual);
-    }
-
-    @Test
     public void difference_fitBlock_returnsRemainingCells() throws Exception {
         //given
         Offset remainOffset = Offset.of(6, 8);

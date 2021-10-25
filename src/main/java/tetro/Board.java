@@ -38,10 +38,6 @@ public final class Board {
             return new Blanks(difference);
         }
 
-        public boolean containsAll(AbstractCells cells) {
-            return offsets().containsAll(cells.offsets());
-        }
-
         @Override
         public Offsets offsets() {
             return this.offsets;
