@@ -1,10 +1,9 @@
 package tetro;
 
-
-import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,7 +41,7 @@ public final class Puzzle {
         return board.blankOffsets().difference(nonBlanks.offsets());
     }
 
-    private final class NonBlanks extends AbstractCells {
+    private final class NonBlanks {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
@@ -61,11 +60,23 @@ public final class Puzzle {
             return Set.copyOf(fitBlocks);
         }
 
-        @Override
         public Offsets offsets() {
             return fitBlocks.stream()
                     .flatMap(e -> e.offsets().stream())
                     .collect(collectingAndThen(Collectors.toSet(), Offsets::of));
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof NonBlanks)) return false;
+            NonBlanks nonBlanks = (NonBlanks) o;
+            return fitBlocks.equals(nonBlanks.fitBlocks);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(fitBlocks);
         }
     }
 }
