@@ -1,7 +1,6 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.grid.cells.AbstractCells;
 import tetro.offset.Offsets;
 
 import java.util.Objects;
@@ -56,24 +55,5 @@ public final class Block {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), type, rotation);
-    }
-
-    protected static final class Shape extends AbstractCells {
-
-        private final Offsets offsets;
-
-        public Shape(Offsets offsets) {
-            this.offsets = offsets;
-        }
-
-        @Override
-        public Offsets offsets() {
-            return this.offsets;
-        }
-
-        @Override
-        public String toString() {
-            return "Shape{" + offsets + '}';
-        }
     }
 }
