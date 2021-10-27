@@ -9,6 +9,10 @@ public final class Offset extends OffsetBase {
         super(x, y);
     }
 
+    public Offset difference(Offset other) {
+        return new Offset(this.x - other.x, this.y - other.y);
+    }
+
     @Override
     public String toString() {
         return "Offset{" + "x=" + x + ", y=" + y + '}';

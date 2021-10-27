@@ -26,10 +26,6 @@ public final class Cell extends OffsetBase implements Comparable<Cell>, Translat
         return Cell.of(this.x + translateX, this.y + translateY);
     }
 
-    public Cell difference(Cell other) {
-        return Cell.of(this.x - other.x, this.y - other.y);
-    }
-
     @Override
     public String toString() {
         return "Cell{" + "x=" + x + ", y=" + y + '}';

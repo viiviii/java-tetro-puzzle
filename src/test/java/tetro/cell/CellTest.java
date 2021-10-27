@@ -287,29 +287,5 @@ public class CellTest {
         assertEquals(-2, actual.y);
     }
 
-    @Test
-    public void difference_positiveOtherOffset_returnsOriginMinusOtherOffset() throws Exception {
-        //given
-        Cell cell = Cell.of(10, 6);
-        Cell other = Cell.of(3, 1);
 
-        //when
-        Cell actual = cell.difference(other);
-
-        //then
-        assertEquals(Cell.of(7, 5), actual);
-    }
-
-    @Test
-    public void difference_negativeOtherOffset_returnsOriginPlusOtherOffset() throws Exception {
-        //given
-        Cell cell = Cell.of(10, 6);
-        Cell other = Cell.of(-3, -1);
-
-        //when
-        Cell actual = cell.difference(other);
-
-        //then
-        assertEquals(Cell.of(13, 7), actual);
-    }
 }
