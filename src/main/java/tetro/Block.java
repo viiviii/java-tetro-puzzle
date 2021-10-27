@@ -7,12 +7,13 @@ import tetro.offset.Offsets;
 import java.util.Objects;
 
 public final class Block {
-    private final Grid<Shape> shapeGrid;
+    private final Grid<Shape> grid;
+
     private final BlockType type;
     private final int rotation;
 
-    private Block(Grid<Shape> shapeGrid, BlockType type, int rotation) {
-        this.shapeGrid = shapeGrid;
+    private Block(Grid<Shape> grid, BlockType type, int rotation) {
+        this.grid = grid;
         this.type = type;
         this.rotation = rotation;
     }
@@ -27,7 +28,7 @@ public final class Block {
     }
 
     public Offsets shapeOffsets() {
-        return shapeGrid.cells().offsets();
+        return grid.cells().offsets();
     }
     public BlockType type() {
         return this.type;
