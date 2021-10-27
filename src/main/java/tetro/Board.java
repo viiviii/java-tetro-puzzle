@@ -7,23 +7,19 @@ import tetro.offset.Offsets;
 public final class Board {
     private static final int LENGTH = 9;
 
-    private final Grid<Blanks> grid;
+    private final Grid grid;
 
-    private Board(Grid<Blanks> grid) {
+    private Board(Grid grid) {
         this.grid = grid;
-    }
-
-    private Board(Blanks cells) {
-        this(new Grid(LENGTH, cells));
     }
 
     // todo
     public Board(Offsets offsets) {
-        this(new Blanks(offsets));
+        this(new Grid(LENGTH, offsets));
     }
 
     public Offsets blankOffsets() {
-        return grid.cells().offsets();
+        return grid.cells();
     }
 
     protected static final class Blanks extends AbstractCells {

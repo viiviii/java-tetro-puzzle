@@ -9,12 +9,12 @@ import java.util.Objects;
 public final class Block {
     public static final int SIZE = 4;
 
-    private final Grid<Shape> grid;
+    private final Grid grid;
 
     private final BlockType type;
     private final int rotation;
 
-    private Block(Grid<Shape> grid, BlockType type, int rotation) {
+    private Block(Grid grid, BlockType type, int rotation) {
         this.grid = grid;
         this.type = type;
         this.rotation = rotation;
@@ -22,8 +22,7 @@ public final class Block {
 
     public static Block of(Offsets offsets, BlockType type, int rotation) {
         validate(offsets.size());
-        final Shape shape = new Shape(offsets);
-        return new Block(new Grid(Block.SIZE, shape), type, rotation);
+        return new Block(new Grid(Block.SIZE, offsets), type, rotation);
 
     }
 
@@ -34,7 +33,7 @@ public final class Block {
     }
 
     public Offsets shapeOffsets() {
-        return grid.cells().offsets();
+        return grid.cells();
     }
 
     public BlockType type() {
