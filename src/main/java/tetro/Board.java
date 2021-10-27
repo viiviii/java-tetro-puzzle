@@ -1,7 +1,7 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.offset.Offsets;
+import tetro.cell.Offsets;
 
 public final class Board {
     private static final int LENGTH = 9;

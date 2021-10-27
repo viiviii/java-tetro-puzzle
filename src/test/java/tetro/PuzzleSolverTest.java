@@ -2,8 +2,8 @@ package tetro;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ class PuzzleSolverTest {
     @Test
     public void allFitCombinations_unfitBoard_returnsEmptyList() throws Exception {
         //given
-        Offsets unfitOffsets = Offsets.of(Offset.of(0, 0));
+        Offsets unfitOffsets = Offsets.of(Cell.of(0, 0));
         Board board = new Board(unfitOffsets);
         Puzzle puzzle = new Puzzle(board);
 
@@ -52,8 +52,8 @@ class PuzzleSolverTest {
     public void allFitCombinations_4x2RectangularBoard_returnsFourSizeSet() throws Exception {
         //given
         Offsets offsets = Offsets.of(
-                Offset.of(3, 3), Offset.of(4, 3), Offset.of(5, 3), Offset.of(6, 3),
-                Offset.of(3, 4), Offset.of(4, 4), Offset.of(5, 4), Offset.of(6, 4)
+                Cell.of(3, 3), Cell.of(4, 3), Cell.of(5, 3), Cell.of(6, 3),
+                Cell.of(3, 4), Cell.of(4, 4), Cell.of(5, 4), Cell.of(6, 4)
         );
         Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);

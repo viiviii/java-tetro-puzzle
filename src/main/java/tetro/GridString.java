@@ -1,7 +1,7 @@
 package tetro;
 
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -40,26 +40,26 @@ public final class GridString {
         }
 
         if (invalidOffsets(length, offsets)) {
-            throw new IllegalArgumentException("Has invalid Offset in 'offsets': " +
+            throw new IllegalArgumentException("Has invalid Cell in 'offsets': " +
                     "<offsets> " + offsets);
         }
     }
 
     private static boolean invalidOffsets(int length, Offsets offsets) {
-        final Predicate<Offset> validRange = (e) -> (e.x >= 0 && e.x < length) && (e.y >= 0 && e.y < length);
-        return offsets.stream().anyMatch(offset -> validRange.negate().test(offset));
+        final Predicate<Cell> validRange = cell -> (cell.x >= 0 && cell.x < length) && (cell.y >= 0 && cell.y < length);
+        return offsets.stream().anyMatch(cell -> validRange.negate().test(cell));
     }
 
     private static boolean[][] grid(int length, Offsets fillOffsets) {
         final boolean[][] grid = new boolean[length][length];
-        final Consumer<Offset> fillGrid = fillInOffsetOf(grid);
+        final Consumer<Cell> fillGrid = fillInCellOf(grid);
         fillOffsets.stream().forEach(offset -> fillGrid.accept(offset));
         return grid;
     }
 
-    private static Consumer<Offset> fillInOffsetOf(boolean[][] grid) {
+    private static Consumer<Cell> fillInCellOf(boolean[][] grid) {
         final boolean FILL = true;
-        return (offset) -> grid[offset.y][offset.x] = FILL;
+        return cell -> grid[cell.y][cell.x] = FILL;
     }
 
     private static String toStringBy(boolean[][] grid) {

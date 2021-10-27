@@ -1,8 +1,8 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import java.util.Collections;
 import java.util.Set;
@@ -14,7 +14,7 @@ class PuzzleTest {
     @Test
     void hasBlanks_returnsTrue() {
         //given
-        Offsets offsets = Offsets.of(Offset.of(1, 3));
+        Offsets offsets = Offsets.of(Cell.of(1, 3));
         Board board = new Board(offsets);
         Puzzle puzzle = new Puzzle(board);
 

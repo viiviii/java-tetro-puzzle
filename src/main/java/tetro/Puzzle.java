@@ -1,6 +1,6 @@
 package tetro;
 
-import tetro.offset.Offsets;
+import tetro.cell.Offsets;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -1,8 +1,8 @@
 package tetro;
 
 import tetro.data.BlockShapesData;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -28,12 +28,12 @@ public final class Blocks {
     }
 
     private static Offsets offsetsBy(int[] data) {
-        final int OFFSET_LENGTH = 2;
-        final List<Offset> list = new ArrayList();
-        for (int i = 0; i < data.length; i += OFFSET_LENGTH) {
+        final int NUMBER_OF_CELL_ATTRIBUTE = 2;
+        final List<Cell> list = new ArrayList();
+        for (int i = 0; i < data.length; i += NUMBER_OF_CELL_ATTRIBUTE) {
             final int x = data[i];
             final int y = data[i + 1];
-            list.add(Offset.of(x, y));
+            list.add(Cell.of(x, y));
         }
         return Offsets.of(list);
     }

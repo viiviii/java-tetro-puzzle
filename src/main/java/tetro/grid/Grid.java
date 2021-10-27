@@ -1,7 +1,7 @@
 package tetro.grid;
 
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -35,7 +35,7 @@ public final class Grid {
     }
 
     private void validateCellsRange(int length, Offsets cells) throws IllegalArgumentException {
-        final Predicate<Offset> validRange = (e) -> (e.x >= 0 && e.x < length) && (e.y >= 0 && e.y < length);
+        final Predicate<Cell> validRange = cell -> (cell.x >= 0 && cell.x < length) && (cell.y >= 0 && cell.y < length);
         final boolean valid = cells.stream().allMatch(offset -> validRange.test(offset));
         if (valid) return;
         throw new IllegalArgumentException("Has invalid cell in 'cells': <cells> " + cells);

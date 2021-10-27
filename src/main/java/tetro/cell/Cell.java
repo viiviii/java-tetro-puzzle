@@ -1,47 +1,44 @@
-package tetro.offset;
+package tetro.cell;
 
 import tetro.Translatable;
 
 import java.util.Objects;
 
-/**
- * 좌표의 x, y 위치를 나타낸다
- */
-public final class Offset implements Comparable<Offset>, Translatable<Offset> {
+public final class Cell implements Comparable<Cell>, Translatable<Cell> {
     public final int x;
     public final int y;
 
-    private Offset(int x, int y) {
+    private Cell(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
     // TODO: 기존 코드와 호환을 위해 임시로 둠
-    public static Offset of(int x, int y) {
-        return new Offset(x, y);
+    public static Cell of(int x, int y) {
+        return new Cell(x, y);
     }
 
     @Override
-    public int compareTo(Offset other) {
+    public int compareTo(Cell other) {
         return this.y == other.y
                 ? Integer.compare(this.x, other.x)
                 : Integer.compare(this.y, other.y);
     }
 
     @Override
-    public Offset translate(int translateX, int translateY) {
-        return Offset.of(this.x + translateX, this.y + translateY);
+    public Cell translate(int translateX, int translateY) {
+        return Cell.of(this.x + translateX, this.y + translateY);
     }
 
-    public Offset difference(Offset other) {
-        return Offset.of(this.x - other.x, this.y - other.y);
+    public Cell difference(Cell other) {
+        return Cell.of(this.x - other.x, this.y - other.y);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Offset)) return false;
-        Offset that = (Offset) o;
+        if (!(o instanceof Cell)) return false;
+        Cell that = (Cell) o;
         return this.x == that.x && this.y == that.y;
     }
 
@@ -52,6 +49,6 @@ public final class Offset implements Comparable<Offset>, Translatable<Offset> {
 
     @Override
     public String toString() {
-        return "Offset{" + "x=" + x + ", y=" + y + '}';
+        return "Cell{" + "x=" + x + ", y=" + y + '}';
     }
 }

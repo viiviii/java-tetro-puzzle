@@ -1,20 +1,20 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockTest {
     
     @Test
-    public void validate_notEqualsOffsetSizeAsBlockSize_throwsException() throws Exception {
+    public void validate_notEqualsCellsSizeAsBlockSize_throwsException() throws Exception {
         //given
-        Offset duplicateOffset = Offset.of(2, 3);
+        Cell duplicate = Cell.of(2, 3);
         Offsets offsets = Offsets.of(
-                Offset.of(0, 0), duplicateOffset,
-                Offset.of(4, 5), duplicateOffset);
+                Cell.of(0, 0), duplicate,
+                Cell.of(4, 5), duplicate);
 
         //then
         assertNotEquals(Block.SIZE, offsets.size());

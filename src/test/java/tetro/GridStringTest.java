@@ -2,8 +2,8 @@ package tetro;
 
 import org.junit.jupiter.api.Test;
 
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.cell.Cell;
+import tetro.cell.Offsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +14,7 @@ public class GridStringTest {
     public void valueOf() throws Exception {
         //given
         Offsets oBlockShapeOffsets = Offsets.of(
-                Offset.of(0, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1)
+                Cell.of(0, 0), Cell.of(1, 0), Cell.of(0, 1), Cell.of(1, 1)
         );
         String expect = "\n" +
                 "■ ■ □ □ \n" +
@@ -32,8 +32,8 @@ public class GridStringTest {
     @Test
     public void validate_containSameNumberAsLength_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, LENGTH);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, LENGTH);
+        Offsets offsets = Offsets.of(cell);
 
         //then
         assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
@@ -42,8 +42,8 @@ public class GridStringTest {
     @Test
     public void validate_containNumberGreaterThanLength_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, LENGTH + 1);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, LENGTH + 1);
+        Offsets offsets = Offsets.of(cell);
 
         //then
         assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
@@ -52,8 +52,8 @@ public class GridStringTest {
     @Test
     public void validate_containNegativeNumber_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, -LENGTH);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, -LENGTH);
+        Offsets offsets = Offsets.of(cell);
 
         //then
         assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
