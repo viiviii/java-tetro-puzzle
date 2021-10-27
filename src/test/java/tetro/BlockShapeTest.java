@@ -39,15 +39,5 @@ public class BlockShapeTest {
         assertFalse(actual);
     }
 
-    @Test
-    public void validate_duplicateOffset_throwsException() throws Exception {
-        //given
-        Offset duplicateOffset = Offset.of(2, 3);
-        Offsets offsets = Offsets.of(
-                Offset.of(0, 0), duplicateOffset,
-                Offset.of(4, 5), duplicateOffset);
 
-        //then
-        assertThrows(IllegalArgumentException.class, () -> new Block.Shape(offsets));
-    }
 }

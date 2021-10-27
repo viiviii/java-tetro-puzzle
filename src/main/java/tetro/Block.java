@@ -7,6 +7,8 @@ import tetro.offset.Offsets;
 import java.util.Objects;
 
 public final class Block {
+    public static final int SIZE = 4;
+
     private final Grid<Shape> grid;
 
     private final BlockType type;
@@ -18,18 +20,23 @@ public final class Block {
         this.rotation = rotation;
     }
 
-    private Block(Shape shape, BlockType type, int rotation) {
-        this(new Grid(Shape.SIZE, shape), type, rotation);
+    public static Block of(Offsets offsets, BlockType type, int rotation) {
+        validate(offsets.size());
+        final Shape shape = new Shape(offsets);
+        return new Block(new Grid(Block.SIZE, shape), type, rotation);
+
     }
 
-    // todo
-    public Block(Offsets offsets, BlockType type, int rotation) {
-        this(new Shape(offsets), type, rotation);
+    private static void validate(int size) {
+        if (size == Block.SIZE) return;
+        throw new IllegalArgumentException("'size' is not equal to Block.SIZE: "
+                + "<size> " + size + ", <Block.SIZE> " + Block.SIZE);
     }
 
     public Offsets shapeOffsets() {
         return grid.cells().offsets();
     }
+
     public BlockType type() {
         return this.type;
     }
@@ -53,19 +60,11 @@ public final class Block {
     }
 
     protected static final class Shape extends AbstractCells {
-        private static final int SIZE = 4;
 
         private final Offsets offsets;
 
         public Shape(Offsets offsets) {
-            validate(offsets);
             this.offsets = offsets;
-        }
-
-        private static void validate(Offsets offsets) {
-            if (offsets.size() == SIZE) return;
-            throw new IllegalArgumentException("'offsets.size()' is not equal to SIZE: "
-                    + "<offsets size> " + offsets.size() + ", <SIZE> " + SIZE);
         }
 
         @Override

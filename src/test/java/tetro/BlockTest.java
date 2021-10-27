@@ -7,22 +7,17 @@ import tetro.offset.Offsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockTest {
+    
+    @Test
+    public void validate_notEqualsOffsetSizeAsBlockSize_throwsException() throws Exception {
+        //given
+        Offset duplicateOffset = Offset.of(2, 3);
+        Offsets offsets = Offsets.of(
+                Offset.of(0, 0), duplicateOffset,
+                Offset.of(4, 5), duplicateOffset);
 
-//    @Test
-//    public void offsets() throws Exception {
-//        //given
-//        BlockShape sBlockShape = BlockShapes.get(BlockType.S, 0);
-//        Block block = Block.of(sBlockShape, Offset.of(3, 4));
-//
-//        Offsets expect = Offsets.of(
-//                Offset.of(3, 4), Offset.of(3, 5),
-//                Offset.of(4, 5), Offset.of(4, 6)
-//        );
-//
-//        //when
-//        Offsets offsets = block.offsets();
-//
-//        //then
-//        assertEquals(expect, offsets);
-//    }
+        //then
+        assertNotEquals(Block.SIZE, offsets.size());
+        assertThrows(IllegalArgumentException.class, () -> Block.of(offsets, null, 0));
+    }
 }

@@ -23,7 +23,7 @@ public final class Blocks {
     private static Set<Block> blocks(BlockType type, int[][] data) {
         final int NUMBER_OF_SHAPES = data.length;
         return IntStream.range(0, NUMBER_OF_SHAPES)
-                .mapToObj(rotation -> new Block(offsetsBy(data[rotation]), type, rotation))
+                .mapToObj(rotation -> Block.of(offsetsBy(data[rotation]), type, rotation))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
