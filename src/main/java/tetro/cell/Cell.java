@@ -5,7 +5,7 @@ import tetro.Translatable;
 
 public final class Cell extends OffsetBase implements Comparable<Cell>, Translatable<Cell> {
 
-    public Cell(int x, int y) {
+    private Cell(int x, int y) {
         super(x, y);
     }
 
