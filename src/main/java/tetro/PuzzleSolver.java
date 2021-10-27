@@ -22,7 +22,7 @@ public final class PuzzleSolver {
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
         if (!puzzle.hasBlanks()) return Collections.EMPTY_SET;
         final Set<Puzzle> result = new HashSet<>();
-        final Cell first = puzzle.remainingBlankOffsets().first();
+        final Offset first = puzzle.remainingBlankOffsets().first();
 
         for (Block block : Blocks.all()) {
             final FitBlock fitBlock = new FitBlock(block, first);

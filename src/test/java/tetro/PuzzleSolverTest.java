@@ -59,14 +59,14 @@ class PuzzleSolverTest {
         Puzzle puzzle = new Puzzle(board);
 
         Set<Set<FitBlock>> expect = new HashSet<>();
-        FitBlock oBlock1 = new FitBlock(Blocks.get(BlockType.O, 0), Offset.of(3, 3));
-        FitBlock oBlock2 = new FitBlock(Blocks.get(BlockType.O, 0), Offset.of(5, 3));
-        FitBlock iBlock1 = new FitBlock(Blocks.get(BlockType.I, 1), Offset.of(3, 3));
-        FitBlock iBlock2 = new FitBlock(Blocks.get(BlockType.I, 1), Offset.of(3, 4));
-        FitBlock lBlock1 = new FitBlock(Blocks.get(BlockType.L, 3), Offset.of(3, 3));
-        FitBlock lBlock2 = new FitBlock(Blocks.get(BlockType.L, 1), Offset.of(6, 3));
-        FitBlock jBlock1 = new FitBlock(Blocks.get(BlockType.J, 3), Offset.of(3, 3));
-        FitBlock jBlock2 = new FitBlock(Blocks.get(BlockType.J, 1), Offset.of(4, 3));
+        FitBlock oBlock1 = new FitBlock(Blocks.get(BlockType.O, 0), new Offset(3, 3));
+        FitBlock oBlock2 = new FitBlock(Blocks.get(BlockType.O, 0), new Offset(5, 3));
+        FitBlock iBlock1 = new FitBlock(Blocks.get(BlockType.I, 1), new Offset(3, 3));
+        FitBlock iBlock2 = new FitBlock(Blocks.get(BlockType.I, 1), new Offset(3, 4));
+        FitBlock lBlock1 = new FitBlock(Blocks.get(BlockType.L, 3), new Offset(3, 3));
+        FitBlock lBlock2 = new FitBlock(Blocks.get(BlockType.L, 1), new Offset(6, 3));
+        FitBlock jBlock1 = new FitBlock(Blocks.get(BlockType.J, 3), new Offset(3, 3));
+        FitBlock jBlock2 = new FitBlock(Blocks.get(BlockType.J, 1), new Offset(4, 3));
         expect.add(Set.of(oBlock1, oBlock2));
         expect.add(Set.of(iBlock1, iBlock2));
         expect.add(Set.of(lBlock1, lBlock2));

@@ -1,5 +1,6 @@
 package tetro.cell;
 
+import tetro.Offset;
 import tetro.Translatable;
 
 import java.util.*;
@@ -44,8 +45,9 @@ public final class Offsets implements Translatable<Offsets> {
         return this.cells.size();
     }
 
-    public Cell first() {
-        return this.cells.first();
+    public Offset first() {
+        final Cell first = this.cells.first();
+        return new Offset(first.x, first.y);
     }
 
     // TODO: 제거YN
@@ -74,7 +76,7 @@ public final class Offsets implements Translatable<Offsets> {
      * offset 위치로 이동
      */
     public Offsets translateTo(Offset offset) {
-        final Cell difference = offset.difference(this.first());
+        final Offset difference = offset.difference(this.first());
         return translate(difference.x, difference.y);
     }
 

@@ -1,6 +1,7 @@
 package tetro.cell;
 
 import org.junit.jupiter.api.Test;
+import tetro.Offset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +44,7 @@ public class OffsetsTest {
         Offsets offsets = Offsets.of(c1, c2);
 
         //when
-        Cell actual = offsets.first();
+        Offset actual = offsets.first();
         int compare = c2.compareTo(c1);
 
         //then
@@ -59,7 +60,7 @@ public class OffsetsTest {
         Offsets offsets = Offsets.of(c1, c2);
 
         //when
-        Cell actual = offsets.first();
+        Offset actual = offsets.first();
         int compare = c1.compareTo(c2);
 
         //then
@@ -91,7 +92,7 @@ public class OffsetsTest {
         Cell c1 = Cell.of(1, 3);
         Cell c2 = Cell.of(2, 4);
         Offsets origin = Offsets.of(c1, c2);
-        Cell offset = Cell.of(6, 3);
+        Offset offset = new Offset(6, 3);
         
         //when
         Offsets actual = origin.translateTo(offset);
