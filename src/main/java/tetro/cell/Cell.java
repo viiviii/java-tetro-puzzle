@@ -1,16 +1,12 @@
 package tetro.cell;
 
+import tetro.OffsetBase;
 import tetro.Translatable;
 
-import java.util.Objects;
+public final class Cell extends OffsetBase implements Comparable<Cell>, Translatable<Cell> {
 
-public final class Cell implements Comparable<Cell>, Translatable<Cell> {
-    public final int x;
-    public final int y;
-
-    private Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Cell(int x, int y) {
+        super(x, y);
     }
 
     // TODO: 기존 코드와 호환을 위해 임시로 둠
@@ -32,19 +28,6 @@ public final class Cell implements Comparable<Cell>, Translatable<Cell> {
 
     public Cell difference(Cell other) {
         return Cell.of(this.x - other.x, this.y - other.y);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Cell)) return false;
-        Cell that = (Cell) o;
-        return this.x == that.x && this.y == that.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
     }
 
     @Override
