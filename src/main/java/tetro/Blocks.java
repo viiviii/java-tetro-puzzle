@@ -2,7 +2,7 @@ package tetro;
 
 import tetro.data.BlockShapesData;
 import tetro.cell.Cell;
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,11 +23,11 @@ public final class Blocks {
     private static Set<Block> blocks(BlockType type, int[][] data) {
         final int NUMBER_OF_SHAPES = data.length;
         return IntStream.range(0, NUMBER_OF_SHAPES)
-                .mapToObj(rotation -> Block.of(offsetsBy(data[rotation]), type, rotation))
+                .mapToObj(rotation -> Block.of(cellsBy(data[rotation]), type, rotation))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private static Offsets offsetsBy(int[] data) {
+    private static Cells cellsBy(int[] data) {
         final int NUMBER_OF_CELL_ATTRIBUTE = 2;
         final List<Cell> list = new ArrayList();
         for (int i = 0; i < data.length; i += NUMBER_OF_CELL_ATTRIBUTE) {
@@ -35,7 +35,7 @@ public final class Blocks {
             final int y = data[i + 1];
             list.add(Cell.of(x, y));
         }
-        return Offsets.of(list);
+        return Cells.of(list);
     }
 
     public static Set<Block> all() {

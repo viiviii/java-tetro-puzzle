@@ -1,21 +1,21 @@
 package tetro;
 
 
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.Objects;
 
 public final class FitBlock {
     private final Block block;
-    private final Offset offsetInThePuzzle;
+    private final Offset offset;
 
-    public FitBlock(Block block, Offset offsetInThePuzzle) {
+    public FitBlock(Block block, Offset offset) {
         this.block = block;
-        this.offsetInThePuzzle = offsetInThePuzzle;
+        this.offset = offset;
     }
 
-    public Offsets offsets() {
-        return this.block.shapeOffsets().translateTo(offsetInThePuzzle);
+    public Cells cells() {
+        return this.block.cells().translateTo(offset);
     }
 
     @Override
@@ -23,11 +23,11 @@ public final class FitBlock {
         if (this == o) return true;
         if (!(o instanceof FitBlock)) return false;
         FitBlock that = (FitBlock) o;
-        return this.block.equals(that.block) && this.offsetInThePuzzle.equals(that.offsetInThePuzzle);
+        return this.block.equals(that.block) && this.offset.equals(that.offset);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(block, offsetInThePuzzle);
+        return Objects.hash(block, offset);
     }
 }

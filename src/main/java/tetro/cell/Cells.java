@@ -7,38 +7,38 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public final class Offsets implements Translatable<Offsets> {
-    public static final Offsets EMPTY = Offsets.of(Collections.EMPTY_LIST);
+public final class Cells implements Translatable<Cells> {
+    public static final Cells EMPTY = Cells.of(Collections.EMPTY_LIST);
 
     private final SortedSet<Cell> cells;
 
-    private Offsets(Collection<Cell> cells) {
+    private Cells(Collection<Cell> cells) {
         this.cells = new TreeSet(cells);
     }
 
-    public static final Offsets of(Collection<Cell> cells) {
-        return new Offsets(Collections.unmodifiableCollection(cells));
+    public static final Cells of(Collection<Cell> cells) {
+        return new Cells(Collections.unmodifiableCollection(cells));
     }
 
-    public static final Offsets of(Cell cell) {
-        return new Offsets(Set.of(cell));
+    public static final Cells of(Cell cell) {
+        return new Cells(Set.of(cell));
     }
 
-    public static final Offsets of(Cell... cells) {
-        return new Offsets(Arrays.asList(cells));
+    public static final Cells of(Cell... cells) {
+        return new Cells(Arrays.asList(cells));
     }
 
-    public Offsets union(Offsets other) {
+    public Cells union(Cells other) {
         final Set<Cell> unionCells = Stream.concat(this.stream(), other.stream())
                 .collect(Collectors.toUnmodifiableSet());
-        return Offsets.of(unionCells);
+        return Cells.of(unionCells);
     }
 
-    public Offsets difference(Offsets other) {
+    public Cells difference(Cells other) {
         final Set<Cell> differenceCells = this.stream()
                 .filter(cell -> !other.contains(cell))
                 .collect(Collectors.toUnmodifiableSet());
-        return Offsets.of(differenceCells);
+        return Cells.of(differenceCells);
     }
 
     public int size() {
@@ -59,22 +59,22 @@ public final class Offsets implements Translatable<Offsets> {
         return this.cells.contains(cell);
     }
 
-    public boolean containsAll(Offsets other) {
+    public boolean containsAll(Cells other) {
         return this.cells.containsAll(other.cells);
     }
 
     @Override
-    public Offsets translateBy(int translateX, int translateY) {
+    public Cells translateBy(int translateX, int translateY) {
         final List<Cell> translateCells = this.stream()
                 .map(cell -> cell.translateBy(translateX, translateY))
                 .collect(Collectors.toList());
-        return new Offsets(translateCells);
+        return new Cells(translateCells);
     }
 
     /**
      * 첫번째 셀을 기준으로 Cell 집합을 offset 위치로 이동
      */
-    public Offsets translateTo(Offset offset) {
+    public Cells translateTo(Offset offset) {
         final Offset distance = offset.minus(this.first());
         return translateBy(distance.x, distance.y);
     }
@@ -82,8 +82,8 @@ public final class Offsets implements Translatable<Offsets> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Offsets)) return false;
-        Offsets that = (Offsets) o;
+        if (!(o instanceof Cells)) return false;
+        Cells that = (Cells) o;
         return this.cells.equals(that.cells);
     }
 
@@ -94,6 +94,6 @@ public final class Offsets implements Translatable<Offsets> {
 
     @Override
     public String toString() {
-        return "Offsets{" + cells + '}';
+        return "Cells{" + cells + '}';
     }
 }

@@ -1,11 +1,12 @@
 package tetro.cell;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.Offset;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OffsetsTest {
+public class CellsTest {
     final int LESS = -1;
 
     @Test
@@ -13,24 +14,24 @@ public class OffsetsTest {
         //given
         Cell c1 = Cell.of(0, 0);
         Cell c2 = Cell.of(1, 2);
-        Offsets offsets = Offsets.of(c1, c2);
+        Cells cells = Cells.of(c1, c2);
 
         //when
-        int actual = offsets.size();
+        int actual = cells.size();
 
         //then
         assertEquals(2, actual);
     }
 
     @Test
-    public void size_duplicateOffsets_returnsNumberOne() throws Exception {
+    public void size_duplicateCells_returnsNumberOne() throws Exception {
         //given
         Cell c1 = Cell.of(4, 1);
         Cell c2 = Cell.of(4, 1);
-        Offsets offsets = Offsets.of(c1, c2);
+        Cells cells = Cells.of(c1, c2);
 
         //when
-        int actual = offsets.size();
+        int actual = cells.size();
 
         //then
         assertEquals(1, actual);
@@ -41,10 +42,10 @@ public class OffsetsTest {
         //given
         Cell c1 = Cell.of(5, 3);
         Cell c2 = Cell.of(1, 2);
-        Offsets offsets = Offsets.of(c1, c2);
+        Cells cells = Cells.of(c1, c2);
 
         //when
-        Offset actual = offsets.first();
+        Offset actual = cells.first();
         int compare = c2.compareTo(c1);
 
         //then
@@ -57,10 +58,10 @@ public class OffsetsTest {
         //given
         Cell c1 = Cell.of(-3, -3);
         Cell c2 = Cell.of(-2, -2);
-        Offsets offsets = Offsets.of(c1, c2);
+        Cells cells = Cells.of(c1, c2);
 
         //when
-        Offset actual = offsets.first();
+        Offset actual = cells.first();
         int compare = c1.compareTo(c2);
 
         //then
@@ -75,10 +76,10 @@ public class OffsetsTest {
         final int translateY = 4;
 
         Cell cell = Cell.of(-3, -3);
-        Offsets origin = Offsets.of(cell);
+        Cells origin = Cells.of(cell);
 
         //when
-        Offsets actual = origin.translateBy(translateX, translateY);
+        Cells actual = origin.translateBy(translateX, translateY);
 
         //then
         assertEquals(cell.x + translateX, actual.first().x);
@@ -92,10 +93,10 @@ public class OffsetsTest {
         final int translateY = -4;
 
         Cell cell = Cell.of(-3, -3);
-        Offsets origin = Offsets.of(cell);
+        Cells origin = Cells.of(cell);
 
         //when
-        Offsets actual = origin.translateBy(translateX, translateY);
+        Cells actual = origin.translateBy(translateX, translateY);
 
         //then
         assertEquals(cell.x + translateX, actual.first().x);
@@ -103,116 +104,116 @@ public class OffsetsTest {
     }
 
     @Test
-    public void translateTo_otherOffset_returnsOffsetsWithSameFirstOffset() throws Exception {
+    public void translateTo_offset_returnsCellsWithSameFirstOffset() throws Exception {
         //given
         Cell c1 = Cell.of(1, 3);
         Cell c2 = Cell.of(2, 4);
-        Offsets origin = Offsets.of(c1, c2);
+        Cells origin = Cells.of(c1, c2);
         Offset offset = new Offset(6, 3);
 
         //when
-        Offsets actual = origin.translateTo(offset);
+        Cells actual = origin.translateTo(offset);
 
         //then
         assertEquals(offset, actual.first());
     }
 
     @Test
-    public void containsAll_containAllOffsets_returnsTrue() throws Exception {
+    public void containsAll_containAllCells_returnsTrue() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
-        Offsets offsets = Offsets.of(c1, c2, c3);
-        Offsets other = Offsets.of(c2);
+        Cells cells = Cells.of(c1, c2, c3);
+        Cells other = Cells.of(c2);
 
         //when
-        boolean actual = offsets.containsAll(other);
+        boolean actual = cells.containsAll(other);
 
         //then
         assertTrue(actual);
     }
 
     @Test
-    public void containsAll_notContainAllOffsets_returnsFalse() throws Exception {
+    public void containsAll_notContainAllCells_returnsFalse() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
-        Offsets offsets = Offsets.of(c2);
-        Offsets other = Offsets.of(c1, c2, c3);
+        Cells cells = Cells.of(c2);
+        Cells other = Cells.of(c1, c2, c3);
 
         //when
-        boolean actual = offsets.containsAll(other);
+        boolean actual = cells.containsAll(other);
 
         //then
         assertFalse(actual);
     }
 
     @Test
-    public void containsAll_notContainAnyOffsets_returnsFalse() throws Exception {
+    public void containsAll_notContainAnyCells_returnsFalse() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
-        Offsets offsets = Offsets.of(c1, c2, c3);
-        Offsets other = Offsets.of(Cell.of(99, 99));
+        Cells cells = Cells.of(c1, c2, c3);
+        Cells other = Cells.of(Cell.of(99, 99));
 
         //when
-        boolean actual = offsets.containsAll(other);
+        boolean actual = cells.containsAll(other);
 
         //then
         assertFalse(actual);
     }
 
     @Test
-    public void difference_emptyOffsets_returnsEqualsValue() throws Exception {
+    public void difference_emptyCells_returnsEqualsValue() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
 
-        Offsets origin = Offsets.of(c1, c2, c3);
-        Offsets other = Offsets.EMPTY;
+        Cells origin = Cells.of(c1, c2, c3);
+        Cells other = Cells.EMPTY;
 
         //when
-        Offsets actual = origin.difference(other);
+        Cells actual = origin.difference(other);
 
         //then
         assertEquals(origin, actual);
     }
 
     @Test
-    public void difference_emptyOffsets_returnNotSameInstance() throws Exception {
+    public void difference_emptyCells_returnNotSameInstance() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
 
-        Offsets origin = Offsets.of(c1, c2, c3);
-        Offsets other = Offsets.EMPTY;
+        Cells origin = Cells.of(c1, c2, c3);
+        Cells other = Cells.EMPTY;
 
         //when
-        Offsets actual = origin.difference(other);
+        Cells actual = origin.difference(other);
 
         //then
         assertNotSame(origin, actual);
     }
 
     @Test
-    public void difference_otherOffsets_returnsDifferentOffsets() throws Exception {
+    public void difference_otherCells_returnsDifferentCells() throws Exception {
         //given
         Cell c1 = Cell.of(1, 2);
         Cell c2 = Cell.of(3, 4);
         Cell c3 = Cell.of(5, 6);
 
-        Offsets origin = Offsets.of(c1, c2, c3);
-        Offsets other = Offsets.of(c2);
+        Cells origin = Cells.of(c1, c2, c3);
+        Cells other = Cells.of(c2);
 
         //when
-        Offsets actual = origin.difference(other);
+        Cells actual = origin.difference(other);
 
         //then
-        assertEquals(Offsets.of(c1, c3), actual);
+        assertEquals(Cells.of(c1, c3), actual);
     }
 }

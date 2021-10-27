@@ -1,7 +1,5 @@
 package tetro;
 
-import tetro.cell.Cell;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +20,7 @@ public final class PuzzleSolver {
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
         if (!puzzle.hasBlanks()) return Collections.EMPTY_SET;
         final Set<Puzzle> result = new HashSet<>();
-        final Offset first = puzzle.remainingBlankOffsets().first();
+        final Offset first = puzzle.remainingBlankCells().first();
 
         for (Block block : Blocks.all()) {
             final FitBlock fitBlock = new FitBlock(block, first);
@@ -36,7 +34,7 @@ public final class PuzzleSolver {
 
     private static Puzzle copyOf(Puzzle puzzle) {
         Set<FitBlock> fitBlocks = puzzle.fitBlockSet();
-        Puzzle newPuzzle = new Puzzle(new Board(puzzle.boardBlankOffsets()));
+        Puzzle newPuzzle = new Puzzle(new Board(puzzle.boardBlankCells()));
         fitBlocks.forEach(e -> newPuzzle.put(e));
         return newPuzzle;
     }

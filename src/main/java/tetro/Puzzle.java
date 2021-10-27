@@ -1,6 +1,6 @@
 package tetro;
 
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,7 +18,7 @@ public final class Puzzle {
     }
 
     public boolean hasBlanks() {
-        return remainingBlankOffsets().size() != 0;
+        return remainingBlankCells().size() != 0;
     }
 
     public boolean put(FitBlock fitBlock) {
@@ -33,23 +33,23 @@ public final class Puzzle {
         return nonBlanks.fitBlockSet();
     }
 
-    public Offsets boardBlankOffsets() {
-        return board.blankOffsets();
+    public Cells boardBlankCells() {
+        return board.cells();
     }
 
-    public Offsets remainingBlankOffsets() {
-        return board.blankOffsets().difference(nonBlanks.offsets());
+    public Cells remainingBlankCells() {
+        return board.cells().difference(nonBlanks.cells());
     }
 
     private final class NonBlanks {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
-            return canFit(fitBlock.offsets()) && fitBlocks.add(fitBlock);
+            return canFit(fitBlock.cells()) && fitBlocks.add(fitBlock);
         }
 
-        private boolean canFit(Offsets offsets) {
-            return Puzzle.this.remainingBlankOffsets().containsAll(offsets);
+        private boolean canFit(Cells cells) {
+            return Puzzle.this.remainingBlankCells().containsAll(cells);
         }
 
         public boolean remove(FitBlock fitBlock) {
@@ -60,10 +60,10 @@ public final class Puzzle {
             return Set.copyOf(fitBlocks);
         }
 
-        public Offsets offsets() {
+        public Cells cells() {
             return fitBlocks.stream()
-                    .flatMap(e -> e.offsets().stream())
-                    .collect(collectingAndThen(Collectors.toSet(), Offsets::of));
+                    .flatMap(e -> e.cells().stream())
+                    .collect(collectingAndThen(Collectors.toSet(), Cells::of));
         }
 
         @Override

@@ -121,7 +121,7 @@ public class CellTest {
     }
 
     @Test
-    public void sizeOfHashSet_addDuplicateOffsets_returns1() throws Exception {
+    public void sizeOfHashSet_addDuplicate_returns1() throws Exception {
         //given
         Cell cell = Cell.of(1, 1);
         Cell equalToCell = Cell.of(1, 1);
@@ -138,7 +138,7 @@ public class CellTest {
     }
 
     @Test
-    public void sizeOfTreeSet_addDuplicateOffsets_returns1() throws Exception {
+    public void sizeOfTreeSet_addDuplicate_returns1() throws Exception {
         //given
         Cell cell = Cell.of(1, 1);
         Cell equalToCell = Cell.of(1, 1);

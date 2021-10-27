@@ -3,7 +3,7 @@ package tetro;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.cell.Cell;
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +16,8 @@ class PuzzleSolverTest {
     @Test
     public void allFitCombinations_unfitBoard_returnsEmptyList() throws Exception {
         //given
-        Offsets unfitOffsets = Offsets.of(Cell.of(0, 0));
-        Board board = new Board(unfitOffsets);
+        Cells unfitCells = Cells.of(Cell.of(0, 0));
+        Board board = new Board(unfitCells);
         Puzzle puzzle = new Puzzle(board);
 
         //when
@@ -31,8 +31,8 @@ class PuzzleSolverTest {
     @Test
     public void allFitCombinations_oBlockShapeBoard_returnsOneSizeSet() throws Exception {
         //given
-        Offsets offsets = Blocks.get(BlockType.O, 0).shapeOffsets();
-        Board board = new Board(offsets);
+        Cells cells = Blocks.get(BlockType.O, 0).cells();
+        Board board = new Board(cells);
         Puzzle puzzle = new Puzzle(board);
 
         //when
@@ -51,11 +51,11 @@ class PuzzleSolverTest {
     @Test
     public void allFitCombinations_4x2RectangularBoard_returnsFourSizeSet() throws Exception {
         //given
-        Offsets offsets = Offsets.of(
+        Cells cells = Cells.of(
                 Cell.of(3, 3), Cell.of(4, 3), Cell.of(5, 3), Cell.of(6, 3),
                 Cell.of(3, 4), Cell.of(4, 4), Cell.of(5, 4), Cell.of(6, 4)
         );
-        Board board = new Board(offsets);
+        Board board = new Board(cells);
         Puzzle puzzle = new Puzzle(board);
 
         Set<Set<FitBlock>> expect = new HashSet<>();

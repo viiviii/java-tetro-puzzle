@@ -1,7 +1,7 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.Objects;
 
@@ -19,9 +19,9 @@ public final class Block {
         this.rotation = rotation;
     }
 
-    public static Block of(Offsets offsets, BlockType type, int rotation) {
-        validate(offsets.size());
-        return new Block(new Grid(Block.SIZE, offsets), type, rotation);
+    public static Block of(Cells cells, BlockType type, int rotation) {
+        validate(cells.size());
+        return new Block(new Grid(Block.SIZE, cells), type, rotation);
 
     }
 
@@ -31,7 +31,7 @@ public final class Block {
                 + "<size> " + size + ", <Block.SIZE> " + Block.SIZE);
     }
 
-    public Offsets shapeOffsets() {
+    public Cells cells() {
         return grid.cells();
     }
 

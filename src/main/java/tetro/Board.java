@@ -1,7 +1,7 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 public final class Board {
     private static final int LENGTH = 9;
@@ -13,11 +13,11 @@ public final class Board {
     }
 
     // todo
-    public Board(Offsets offsets) {
-        this(new Grid(LENGTH, offsets));
+    public Board(Cells cells) {
+        this(new Grid(LENGTH, cells));
     }
 
-    public Offsets blankOffsets() {
+    public Cells cells() {
         return grid.cells();
     }
 }

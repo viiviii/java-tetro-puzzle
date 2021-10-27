@@ -1,22 +1,22 @@
 package tetro.grid;
 
 import tetro.cell.Cell;
-import tetro.cell.Offsets;
+import tetro.cell.Cells;
 
 import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class Grid {
     private final int length;
-    private final Offsets cells;
+    private final Cells cells;
 
-    public Grid(int length, Offsets cells) {
+    public Grid(int length, Cells cells) {
         validate(length, cells);
         this.length = length;
         this.cells = cells;
     }
 
-    private void validate(int length, Offsets cells) throws IllegalArgumentException {
+    private void validate(int length, Cells cells) throws IllegalArgumentException {
         validateLength(length);
         validateCapacity(length, cells);
         validateCellsRange(length, cells);
@@ -27,14 +27,14 @@ public final class Grid {
         throw new IllegalArgumentException("'length should be greater than zero: <length> " + length);
     }
 
-    private void validateCapacity(int length, Offsets cells) throws IllegalArgumentException {
+    private void validateCapacity(int length, Cells cells) throws IllegalArgumentException {
         final int capacity = length * length;
         if (cells.size() <= capacity) return;
         throw new IllegalArgumentException("'cells.size()' is greater than capacity: " +
                 "<cells size> " + cells.size() + ", <capacity> " + capacity);
     }
 
-    private void validateCellsRange(int length, Offsets cells) throws IllegalArgumentException {
+    private void validateCellsRange(int length, Cells cells) throws IllegalArgumentException {
         final Predicate<Cell> validRange = cell -> (cell.x >= 0 && cell.x < length) && (cell.y >= 0 && cell.y < length);
         final boolean valid = cells.stream().allMatch(offset -> validRange.test(offset));
         if (valid) return;
@@ -45,7 +45,7 @@ public final class Grid {
         return this.length;
     }
 
-    public final Offsets cells() {
+    public final Cells cells() {
         return this.cells;
     }
 
