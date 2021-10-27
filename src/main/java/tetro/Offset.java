@@ -9,6 +9,10 @@ public final class Offset extends OffsetBase {
         super(x, y);
     }
 
+    public Offset plus(Offset other) {
+        return new Offset(this.x + other.x, this.y + other.y);
+    }
+
     public Offset minus(Offset other) {
         return new Offset(this.x - other.x, this.y - other.y);
     }
