@@ -22,7 +22,7 @@ public final class Cell extends OffsetBase implements Comparable<Cell>, Translat
     }
 
     @Override
-    public Cell translate(int translateX, int translateY) {
+    public Cell translateBy(int translateX, int translateY) {
         return Cell.of(this.x + translateX, this.y + translateY);
     }
 

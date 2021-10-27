@@ -63,21 +63,20 @@ public final class Offsets implements Translatable<Offsets> {
         return this.cells.containsAll(other.cells);
     }
 
-    // TODO: 리팩토링
     @Override
-    public Offsets translate(int translateX, int translateY) {
+    public Offsets translateBy(int translateX, int translateY) {
         final List<Cell> translateCells = this.stream()
-                .map(cell -> cell.translate(translateX, translateY))
+                .map(cell -> cell.translateBy(translateX, translateY))
                 .collect(Collectors.toList());
         return new Offsets(translateCells);
     }
 
     /**
-     * offset 위치로 이동
+     * 첫번째 셀을 기준으로 Cell 집합을 offset 위치로 이동
      */
     public Offsets translateTo(Offset offset) {
         final Offset distance = offset.minus(this.first());
-        return translate(distance.x, distance.y);
+        return translateBy(distance.x, distance.y);
     }
 
     @Override

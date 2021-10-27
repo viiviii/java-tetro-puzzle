@@ -265,7 +265,7 @@ public class CellTest {
         Cell cell = Cell.of(1, 1);
 
         //when
-        Cell actual = cell.translate(translateX, translateY);
+        Cell actual = cell.translateBy(translateX, translateY);
 
         //then
         assertEquals(4, actual.x);
@@ -280,7 +280,7 @@ public class CellTest {
         Cell cell = Cell.of(1, 1);
 
         //when
-        Cell actual = cell.translate(translateX, translateY);
+        Cell actual = cell.translateBy(translateX, translateY);
 
         //then
         assertEquals(-2, actual.x);

@@ -69,23 +69,39 @@ public class OffsetsTest {
     }
 
     @Test
-    public void translate_oneSpace_returnsPlusNumberOne() throws Exception {
+    public void translateBy_positiveTranslateValue_returnsPlusValue() throws Exception {
         //given
         final int translateX = 1;
         final int translateY = 4;
 
-        Cell c1 = Cell.of(-3, -3);
-        Cell c2 = Cell.of(-2, -2);
-        Offsets origin = Offsets.of(c1, c2);
+        Cell cell = Cell.of(-3, -3);
+        Offsets origin = Offsets.of(cell);
 
         //when
-        Offsets actual = origin.translate(translateX, translateY);
+        Offsets actual = origin.translateBy(translateX, translateY);
 
         //then
-        assertEquals(origin.first().x + translateX, actual.first().x);
-        assertEquals(origin.first().y + translateY, actual.first().y);
+        assertEquals(cell.x + translateX, actual.first().x);
+        assertEquals(cell.y + translateY, actual.first().y);
     }
-    
+
+    @Test
+    public void translateBy_negativeTranslateValue_returnsPlusValue() throws Exception {
+        //given
+        final int translateX = -1;
+        final int translateY = -4;
+
+        Cell cell = Cell.of(-3, -3);
+        Offsets origin = Offsets.of(cell);
+
+        //when
+        Offsets actual = origin.translateBy(translateX, translateY);
+
+        //then
+        assertEquals(cell.x + translateX, actual.first().x);
+        assertEquals(cell.y + translateY, actual.first().y);
+    }
+
     @Test
     public void translateTo_otherOffset_returnsOffsetsWithSameFirstOffset() throws Exception {
         //given
@@ -93,7 +109,7 @@ public class OffsetsTest {
         Cell c2 = Cell.of(2, 4);
         Offsets origin = Offsets.of(c1, c2);
         Offset offset = new Offset(6, 3);
-        
+
         //when
         Offsets actual = origin.translateTo(offset);
 
