@@ -1,8 +1,8 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
-import tetro.cell.Cell;
-import tetro.cell.Cells;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import java.util.Collections;
 import java.util.Set;

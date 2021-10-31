@@ -1,4 +1,4 @@
-package tetro.cell;
+package tetro.grid;
 
 import tetro.OffsetBase;
 import tetro.Translatable;

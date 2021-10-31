@@ -1,8 +1,5 @@
 package tetro.grid;
 
-import tetro.cell.Cell;
-import tetro.cell.Cells;
-
 import java.util.Objects;
 import java.util.function.Predicate;
 

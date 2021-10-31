@@ -1,6 +1,5 @@
-package tetro.cell;
+package tetro.grid;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tetro.Offset;
 

@@ -1,8 +1,8 @@
 package tetro;
 
 import tetro.data.BlockShapesData;
-import tetro.cell.Cell;
-import tetro.cell.Cells;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import java.util.*;
 import java.util.stream.Collectors;

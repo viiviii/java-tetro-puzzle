@@ -1,7 +1,7 @@
 package tetro;
 
 import tetro.grid.Grid;
-import tetro.cell.Cells;
+import tetro.grid.Cells;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package tetro;
 
-import tetro.cell.Cells;
+import tetro.grid.Cells;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -1,7 +1,7 @@
 package tetro;
 
-import tetro.cell.Cell;
-import tetro.cell.Cells;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
