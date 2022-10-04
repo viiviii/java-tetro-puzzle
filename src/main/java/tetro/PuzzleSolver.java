@@ -1,9 +1,7 @@
 package tetro;
 
-import tetro.offset.Offset;
-
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,34 +9,41 @@ public final class PuzzleSolver {
     private PuzzleSolver() {
     }
 
-    public static Set<Puzzle.FitCells> allFitCombinations(Puzzle puzzle) {
+    public static Set<Set<FitBlock>> allFitCombinations(Puzzle puzzle) {
         final Set<Puzzle> combinations = combinationsFitOf(puzzle);
         return combinations.stream()
-                .map(e -> e.fitCells())
+                .map(e -> e.fitBlockSet())
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    // TODO: 메서드명
+    // TODO: 메서드명, 변수명, Blocks.all(0
     private static Set<Puzzle> combinationsFitOf(Puzzle puzzle) {
-        assert puzzle.remainingBlankCells().size() != 0;
+        if (!puzzle.hasBlanks()) return Collections.EMPTY_SET;
         final Set<Puzzle> result = new HashSet<>();
-        final Offset offset = puzzle.remainingBlankCells().first(); // todo: 변수명
+        final Offset first = puzzle.remainingBlankCells().first();
 
-        for (Block block : Blocks.all()) { // todo: Blocks.all()
-            Optional<Puzzle> optional = puzzle.put(block, offset); // todo: 변수명
-            if (optional.isEmpty()) continue;
+        for (Block block : Blocks.all()) {
+            final FitBlock fitBlock = new FitBlock(block, first);
+            final Set<Puzzle> combinations = recursivePutWith(fitBlock, copyOf(puzzle));
 
-            Puzzle nextPuzzle = optional.get(); // todo: 변수명
-            if (nextPuzzle.completed()) {
-                result.add(nextPuzzle);
-                return result;
-            }
-
-            Set<Puzzle> nextCombinations = combinationsFitOf(nextPuzzle);
-            if (nextCombinations.isEmpty()) continue;
-
-            result.addAll(nextCombinations);
+            if (combinations.isEmpty()) continue;
+            result.addAll(combinations);
         }
         return result;
+    }
+
+    private static Puzzle copyOf(Puzzle puzzle) {
+        Set<FitBlock> fitBlocks = puzzle.fitBlockSet();
+        Puzzle newPuzzle = new Puzzle(new Board(puzzle.boardBlankCells()));
+        fitBlocks.forEach(e -> newPuzzle.put(e));
+        return newPuzzle;
+    }
+
+    private static Set<Puzzle> recursivePutWith(FitBlock fitBlock, Puzzle puzzle) {
+        if (!puzzle.put(fitBlock)) return Collections.EMPTY_SET;
+        if (puzzle.hasBlanks())
+            return combinationsFitOf(puzzle);
+        else
+            return Set.of(puzzle);
     }
 }

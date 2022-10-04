@@ -1,7 +1,7 @@
 package tetro;
 
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -12,54 +12,54 @@ public final class GridString {
     }
 
     /**
-     * 디버깅용으로 {@link Offsets}를 시각적으로 보기 위해 만든 메서드 <br>
+     * 디버깅용으로 {@link Cells}를 시각적으로 보기 위해 만든 메서드 <br>
      * <p>
      * For example, <br>
-     * - length: 4, offsets: (0, 0), (1, 0), (0, 1), (1, 1) <br>
+     * - length: 4, cells: (0, 0), (1, 0), (0, 1), (1, 1) <br>
      * ■ ■ □ □ <br>
      * ■ ■ □ □ <br>
      * □ □ □ □ <br>
      * □ □ □ □ <br>
      *
      * @param length      정사각형 그리드의 한쪽 길이
-     * @param fillOffsets 채운 네모로 표시할 offsets
+     * @param filledCells 채운 네모로 표시할 cells
      * @return 비어있거나 채워진 네모로 이루어진 문자열
      */
-    public static String valueOf(int length, Offsets fillOffsets) {
-        validate(length, fillOffsets);
-        final boolean[][] grid = grid(length, fillOffsets);
+    public static String valueOf(int length, Cells filledCells) {
+        validate(length, filledCells);
+        final boolean[][] grid = grid(length, filledCells);
         return toStringBy(grid);
     }
 
-    private static void validate(int length, Offsets offsets) throws IllegalArgumentException {
+    private static void validate(int length, Cells cells) throws IllegalArgumentException {
         final int capacity = length * length;
-        if (offsets.size() > capacity) {
-            throw new IllegalArgumentException("'offsets.size()' is greater than capacity: " +
-                    "<offsets size> " + offsets.size() + ", " +
+        if (cells.size() > capacity) {
+            throw new IllegalArgumentException("'cells.size()' is greater than capacity: " +
+                    "<cells size> " + cells.size() + ", " +
                     "<capacity> " + capacity);
         }
 
-        if (invalidOffsets(length, offsets)) {
-            throw new IllegalArgumentException("Has invalid Offset in 'offsets': " +
-                    "<offsets> " + offsets);
+        if (invalidCells(length, cells)) {
+            throw new IllegalArgumentException("Has invalid Cell in 'cells': " +
+                    "<cells> " + cells);
         }
     }
 
-    private static boolean invalidOffsets(int length, Offsets offsets) {
-        final Predicate<Offset> validRange = (e) -> (e.x >= 0 && e.x < length) && (e.y >= 0 && e.y < length);
-        return offsets.stream().anyMatch(offset -> validRange.negate().test(offset));
+    private static boolean invalidCells(int length, Cells cells) {
+        final Predicate<Cell> validRange = cell -> (cell.x >= 0 && cell.x < length) && (cell.y >= 0 && cell.y < length);
+        return cells.stream().anyMatch(cell -> validRange.negate().test(cell));
     }
 
-    private static boolean[][] grid(int length, Offsets fillOffsets) {
+    private static boolean[][] grid(int length, Cells filledCells) {
         final boolean[][] grid = new boolean[length][length];
-        final Consumer<Offset> fillGrid = fillInOffsetOf(grid);
-        fillOffsets.stream().forEach(offset -> fillGrid.accept(offset));
+        final Consumer<Cell> fillGrid = fillInCellOf(grid);
+        filledCells.stream().forEach(cell -> fillGrid.accept(cell));
         return grid;
     }
 
-    private static Consumer<Offset> fillInOffsetOf(boolean[][] grid) {
+    private static Consumer<Cell> fillInCellOf(boolean[][] grid) {
         final boolean FILL = true;
-        return (offset) -> grid[offset.y][offset.x] = FILL;
+        return cell -> grid[cell.y][cell.x] = FILL;
     }
 
     private static String toStringBy(boolean[][] grid) {

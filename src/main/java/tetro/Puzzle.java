@@ -1,11 +1,9 @@
 package tetro;
 
-
-import tetro.grid.cells.AbstractBlankCells;
-import tetro.grid.cells.AbstractNonBlankCells;
-import tetro.offset.Offsets;
+import tetro.grid.Cells;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +18,7 @@ public final class Puzzle {
     }
 
     public boolean hasBlanks() {
-        return blanks().size() == 0;
+        return remainingBlankCells().size() != 0;
     }
 
     public boolean put(FitBlock fitBlock) {
@@ -35,34 +33,23 @@ public final class Puzzle {
         return nonBlanks.fitBlockSet();
     }
 
-    private Puzzle.Blanks blanks() {
-        final Board.Blanks remainingBoardBlanks = board.blanks().difference(nonBlanks);
-        return new Puzzle.Blanks(remainingBoardBlanks);
+    public Cells boardBlankCells() {
+        return board.cells();
     }
 
-    private static final class Blanks extends AbstractBlankCells {
-        private final Offsets offsets;
-
-        public Blanks(Board.Blanks boardBlanks) {
-            this.offsets = boardBlanks.offsets();
-        }
-
-        public boolean canFit(FitBlock puzzleBlock) {
-            return this.offsets().containsAll(puzzleBlock.offsets());
-        }
-
-        @Override
-        public Offsets offsets() {
-            return this.offsets;
-        }
+    public Cells remainingBlankCells() {
+        return board.cells().difference(nonBlanks.cells());
     }
 
-    private final class NonBlanks extends AbstractNonBlankCells {
+    private final class NonBlanks {
         private final Set<FitBlock> fitBlocks = new HashSet<>();
 
         public boolean add(FitBlock fitBlock) {
-            final boolean canFit = Puzzle.this.blanks().canFit(fitBlock);
-            return canFit && fitBlocks.add(fitBlock);
+            return canFit(fitBlock.cells()) && fitBlocks.add(fitBlock);
+        }
+
+        private boolean canFit(Cells cells) {
+            return Puzzle.this.remainingBlankCells().containsAll(cells);
         }
 
         public boolean remove(FitBlock fitBlock) {
@@ -73,11 +60,23 @@ public final class Puzzle {
             return Set.copyOf(fitBlocks);
         }
 
-        @Override
-        public Offsets offsets() {
+        public Cells cells() {
             return fitBlocks.stream()
-                    .flatMap(e -> e.offsets().stream())
-                    .collect(collectingAndThen(Collectors.toSet(), Offsets::of));
+                    .flatMap(e -> e.cells().stream())
+                    .collect(collectingAndThen(Collectors.toSet(), Cells::of));
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof NonBlanks)) return false;
+            NonBlanks nonBlanks = (NonBlanks) o;
+            return fitBlocks.equals(nonBlanks.fitBlocks);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(fitBlocks);
         }
     }
 }

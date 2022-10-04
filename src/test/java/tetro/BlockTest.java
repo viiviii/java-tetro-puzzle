@@ -1,28 +1,23 @@
 package tetro;
 
 import org.junit.jupiter.api.Test;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BlockTest {
+    
+    @Test
+    public void validate_notEqualsCellsSizeAsBlockSize_throwsException() throws Exception {
+        //given
+        Cell duplicate = Cell.of(2, 3);
+        Cells cells = Cells.of(
+                Cell.of(0, 0), duplicate,
+                Cell.of(4, 5), duplicate);
 
-//    @Test
-//    public void offsets() throws Exception {
-//        //given
-//        BlockShape sBlockShape = BlockShapes.get(BlockType.S, 0);
-//        Block block = Block.of(sBlockShape, Offset.of(3, 4));
-//
-//        Offsets expect = Offsets.of(
-//                Offset.of(3, 4), Offset.of(3, 5),
-//                Offset.of(4, 5), Offset.of(4, 6)
-//        );
-//
-//        //when
-//        Offsets offsets = block.offsets();
-//
-//        //then
-//        assertEquals(expect, offsets);
-//    }
+        //then
+        assertNotEquals(Block.SIZE, cells.size());
+        assertThrows(IllegalArgumentException.class, () -> Block.of(cells, null, 0));
+    }
 }

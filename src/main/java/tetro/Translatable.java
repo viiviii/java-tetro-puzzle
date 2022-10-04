@@ -1,5 +1,9 @@
 package tetro;
 
 public interface Translatable<T> {
-    T translate(int translateX, int translateY);
+
+    /**
+     * x, y만큼 이동
+     */
+    T translateBy(int translateX, int translateY);
 }

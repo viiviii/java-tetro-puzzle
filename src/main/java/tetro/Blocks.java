@@ -1,8 +1,8 @@
 package tetro;
 
 import tetro.data.BlockShapesData;
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,19 +23,19 @@ public final class Blocks {
     private static Set<Block> blocks(BlockType type, int[][] data) {
         final int NUMBER_OF_SHAPES = data.length;
         return IntStream.range(0, NUMBER_OF_SHAPES)
-                .mapToObj(rotation -> new Block(offsetsBy(data[rotation]), type, rotation))
+                .mapToObj(rotation -> Block.of(cellsBy(data[rotation]), type, rotation))
                 .collect(Collectors.toUnmodifiableSet());
     }
 
-    private static Offsets offsetsBy(int[] data) {
-        final int OFFSET_LENGTH = 2;
-        final List<Offset> list = new ArrayList();
-        for (int i = 0; i < data.length; i += OFFSET_LENGTH) {
+    private static Cells cellsBy(int[] data) {
+        final int NUMBER_OF_CELL_ATTRIBUTE = 2;
+        final List<Cell> list = new ArrayList();
+        for (int i = 0; i < data.length; i += NUMBER_OF_CELL_ATTRIBUTE) {
             final int x = data[i];
             final int y = data[i + 1];
-            list.add(Offset.of(x, y));
+            list.add(Cell.of(x, y));
         }
-        return Offsets.of(list);
+        return Cells.of(list);
     }
 
     public static Set<Block> all() {

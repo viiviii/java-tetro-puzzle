@@ -2,8 +2,8 @@ package tetro;
 
 import org.junit.jupiter.api.Test;
 
-import tetro.offset.Offset;
-import tetro.offset.Offsets;
+import tetro.grid.Cell;
+import tetro.grid.Cells;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +13,8 @@ public class GridStringTest {
     @Test
     public void valueOf() throws Exception {
         //given
-        Offsets oBlockShapeOffsets = Offsets.of(
-                Offset.of(0, 0), Offset.of(1, 0), Offset.of(0, 1), Offset.of(1, 1)
+        Cells oBlockShapeCells = Cells.of(
+                Cell.of(0, 0), Cell.of(1, 0), Cell.of(0, 1), Cell.of(1, 1)
         );
         String expect = "\n" +
                 "■ ■ □ □ \n" +
@@ -23,7 +23,7 @@ public class GridStringTest {
                 "□ □ □ □ ";
 
         //when
-        String actual = GridString.valueOf(LENGTH, oBlockShapeOffsets);
+        String actual = GridString.valueOf(LENGTH, oBlockShapeCells);
 
         //then
         assertEquals(expect, actual);
@@ -32,30 +32,30 @@ public class GridStringTest {
     @Test
     public void validate_containSameNumberAsLength_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, LENGTH);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, LENGTH);
+        Cells cells = Cells.of(cell);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, cells));
     }
 
     @Test
     public void validate_containNumberGreaterThanLength_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, LENGTH + 1);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, LENGTH + 1);
+        Cells cells = Cells.of(cell);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, cells));
     }
 
     @Test
     public void validate_containNegativeNumber_throwsException() throws Exception {
         //given
-        Offset offset = Offset.of(0, -LENGTH);
-        Offsets offsets = Offsets.of(offset);
+        Cell cell = Cell.of(0, -LENGTH);
+        Cells cells = Cells.of(cell);
 
         //then
-        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, offsets));
+        assertThrows(IllegalArgumentException.class, () -> GridString.valueOf(LENGTH, cells));
     }
 }
